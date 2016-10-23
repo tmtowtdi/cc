@@ -1,0 +1,86 @@
+
+--[[
+    "C" marks crop.
+    "I" marks irrigation trench.
+    "^" marks turtle's starting point and direction.
+        C C I C C
+        C C I C C
+        C C I C C
+        C C I C C
+        C C I C C
+        C C I C C
+        C C I C C
+        ^         
+
+    Villager farms consist of two or more column-pairs of crops separated by a 
+    single column of water for irrigation.
+    
+    You can specify the number of column-pairs and rows at the command line.  
+    Column-pairs default to '2' and rows defaults to '7'.  So you could 
+    harvest the farm in the diagram above with any of:
+        bin/harvest_wheat
+        bin/harvest_wheat 2
+        bin/harvest_wheat 2 7
+
+    For a farm with three column-pairs of crops, but still with 7 rows in each 
+    column, these two are identical:
+        bin/harvest_wheat 3
+        bin/harvest_wheat 3 7
+
+    I've never seen a villager farm with more than 7 rows of crops, but a 
+    player farm may well have more than 7.
+    
+    After harvesting and replanting, the turtle will end up back where it 
+    started again.
+--]]
+
+os.loadAPI("lib/move")
+os.loadAPI("lib/harvest")
+
+local args = {...}
+local cols = args[1] or 2
+local rows = args[2] or 7
+
+if not move.test_gps() then 
+    error("GPS System is down, go fix it.")
+    return false
+end
+
+--[[
+    Assume the user initially laid us down in the right location and 
+    direction.  Record that spot; if we're not in the same spot and facing the 
+    same direction when we're done, we'll stop.
+--]]
+local sx, sy, sz = gps.locate(2)
+local sface      = move.d()
+
+function growth_complete()
+  local s, d = turtle.inspect()
+  local e = 0
+  if s then
+    if d.name ~= 'minecraft:wheat' then e = 1 end
+    if d.metadata ~= 7 then e = 1 end
+    if e == 1 then
+      -- it's not wheat or it's not done growing
+      return false
+    end
+  end
+  return true
+end
+
+while true do 
+  while not growth_complete() do 
+    print("Waiting for crop maturity")
+    sleep(300)
+  end
+  harvest.harvest_villager_farm(cols, rows)
+
+    local ex, ey, ez = gps.locate(2)
+    local eface      = move.find_direction()    -- not move.d(); we want guaranteed accuracy here.
+
+    if not( sx==ex and sy==ey and sz==ez and sface==eface ) then
+        error("We're not back in our starting position for some reason; quitting.")
+    end
+end
+
+ -- vim: syntax=lua

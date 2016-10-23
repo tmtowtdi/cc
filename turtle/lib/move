@@ -1,0 +1,306 @@
+
+--move
+
+
+--[[
+    You must call move.init() in your 
+    calling module before using any 
+    other methods.
+--]]
+
+local x, y, z  = nil, nil, nil
+local facing   = nil
+local cardinal = {
+    ['n'] = { ['right'] = 'e', ['left'] = 'w', ['around'] = 's' },
+    ['s'] = { ['right'] = 'w', ['left'] = 'e', ['around'] = 'n' },
+    ['e'] = { ['right'] = 's', ['left'] = 'n', ['around'] = 'w' },
+    ['w'] = { ['right'] = 'n', ['left'] = 's', ['around'] = 'e' },
+}
+
+
+function init()
+    x, y, z = gps.locate(2)
+    if (not x or not y or not z) then error("GPS System is off!") end
+    local d = d()
+end
+
+function a()        -- Turn around
+    facing = cardinal[facing]['around']
+    turtle.turnLeft()
+    return turtle.turnLeft()
+end
+function l()        -- Turn left
+    facing = cardinal[facing]['left']
+    return turtle.turnLeft()
+end
+function r()        -- Turn right
+    facing = cardinal[facing]['right']
+    return turtle.turnRight()
+end
+function face_n()
+    local d = d()
+    if d == 'e' then l() elseif d == 's' then a() elseif d == 'w' then r() end
+    return true
+end
+function face_e()
+    local d = d()
+    if d == 'n' then r() elseif d == 's' then l() elseif d == 'w' then a() end
+    return true
+end
+function face_s()
+    local d = d()
+    if d == 'n' then a() elseif d == 'e' then r() elseif d == 'w' then l() end
+    return true
+end
+function face_w()
+    local d = d()
+    if d == 'n' then l() elseif d == 'e' then a() elseif d == 's' then r() end
+    return true
+end
+function face(dir)
+    if dir == 'n' then face_n() 
+        elseif dir == 'e' then face_e() 
+        elseif dir == 's' then face_s() 
+        elseif dir == 'w' then face_w()
+    end
+end
+
+--[[
+    Return the direction the turtle is facing.
+    Returns one of 'n', 'e', 's', 'w' on success, false on failure.
+--]]
+function d()
+    if not facing then
+        if not test_gps() then return false end
+        facing = find_direction()
+    end
+    return facing
+end
+
+
+--[[
+    Determine the direction the turtle is facing.
+
+    This must be run once to initially determine direction (the first time d() 
+    is called).  After that initial run, the module keeps track of direction 
+    each time a turn is made.
+
+    If you need to use a method of moving the turtle not supplied by this 
+    module, you'll have to call find_direction() manually or this module will 
+    believe you're pointing in a direction you're not.  So don't do that. 
+
+    -- Slow, forces turtle to move, but guaranteed to be accurate or throw 
+    -- exception:
+        direction_Im_looking = move.find_direction()
+
+    -- Very fast, turtle does not have to move, but depends on the user 
+    -- only using direction-changing methods from the move module
+        direction_Im_looking = move.d()
+--]]
+function find_direction()
+    local startx, starty, startz = gps.locate(2)
+    local endx, endy, endz       = nil, nil, nil
+    local turns                  = 0
+
+    local dir = nil
+    while not endx do
+        success, data = turtle.inspect()
+        --[[
+            false success means the plot in front of the turtle is empty and he can move into it.
+            The turtle can move through both types of both lava and water.
+        --]]
+        if (success and (data.name ~= 'minecraft:water' and data.name ~= 'minecraft:flowing_water' and data.name ~= "minecraft:lava" and data.name ~= "minecraft:flowing_lava") ) then
+            turtle.turnRight()
+            turns = turns + 1
+            if turns>3 then
+                error("I cannot move, so I can't determine direction.")
+                return false
+            end
+        else
+            if not turtle.forward() then error("I should have been able to move forward but I could not.") end
+            endx, endy, endz = gps.locate(2)
+            turtle.back()
+        end
+    end
+
+    for i = 1,turns do
+        turtle.turnLeft()
+    end
+
+    if endx ~= startx then
+        if endx > startx then dir = 'e' else dir = 'w' end
+    else
+        if endz > startz then dir = 's' else dir = 'n' end
+    end
+    return dir
+end
+
+function test_gps()
+    local t1, t2, t3 = gps.locate(2)
+    if t1 then return true else return false end
+end
+
+
+
+
+--[[
+    Stolen from the track module.
+--]]
+
+function up(cnt,force)
+	local cnt   = cnt or 1
+    local force = force or false
+    local wait  = 0
+	for i=1,cnt do
+        while not turtle.up() do
+            if wait == 5 then
+                return i - 1
+            end
+            if force then
+                turtle.digUp()
+                if turtle.attackUp() then sleep(0.25) end
+                turtle.attackUp()
+            end
+            wait = wait + 1
+            sleep(1)
+		end
+    y = y + 1
+    end
+	return cnt
+end
+
+function dn(cnt,force)
+	local cnt   = cnt or 1
+    local force = force or false
+    local wait  = 0
+	for i=1,cnt do
+        while not turtle.down() do
+            if wait == 5 then
+                return i - 1
+            end
+            if force then
+                turtle.digDown()
+                if turtle.attackDown() then sleep(0.25) end
+                turtle.attackDown()
+            end
+            wait = wait + 1
+            sleep(1)
+		end
+    end
+    y = y - 1
+	return cnt
+end
+
+function fd(cnt,force)
+	local cnt   = cnt or 1
+    local force = force or false
+    local wait  = 0
+	for i=1,cnt do
+        while not turtle.forward() do
+            if wait == 5 then
+                return i - 1
+            end
+            if force then
+                turtle.dig()
+                if turtle.attack() then sleep(0.25) end
+                turtle.attack()
+            end
+            wait = wait + 1
+            sleep(1)
+		end
+    end
+    if facing == 'n' then z = z-1
+        elseif facing == 'e' then x = x+1
+        elseif facing == 's' then z = z+1
+        elseif facing == 'w' then x = x-1
+    end
+	return cnt
+end
+
+function bk(cnt,force)
+	local cnt   = cnt or 1
+    local force = force or false
+    local wait  = 0
+	for i=1,cnt do
+        while not turtle.back() do
+            if wait == 5 then
+                return i - 1
+            end
+            if force then
+                a()
+                turtle.dig()
+                if turtle.attack() then sleep(0.25) end
+                turtle.attack()
+                a()
+            end
+            wait = wait + 1
+            sleep(1)
+    	end
+    end
+    if facing == 'n' then z = z+1
+        elseif facing == 'e' then x = x-1
+        elseif facing == 's' then z = z-1
+        elseif facing == 'w' then x = x+1
+    end
+	return cnt
+end
+
+function gotoX(toX,force)
+    if toX == nil then error("No coordinate specified.",2) end
+    local force = force or false
+    if x < toX then
+        face_e()
+    else
+        face_w()
+    end
+
+	
+	while x ~= toX do
+        fd(1,force)
+	end
+end
+
+function gotoY(toY,force)
+    if toY == nil then error("No coordinate specified.",2) end
+    local force = force or false
+    if y < toY then
+		move = up
+		dig = turtle.digUp
+	elseif y > toY then
+		move = dn
+		dig = turtle.digDown
+	end
+	
+	while y ~= toY do move(1,force) end
+end
+
+function gotoZ(toZ,force)
+    if toZ == nil then error("No coordinate specified.",2) end
+    local force = force or false
+    if z < toZ then face_s() else face_n() end
+    while z ~= toZ do fd(1, force) end
+end
+
+--[[
+    Sends the turtle to the specified coords.
+
+    If the fourth arg is true, assume we're in some sort of pit and first fly 
+    up to that height (to get out of the pit), then perform the goto from that 
+    height.
+        goto( 123, 123, 123 )
+        goto( 123, 123, 123, 100 )
+
+--]]
+function goto(toX, toY, toZ, height, force)
+    local toX = toX or x
+    local toY = toY or y
+    local toZ = toZ or z
+
+    if height then gotoY(height, true) end
+
+    gotoX(toX, force)
+    gotoZ(toZ, force)
+    gotoY(toY, force)
+end
+
+ -- vim: syntax=lua

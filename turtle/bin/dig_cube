@@ -1,0 +1,180 @@
+
+--dig_cube
+
+
+--[[
+    return_to_box() still isn't right - it's pausing after dropping each item.
+    It's eventually getting the job done, but taking forever.
+
+    On finishing, we've got to move to a neutral location instead of staying 
+    put on top of the box.  Other turtles might be using the same box and 
+    we're in the way.
+--]]
+
+
+--[[
+    Assumes its starting point is the 
+    SW corner of a cubic rectangle to 
+    dig out.
+--]]
+
+
+os.loadAPI("lib/myinv")
+os.loadAPI("lib/move")
+
+---------------------------------------
+-- EDIT BELOW
+
+--[[
+    Height (cols), width (rows), and 
+    depth (depth) of the rectangle to 
+    dig.
+--]]
+local cols  = 4
+local rows  = 4
+
+-- relative to the turtle's start point
+local depth = 100
+
+--[[
+    Absolute height to fly up to 
+    before returning to the box.  
+    Should be high enough to fly above 
+    any obstacles between the pit and 
+    box.
+--]]
+local highest   = 70
+
+--[[
+    File containing the coords of the
+    box we're going to dump to.
+--]]
+local box_file = "etc/digger_box.txt"
+
+-- END EDITS
+---------------------------------------
+
+-- Coords of the box we'll dump our inv to
+local bx, by, bz = myinv.get_coords(box_file)
+
+-- The turtle assumes the spot and direction he starts in is correct.
+local startx, starty, startz = gps.locate(2)
+local sd                     = move.d()
+
+-- When/if these become true we'll return to the box and quit.
+local hit_bedrock = false
+local box_is_full = false
+
+
+--[[
+    Return to 1 plot above the box, 
+    dump our inv into it.
+    Returns true on success, false if the box is full.
+--]]
+function return_to_box()
+    move.goto(bx, by+1, bz, highest)
+    for i = 1,16 do
+        turtle.select(i)
+        for i = 1,5 do
+            --[[
+                Our turtle dumps very fast, faster than a hopper pulls inv 
+                back out again.  If the box fills up, give it some time to 
+                empty out before giving up.
+                It helps if you do use a double box - that has more inv space 
+                than the turtle does so you won't overwhelm it with one dump.
+            --]]
+            if not turtle.dropDown() then sleep(5) end
+        end
+        if not turtle.dropDown() then box_is_full = true end
+    end
+    return box_is_full
+end
+
+--[[
+    Goes to the box, dumps 
+    ourinventory, then returns back 
+    where it started.
+--]]
+function dump_inv_and_return()
+    local rx, ry, rz = gps.locate(2)
+    local rd         = move.d()
+
+    if return_to_box() then
+        move.goto(rx, ry, rz, highest)
+        move.face(rd)
+        return true
+    else
+        error("Our dumping box is full!")
+        return false
+    end
+end
+
+--[[
+    Moves forward one slot, digging if 
+    necessary.
+    Automatically goes back to the box 
+    to dump inventory when needed.
+    Returns true on success, false if 
+    the box is full or if we hit 
+    bedrock.  
+--]]
+function dig_move_forward()
+    local s,d = turtle.inspect()
+    if (s and d.name == 'minecraft:bedrock') then hit_bedrock = true end
+    move.fd(1, true)
+    if myinv.all_slots_used() then myinv.consolidate_all() end
+    if myinv.all_slots_used() then dump_inv_and_return() end
+
+    if (hit_bedrock or box_is_full) then
+        print("Either we've hit bedrock or our inventory box is full.")
+        return_to_box()
+        return false
+    end
+    return true
+end
+
+
+move.init()
+local rdepth = starty - depth
+
+
+-- Uncomment to test a new box setup
+--return_to_box()
+--do return end
+
+
+
+rows = rows - 1
+local col_cnt = 0
+while starty >= rdepth do
+    for i = 1,cols do
+        for j = 1,rows do
+            if not dig_move_forward() then return end
+        end
+        col_cnt = col_cnt + 1
+
+        if col_cnt < cols then
+            if col_cnt % 2 == 1 then
+                move.r()
+                if not dig_move_forward() then return end
+                move.r()
+            else
+                move.l()
+                if not dig_move_forward() then return end
+                move.l()
+            end
+        end
+    end
+
+    move.goto(startx, starty, startz)
+    move.face(sd)
+    col_cnt = 0
+    starty = starty - 1
+    if starty >= rdepth then move.dn(1, true) end
+end
+
+return_to_box()
+print("Ready for next mission, boss!")
+
+
+ -- vim: syntax=lua

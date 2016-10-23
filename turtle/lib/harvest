@@ -1,0 +1,111 @@
+
+os.loadAPI("lib/myinv")
+os.loadAPI("lib/move")
+
+--[[
+  For harvesting villager farms, which consist of two or more column-pairs of 
+  crop.  Each column-pair is separated by a single-width irrigation trench. 
+
+  Turtle must start in front of the left crop column.
+  
+  "C" marks crop.
+  "I" marks irrigation trench.
+  "^" marks turtle's starting point and direction.
+        C C I C C
+        C C I C C
+        C C I C C
+        C C I C C
+        C C I C C
+        C C I C C
+        C C I C C
+        ^         
+
+  CHECK
+  Right now, this module is assuming all you want to harvest/replant is 
+  wheat, so "wheat" and "wheat_seeds" is hardcoded throughout.
+  Fix if needed.
+--]]
+
+
+
+
+--[[
+  Harvests length plots ahead of us, then backs up and replants those 
+  plots with seeds.
+  Requires your turtle to have a hoe equipped in the left hand.
+  Turtle ends up in starting plot, facing in starting direction.
+--]]
+function harvest_col(length)
+  myinv.consolidate("minecraft:wheat_seeds")
+  local seedslot = myinv.find("wheat_seeds")
+  if not seedslot then error("I need wheat seeds to replant.") end
+  if turtle.getItemCount(seedslot) < length then error("I don't have enough seeds in my inventory to replant.") end
+  turtle.select(seedslot)
+  turtle.equipRight()
+
+  for j = 1,length do
+    -- dig ahead to harvest wheat, move forward (which crushes tilled soil)
+    turtle.dig()
+    move.fd(1)
+  end
+  for j = 1,length do
+    -- move backwards, dig ahead of us with hoe to re-till the soil, then place seed equipped in right
+    move.bk(1)
+    turtle.dig()
+    turtle.place()
+  end
+end
+
+
+--[[
+    Diagram shows turtle start and end point for a two-colpair farm.  "S" is 
+    turtle start, E is turtle end.  Facing north in both cases.
+
+        C C I C C
+        C C I C C               ^
+        C C I C C               |
+        C C I C C               |
+        C C I C C               N
+        C C I C C
+        C C I C C
+        S       E
+
+--]]
+function harvest_colpair(rows)
+    local rows = rows or 7
+    for i = 1,2 do
+        harvest_col(rows)
+        move.r()
+        move.fd(1,1)
+        move.l()
+    end
+end
+
+--[[
+  Harvests an entire villager farm, returning 
+  the turtle back to its starting position and direction.
+--]]
+function harvest_villager_farm(colpairs, rows)
+    local colpairs = colpairs or 2
+    local rows     = rows or 7
+
+    for i = 1, colpairs-1 do
+        harvest_colpair(rows)
+        move.r()
+        move.fd(2)
+        move.l()
+    end
+    harvest_colpair(rows)   -- Don't move to the right after finishing the last colpair.
+
+
+    --            the crop columns, minus the one we're standing at, plus the irrigation columns
+    local moves = (colpairs * 2)    - 1                              + (colpairs - 1)
+
+    move.l()
+    move.fd(moves)          -- move back to the starting point
+    move.r()
+end
+
+return true
+
+ -- vim: syntax=lua
