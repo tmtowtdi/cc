@@ -11,4 +11,11 @@ shell.run( "bin/git", "get", "tmtowtdi", "cc", "master", "turtle/lib/move", "lib
 
 shell.run( "bin/git", "get", "tmtowtdi", "cc", "master", "turtle/etc/digger_box.txt", "etc/digger_box" )
 
+print("--------------------------------------")
+print("WARNING github raw caches content for")
+print("one minute!  You should wait for one")
+print("minute after performing a 'git push'")
+print("before calling this script.")
+print("--------------------------------------")
+
  -- vim: syntax=lua
