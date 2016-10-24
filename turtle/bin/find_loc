@@ -4,11 +4,6 @@ os.loadAPI("lib/move")
 if not move.test_gps() then error("GPS system is down!") end
 local x, y, z = gps.locate(2)
 
-print("I am at:")
-print("    X: " .. x)
-print("    Y: " .. y)
-print("    S: " .. z)
-print("")
 print("      Y axis       ")
 print("         +         ")
 print("         S         ")
@@ -19,8 +14,6 @@ print("         |         ")
 print("         |         ")
 print("         N         ")
 print("         -         ")
-print("")
-print("(North is LESS THAN South!)")
-print("")
+print("X: "..x..", Y: "..y..", Z: "..z)
 
  -- vim: syntax=lua
