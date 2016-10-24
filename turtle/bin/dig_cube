@@ -1,4 +1,9 @@
 
+--[[
+    Still need to test this with odd rows and odd cols, and then with odd and even and then with
+    even and odd.
+--]]
+
 --dig_cube
 
 
@@ -30,8 +35,8 @@ local args = {...}
     depth (depth) of the rectangle to 
     dig.
 --]]
-local cols  = args[1] or 8
-local rows  = args[2] or 8
+local cols  = tonumber(args[1]) or 8
+local rows  = tonumber(args[2]) or 8
 
 -- relative to the turtle's start point
 local depth = 100
@@ -62,9 +67,6 @@ local box_file = "etc/box.txt"
 -- Coords of the box we'll dump our inv to
 local bx, by, bz = myinv.get_coords(box_file)
 
--- The turtle assumes the spot and direction he starts in is correct.
-local startx, starty, startz = gps.locate(2)
-local sd                     = move.d()
 
 -- When/if these become true we'll return to the box and quit.
 local hit_bedrock = false
@@ -135,6 +137,7 @@ end
 
 move.init()
 sleep(0.5)
+local startx, starty, startz = gps.locate(2)
 local rdepth = starty - depth
 
 
@@ -164,12 +167,10 @@ while starty >= rdepth do
                 move.l()
             end
         else
-            if col_cnt % 2 == 1 then move.l() and move.l() else move.r() end
+            if col_cnt % 2 == 1 then move.l() move.l() else move.r() end
         end
     end
 
-    --move.goto(startx, starty, startz)
-    --move.face(sd)
     col_cnt = 0
     starty = starty - 1
     if starty >= rdepth then move.dn(1, true) end
