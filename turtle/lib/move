@@ -205,7 +205,7 @@ function fd(cnt,force)
                 turtle.attack()
             end
             wait = wait + 1
-            sleep(1)
+            sleep(0.25)
 		end
     end
     if facing == 'n' then z = z-1
