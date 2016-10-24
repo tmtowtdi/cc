@@ -134,6 +134,7 @@ end
 
 
 move.init()
+sleep(0.5)
 local rdepth = starty - depth
 
 
@@ -158,12 +159,12 @@ while starty >= rdepth do
                 if not dig_move_forward() then return end
                 move.r()
             else
-                move.r()
+                move.l()
                 if not dig_move_forward() then return end
                 move.l()
             end
         else
-        if col_cnt % 2 == 1 then move.l() else move.r() end
+            if col_cnt % 2 == 1 then move.l() and move.l() else move.r() end
         end
     end
 
