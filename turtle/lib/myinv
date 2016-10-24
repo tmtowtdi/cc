@@ -116,7 +116,6 @@ end
 -- Consolidates all items in the inventory
 function consolidate_all()
     for i = 1,16 do
-        print(i)
         local d = turtle.getItemDetail(i)
         consolidate(d.name)
     end
