@@ -75,7 +75,7 @@ function return_to_box()
             if not turtle.dropDown() then box_is_full = true end
         end
     end
-    return box_is_full
+    return (not box_is_full)
 end
 
 --[[
@@ -87,13 +87,14 @@ function dump_inv_and_return()
     local rx, ry, rz = gps.locate(2)
     local rd         = move.d()
 
-    if return_to_box() then
+    return_to_box()
+    if box_is_full then
+        error("Our dumping box is full!")
+        return false
+    else
         move.goto(rx, ry, rz, highest)
         move.face(rd)
         return true
-    else
-        error("Our dumping box is full!")
-        return false
     end
 end
 
