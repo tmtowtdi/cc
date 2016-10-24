@@ -13,8 +13,6 @@ shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/lib/harvest", "li
 shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/lib/myinv", "lib/myinv" )
 shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/lib/move", "lib/move" )
 
-shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/etc/digger_box.txt", "etc/digger_box" )
-
 print("--------------------------------------")
 print("WARNING github raw caches content for")
 print("several minutes!  You should wait a")

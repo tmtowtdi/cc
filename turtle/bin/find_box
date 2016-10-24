@@ -38,7 +38,8 @@ for i = 1,4 do
 end
 
 if got_chest then
-    local fh = fs.open(fn, 'w')
+    print("Found a box at "..x..", "..y..", "..z..".")
+    local fh = fs.open( "etc/" .. fn, 'w')
     fh.writeLine("x: " .. x)
     fh.writeLine("y: " .. y)
     fh.writeLine("z: " .. z)
