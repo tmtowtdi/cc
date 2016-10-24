@@ -70,7 +70,10 @@ function return_to_box()
     move.goto(bx, by+1, bz, highest)
     for i = 1,16 do
         turtle.select(i)
-        if not turtle.dropDown() then box_is_full = true end
+        local s, d = turtle.getItemDetail()
+        if s then
+            if not turtle.dropDown() then box_is_full = true end
+        end
     end
     return box_is_full
 end
