@@ -67,10 +67,11 @@ local box_file = "etc/box.txt"
 -- Coords of the box we'll dump our inv to
 local bx, by, bz = myinv.get_coords(box_file)
 
-
 -- When/if these become true we'll return to the box and quit.
 local hit_bedrock = false
 local box_is_full = false
+
+
 
 
 --[[
@@ -104,6 +105,10 @@ function dump_inv_and_return()
         error("Our dumping box is full!")
         return false
     else
+        if not rx or not ry or not rz then
+            error("Bottom of pit was out of GPS range; can't return!")
+            return            -- my error message was lying!
+        end
         move.goto(rx, ry, rz, highest)
         move.face(rd)
         return true
@@ -127,7 +132,11 @@ function dig_move_forward()
     if myinv.all_slots_used() then dump_inv_and_return() end
 
     if (hit_bedrock or box_is_full) then
-        print("Either we've hit bedrock or our inventory box is full.")
+        if hit_bedrock then
+            print("We've hit bedrock.")
+        else
+            print("Our inventory box is full.")
+        end
         return_to_box()
         return false
     end
@@ -146,10 +155,10 @@ local rdepth = starty - depth
 --do return end
 
 
-
-rows = rows - 1
-local col_cnt = 0
-while starty >= rdepth do
+rows               = rows - 1
+local col_cnt      = 0
+local curr_depth   = starty
+while curr_depth > = rdepth do
     for i = 1,cols do
         for j = 1,rows do
             if not dig_move_forward() then return end
@@ -172,8 +181,8 @@ while starty >= rdepth do
     end
 
     col_cnt = 0
-    starty = starty - 1
-    if starty >= rdepth then move.dn(1, true) end
+    curr_depth = curr_depth - 1
+    if curr_depth >= rdepth then move.dn(1, true) end
 end
 
 return_to_box()
