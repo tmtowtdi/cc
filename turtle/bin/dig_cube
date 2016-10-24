@@ -6,11 +6,21 @@
     Assumes its starting point is the 
     SW corner of a cubic rectangle to 
     dig out.
+
+    Defaults to an 8x8 square.  You can 
+    determine the length and width at 
+    the command line:
+      > bin/dig_cube 4 8
+
+    ...That will dig forward 4 blocks, 
+    then right 8, forming a rectangle.
 --]]
 
 
 os.loadAPI("lib/myinv")
 os.loadAPI("lib/move")
+
+local args = {..}
 
 ---------------------------------------
 -- EDIT BELOW
@@ -20,8 +30,8 @@ os.loadAPI("lib/move")
     depth (depth) of the rectangle to 
     dig.
 --]]
-local cols  = 4
-local rows  = 4
+local cols  = args[1] or 8
+local rows  = args[2] or 8
 
 -- relative to the turtle's start point
 local depth = 100
