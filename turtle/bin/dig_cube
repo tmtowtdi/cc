@@ -3,16 +3,6 @@
 
 
 --[[
-    return_to_box() still isn't right - it's pausing after dropping each item.
-    It's eventually getting the job done, but taking forever.
-
-    On finishing, we've got to move to a neutral location instead of staying 
-    put on top of the box.  Other turtles might be using the same box and 
-    we're in the way.
---]]
-
-
---[[
     Assumes its starting point is the 
     SW corner of a cubic rectangle to 
     dig out.
@@ -48,6 +38,11 @@ local highest   = 70
 --[[
     File containing the coords of the
     box we're going to dump to.
+
+    Even if this box is hooked up to a 
+    hopper, it must have an inventory 
+    bigger than the turtle (it must be 
+    a double box).
 --]]
 local box_file = "etc/box.txt"
 
@@ -75,16 +70,6 @@ function return_to_box()
     move.goto(bx, by+1, bz, highest)
     for i = 1,16 do
         turtle.select(i)
-        for i = 1,5 do
-            --[[
-                Our turtle dumps very fast, faster than a hopper pulls inv 
-                back out again.  If the box fills up, give it some time to 
-                empty out before giving up.
-                It helps if you do use a double box - that has more inv space 
-                than the turtle does so you won't overwhelm it with one dump.
-            --]]
-            if not turtle.dropDown() then sleep(5) end
-        end
         if not turtle.dropDown() then box_is_full = true end
     end
     return box_is_full
