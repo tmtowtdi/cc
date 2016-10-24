@@ -2,7 +2,24 @@
 
 move.init() now must be called by user - add to harvest_wheat.
 
+TBD {{{{
+    bin/dig_cube {
+        After finishing a layer, the turtle goes back to its starting point 
+        before beginning the next layer.  Not a huge deal, especially if I've 
+        set unlimited fuel, but it's still inefficient.
 
+                x x x x
+                x x x x
+                x x x x
+                S x x E
+
+        ...so he starts at S and ends at E, then moves back to S before 
+        turning right, digging down, and starting the next layer.
+
+        Once we get to E, we should turn right (west in the diagram above), 
+        dig down, then restart the layer-loop.
+    }
+}}}}
 
 New Minecraft Server Bootstrap {{{{
     Git script stolen from https://github.com/LNETeam/CCGit

@@ -20,7 +20,7 @@
 os.loadAPI("lib/myinv")
 os.loadAPI("lib/move")
 
-local args = {..}
+local args = {...}
 
 ---------------------------------------
 -- EDIT BELOW
@@ -165,8 +165,8 @@ while starty >= rdepth do
         end
     end
 
-    move.goto(startx, starty, startz)
-    move.face(sd)
+    --move.goto(startx, starty, startz)
+    --move.face(sd)
     col_cnt = 0
     starty = starty - 1
     if starty >= rdepth then move.dn(1, true) end
