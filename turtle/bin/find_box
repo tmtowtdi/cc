@@ -1,0 +1,52 @@
+--[[
+  Put the turtle down right next to a 
+  chest, then run this.  It will find 
+  the cooords of the box and write them 
+  to "etc/box.txt".
+
+  You can specify a different filename 
+  (but in etc/) with:
+    > bin/find_box some_file_name.txt
+--]]
+
+os.loadAPI("lib/move")
+
+local args = {...}
+local fn   = args[1] or 'box.txt'
+
+move.init()
+if not move.test_gps() then error("GPS system is down!") end
+local x, y, z = gps.locate(2)
+move.face_n()
+
+local got_chest = false
+for i = 1,4 do
+    s, d = turtle.inspect()
+    if s then
+        if d.name == 'minecraft:chest' then
+            got_chest = true
+            local f = move.d()
+            if d == 'n' then z = z - 1
+                else if d == 'e' then x = x + 1
+                else if d == 's' then z = z + 1
+                else if d == 'w' then x = x - 1
+            end
+        end
+    else
+        move.r()
+    end
+end
+
+if got_chest then
+    local fh = fs.open(fn, 'w')
+    fh.writeLine("x: " .. x)
+    fh.writeLine("y: " .. y)
+    fh.writeLine("z: " .. z)
+    fh.close()
+else
+    error("I was unable to find a box - be sure you put me down right next to one.")
+end
+
+
+ -- vim: syntax=lua
+
