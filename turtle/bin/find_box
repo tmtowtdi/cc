@@ -17,6 +17,7 @@ local fn   = args[1] or 'box.txt'
 move.init()
 if not move.test_gps() then error("GPS system is down!") end
 local x, y, z = gps.locate(2)
+print(x..' '..y..' '..z)
 move.face_n()
 
 local got_chest = false
@@ -26,10 +27,10 @@ for i = 1,4 do
         if d.name == 'minecraft:chest' then
             got_chest = true
             local f = move.d()
-            if d == 'n' then z = z - 1
-                elseif d == 'e' then x = x + 1
-                elseif d == 's' then z = z + 1
-                elseif d == 'w' then x = x - 1
+            if f == 'n' then z = z - 1
+                elseif f == 'e' then x = x + 1
+                elseif f == 's' then z = z + 1
+                elseif f == 'w' then x = x - 1
             end
         end
     else

@@ -49,7 +49,7 @@ local highest   = 70
     File containing the coords of the
     box we're going to dump to.
 --]]
-local box_file = "etc/digger_box.txt"
+local box_file = "etc/box.txt"
 
 -- END EDITS
 ---------------------------------------

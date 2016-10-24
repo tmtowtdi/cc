@@ -1,5 +1,5 @@
 
---move
+--move 1
 
 
 --[[
@@ -102,7 +102,6 @@ function find_direction()
     local endx, endy, endz       = nil, nil, nil
     local turns                  = 0
 
-    local dir = nil
     while not endx do
         success, data = turtle.inspect()
         --[[
@@ -123,16 +122,16 @@ function find_direction()
         end
     end
 
-    for i = 1,turns do
-        turtle.turnLeft()
-    end
 
     if endx ~= startx then
-        if endx > startx then dir = 'e' else dir = 'w' end
+        if endx > startx then facing = 'e' else facing = 'w' end
     else
-        if endz > startz then dir = 's' else dir = 'n' end
+        if endz > startz then facing = 's' else facing = 'n' end
     end
-    return dir
+
+    -- Turn back the way we were originally facing
+    for i = 1,turns do l() end
+    return facing
 end
 
 function test_gps()
