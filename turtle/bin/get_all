@@ -19,6 +19,10 @@ print("WARNING github raw caches content for")
 print("several minutes!  You should wait a")
 print("while after performing a 'git push'")
 print("before calling this script.")
+print("")
+print("Edit this script (bin/get_all) to")
+print("read comments on how to get around")
+print("waiting for the cache.")
 print("--------------------------------------")
 
 --[[
