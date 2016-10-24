@@ -1,0 +1,177 @@
+
+
+move.init() now must be called by user - add to harvest_wheat.
+
+
+
+New Minecraft Server Bootstrap {{{{
+    Git script stolen from https://github.com/LNETeam/CCGit
+
+    - In minecraft
+        - create:
+            - 1 basic computer
+            - 1 disk drive
+            - 1 floppy disk
+        - Place the computer and disk drive next to each other.
+        - Boot up the computer, create "jontest.txt" (on the machine, not the 
+          disk).
+        - Label the disk:
+            > label set right init-disk
+                - "right" assumes the drive is on the computer's right
+        - Create disk directories
+                > cd disk
+                > mkdir general
+                > cd general
+                > mkdir bin
+                > mkdir lib
+                > mkdir etc
+                > cd bin
+            - So you're now sitting in disk/general/bin/
+        - Change to the bin directory
+            - Get my copy of the git script
+                > pastebin get K7jCLz1i git
+            - Get the turtlescripts market
+                > pastebin get w1RtfqFd market
+
+    - Put the disk somewhere safe so you don't have to go through all this 
+      again.
+
+}}}}
+New In-Game Machine Bootstrap {{{{
+
+    - Load your init-disk you created in the previous step into a disk drive 
+      attached to your new machine
+        - The disk drive has to be next to your new machine on a side without 
+          a modem.
+
+    - Copy stuff from the disk to your new machine:
+            > cp disk/general/* .
+
+    - Grab my get_all script from github:
+        > bin/git get tmtowtdi cc master turtle/bin/get_all bin/get_all
+
+    Now that you have the get_all script, you don't have to type all that crap 
+    ever again.  Just do:
+        > bin/get_all
+    
+}}}}
+
+bin {{{{
+    dig_cube {{{{
+        Quarrying script.
+
+        Digs a rectangle of a specified length, width, and depth, returning 
+        its inv to a specified box.
+
+        SETUP
+        - Figure out where your box is
+            - This is where the turtle will dump out its inventory.
+                - It should be a double box, even if it's attached to a hopper 
+                  (the turtle dumps its inv faster than a hopper can drain, 
+                  and the turtle's inv is larger than a small box.)
+            - Create a file in etc/ to contain your coords.  The file's 
+              contents must look like this:
+                        x: 123
+                        y: 456
+                        z: -789
+              ...using the exact coords of your box.
+            - The turtle will fly back to the box from above and come to rest 
+              one space /above/ the box, so be sure the path above is clear.
+        - Edit the script.
+            - Set your desired cols, rows, and depth, all relative to the 
+              start point of the turtle.
+            - "highest" is the Y coord that the turtle will fly up to before 
+              heading back to the box.  It should be high enough to not only 
+              fly out of your quarry, but also to avoid any obstacles (trees, 
+              mountains, houses, whatever) between your quarry and your 
+              dumping box.
+            - Set the name of the file containing your box coords.
+
+    }}}}
+    get_all {{{{
+        Downloads all my scripts from Pastebin.
+
+        Just a shell script (more or less) that calls get_script once per 
+        script to be downloaded.
+    }}}}
+    get_script {{{{
+        Downloads a single script from pastebin.  See get_all for example 
+        usage.
+    }}}}
+    harvest_wheat {{{{
+        TBD
+            - Right now, harvest_wheat has the start point hard-coded.  Instead, the 
+            turtle should record its position when the program is started and assume 
+            that's the correct starting point
+                - This assumes the user places the turtle correctly
+                - But it also allows the user to move the turtle to a different farm.
+
+            - At end, find a chest and
+                - dump wheat from inv into chest
+                - check own fuel level.  if too low, get coal from chest and refuel
+                - check own seeds level.  If too low, get seeds from chest
+
+            - Instead of assuming a farm is two double-columns of crops, allow an arg 
+            to declare how many double-columns there are (I can see a villager farm 
+            that consists of 3 double-columns).
+
+    }}}}
+}}}}
+lib {{{{
+    harvest {{{{
+        library used by harvest_wheat script.  My best guess is that this 
+        might have some good ideas, but as a whole it's not real useful as a 
+        general-purpose library.
+    }}}}
+    move {{{{
+        Movement-related library.  Will probably be included in every turtle 
+        script I create.
+    }}}}
+    myinv {{{{
+        Turtle inventory utilities.  Will probably be used in every turtle 
+        script.
+    }}}}
+    
+}}}}
+
+turtlescripts.com {#{{{
+    - Turtle Location Tracking API {
+        http://turtlescripts.com/project/gjdh4g-Turtle-Location-Tracking-API
+        
+        This has some good stuff in it, but some bad stuff too.  I stole the 
+        good stuff and put it into my move module.
+    }
+}#}}}
+MC Directions {#{{{
+    X is east/west
+    Z is north/south    (for whatever stupid fucked-up reason)
+    Y is up/down        (for whatever stupid fucked-up reason)
+
+
+                   N       
+                        
+                        
+                   -5       
+                           
+         W     -5  0  5     E           X axis
+                        
+                   5       
+                        
+                        
+                   S       
+
+
+                        
+                   Z
+
+                   a
+                   x
+                   i
+                   s
+
+
+    Yes, moving North goes DOWN on the z axis for whatever stupid fucked-up 
+    reason.
+}#}}}
+
+

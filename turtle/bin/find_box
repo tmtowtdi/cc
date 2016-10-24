@@ -27,9 +27,9 @@ for i = 1,4 do
             got_chest = true
             local f = move.d()
             if d == 'n' then z = z - 1
-                else if d == 'e' then x = x + 1
-                else if d == 's' then z = z + 1
-                else if d == 'w' then x = x - 1
+                elseif d == 'e' then x = x + 1
+                elseif d == 's' then z = z + 1
+                elseif d == 'w' then x = x - 1
             end
         end
     else
