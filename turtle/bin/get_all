@@ -1,53 +1,16 @@
 
 -- get_all
 
-local args   = {...}
-local branch = args[1] or 'master'
+shell.run( "bin/get_script", "bin/get_all", 'DmEhcUVa' )
+shell.run( "bin/get_script", "bin/get_script", 'pzEBgR8k' )
+shell.run( "bin/get_script", "bin/find_box", 'x1kHs0v3' )
+shell.run( "bin/get_script", "bin/find_loc", 'SEYF57X4' )
+shell.run( "bin/get_script", "bin/harvest_wheat", '8rXFt1YW' )
+shell.run( "bin/get_script", "bin/dig_cube", '2DRzRAR3' )
 
-shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/bin/get_all", "bin/get_all" )
-shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/bin/find_box", "bin/find_box" )
-shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/bin/find_loc", "bin/find_loc" )
-shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/bin/dig_cube", "bin/dig_cube" )
-shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/bin/harvest_wheat", "bin/harvest_wheat" )
-
-shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/lib/harvest", "lib/harvest" )
-shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/lib/myinv", "lib/myinv" )
-shell.run( "bin/git", "get", "tmtowtdi", "cc", branch, "turtle/lib/move", "lib/move" )
-
-print("--------------------------------------")
-print("WARNING github raw caches content for")
-print("several minutes!  You should wait a")
-print("while after performing a 'git push'")
-print("before calling this script.")
-print("")
-print("Edit this script (bin/get_all) to")
-print("read comments on how to get around")
-print("waiting for the cache.")
-print("--------------------------------------")
-
---[[
-    To tell if github's cache has 
-    updated, find your file in github 
-    (in your browser).  Then click the 
-    "raw" button.  Whatever you see 
-    there is what this script will 
-    download.
-
-    If you're seeing old content in 
-    your browser, you'll have to wait 
-    for github's raw cache to expire 
-    before running this.
-
-
-    If you get impatient and want your 
-    stuff to update NAOW, create a 
-    branch and push that, then call 
-    this as
-        > bin/get_all <branchname>
-
-    That will pull the code from your 
-    new branch instead of master.
-
---]]
+shell.run( "bin/get_script", "lib/myinv", 'bxF3p2yy' )
+shell.run( "bin/get_script", "lib/move", 'rpdxDz77' )
+shell.run( "bin/get_script", "lib/harvest", 'G1u3NJE1' )
 
  -- vim: syntax=lua
+

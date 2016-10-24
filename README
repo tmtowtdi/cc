@@ -21,144 +21,6 @@ TBD {{{{
     }
 }}}}
 
-New Minecraft Server Bootstrap {{{{
-    Git script stolen from https://github.com/LNETeam/CCGit
-
-    - In minecraft
-        - create:
-            - 1 basic computer
-            - 1 disk drive
-            - 1 floppy disk
-        - Place the computer and disk drive next to each other.
-        - Boot up the computer, create "jontest.txt" (on the machine, not the 
-          disk).
-        - Label the disk:
-            > label set right init-disk
-                - "right" assumes the drive is on the computer's right
-        - Create disk directories
-                > cd disk
-                > mkdir general
-                > cd general
-                > mkdir bin
-                > mkdir lib
-                > mkdir etc
-                > cd bin
-            - So you're now sitting in disk/general/bin/
-        - Change to the bin directory
-            - Get my copy of the git script
-                > pastebin get K7jCLz1i git
-            - Get the turtlescripts market
-                > pastebin get w1RtfqFd market
-
-    - Put the disk somewhere safe so you don't have to go through all this 
-      again.
-
-}}}}
-New In-Game Machine Bootstrap {{{{
-
-    - Load your init-disk you created in the previous step into a disk drive 
-      attached to your new machine
-        - The disk drive has to be next to your new machine on a side without 
-          a modem.
-
-    - Copy stuff from the disk to your new machine:
-            > cp disk/general/* .
-
-    - Grab my get_all script from github:
-        > bin/git get tmtowtdi cc master turtle/bin/get_all bin/get_all
-
-    Now that you have the get_all script, you don't have to type all that crap 
-    ever again.  Just do:
-        > bin/get_all
-    
-}}}}
-
-bin {{{{
-    dig_cube {{{{
-        Quarrying script.
-
-        Digs a rectangle of a specified length, width, and depth, returning 
-        its inv to a specified box.
-
-        SETUP
-        - Figure out where your box is
-            - This is where the turtle will dump out its inventory.
-                - It should be a double box, even if it's attached to a hopper 
-                  (the turtle dumps its inv faster than a hopper can drain, 
-                  and the turtle's inv is larger than a small box.)
-            - Create a file in etc/ to contain your coords.  The file's 
-              contents must look like this:
-                        x: 123
-                        y: 456
-                        z: -789
-              ...using the exact coords of your box.
-            - The turtle will fly back to the box from above and come to rest 
-              one space /above/ the box, so be sure the path above is clear.
-        - Edit the script.
-            - Set your desired cols, rows, and depth, all relative to the 
-              start point of the turtle.
-            - "highest" is the Y coord that the turtle will fly up to before 
-              heading back to the box.  It should be high enough to not only 
-              fly out of your quarry, but also to avoid any obstacles (trees, 
-              mountains, houses, whatever) between your quarry and your 
-              dumping box.
-            - Set the name of the file containing your box coords.
-
-    }}}}
-    get_all {{{{
-        Downloads all my scripts from Pastebin.
-
-        Just a shell script (more or less) that calls get_script once per 
-        script to be downloaded.
-    }}}}
-    get_script {{{{
-        Downloads a single script from pastebin.  See get_all for example 
-        usage.
-    }}}}
-    harvest_wheat {{{{
-        TBD
-            - Right now, harvest_wheat has the start point hard-coded.  Instead, the 
-            turtle should record its position when the program is started and assume 
-            that's the correct starting point
-                - This assumes the user places the turtle correctly
-                - But it also allows the user to move the turtle to a different farm.
-
-            - At end, find a chest and
-                - dump wheat from inv into chest
-                - check own fuel level.  if too low, get coal from chest and refuel
-                - check own seeds level.  If too low, get seeds from chest
-
-            - Instead of assuming a farm is two double-columns of crops, allow an arg 
-            to declare how many double-columns there are (I can see a villager farm 
-            that consists of 3 double-columns).
-
-    }}}}
-}}}}
-lib {{{{
-    harvest {{{{
-        library used by harvest_wheat script.  My best guess is that this 
-        might have some good ideas, but as a whole it's not real useful as a 
-        general-purpose library.
-    }}}}
-    move {{{{
-        Movement-related library.  Will probably be included in every turtle 
-        script I create.
-    }}}}
-    myinv {{{{
-        Turtle inventory utilities.  Will probably be used in every turtle 
-        script.
-    }}}}
-    
-}}}}
-
-turtlescripts.com {#{{{
-    - Turtle Location Tracking API {
-        http://turtlescripts.com/project/gjdh4g-Turtle-Location-Tracking-API
-        
-        This has some good stuff in it, but some bad stuff too.  I stole the 
-        good stuff and put it into my move module.
-    }
-}#}}}
 MC Directions {#{{{
     X is east/west
     Z is north/south    (for whatever stupid fucked-up reason)
@@ -190,5 +52,184 @@ MC Directions {#{{{
     Yes, moving North goes DOWN on the z axis for whatever stupid fucked-up 
     reason.
 }#}}}
+New In-Game Machine Bootstrap {{{{
 
+    This should be the only two times you have to type in Pastebin hashes:
+        > mkdir bin
+        > pastebin get DmEhcUVa bin/get_all
+        > pastebin get pzEBgR8k bin/get_script
+
+    bin/get_all calls bin/get_script once for each of my scripts, so just run 
+    it now:
+        > bin/get_all
+    
+    And you're set.  Anytime any of my code gets edited on Pastebin, just call 
+    bin/get_all again to get the latest.
+
+}}}}
+Pastebin or Github {#{{{
+    
+    I tried both and ended up using Pastebin and my own custom uploader.
+
+    Pastebin
+        Pros:
+            - There's already a pastebin script on all computers and turtles, 
+              so you don't have to do through any hassle getting it there.
+            - When you edit a pastebin paste, it's available immediately.
+                - Edit via the website, switch to MC and pull it right away, 
+                  and you _did_ just pull the edited paste.
+        Cons:
+            - Editing code is a pain.  Edit in your editor, Ctrl-A, Ctrl-C to 
+              copy it into the clipboard, switch to browser, find the paste, 
+              hit Edit button, Ctrl-A, Ctrl-V to paste your new code, scroll 
+              down to find the submit button.
+                - And at least 20% of the time, accidentally hit Ctrl-C on the 
+                  old code instead of Ctrl-V.  Blarg.
+                - This "con" is mostly nullified by the existence of my custom 
+                  pastebin file uploader (pb.pl).
+            - It's not github.
+
+        Github
+            Pros:
+                - It's github.
+                - I'm already set up to use github and I'm comfortable with it 
+                  and it's handy and it's github.
+            Cons:
+                - There's no git script on any machine in MC by default; you 
+                  have to find one online (they do exist) and get it into the 
+                  game, which is a pain.
+                - The git scripts pull from "raw.githubusercontent.com" to 
+                  pull just the raw file (fine).
+                    - But github raw CACHES its content.  I've read it's for a 
+                      minute, but it sure as hell seems like longer than that.
+                    - However long the cache lasts, if you're trying to edit, 
+                      upload, download, run, repeat, you'll find that the 
+                      "download" part of that process holds you up because it 
+                      keeps downloading old versions.
+                    - This caching issue is becoming a deal-breaker.
+
+
+}#}}}
+pb.pl and Pastebin API {#{{{
+
+    pb.pl {#{{{
+        
+        pb.pl updates all of my pastes on pastebin.com.  Just run the script 
+        any time you make an edit here.
+    
+        If you create a new script or lib to add, first create it manually on 
+        pastebin.com, then edit pb.pl following the existing examples.  From 
+        then on, all calls to pb.pl will update your new script.
+
+    }#}}}
+    Pastebin API funk {#{{{
+        
+        The Pastebin API is largely well-done and easy to deal with.
+
+        However, the API is missing an edit method.
+
+        I do have an edit() method in my Paste module, but it's using 
+        WWW::Mechanize to:
+            - scrape the login form and log in on the web
+            - get the appropriate edit form, fill it out and submit it.
+
+
+        The pastebin website is set up such that you can only have one web 
+        login active at a time.  Test by logging in with one browser, then 
+        switching to another browser and logging in there.  Return to the 
+        first browser and refresh the page and you'll see that it's been 
+        logged out.
+
+        Since my edit() method is having to perform a web login, this means 
+        that, if you've got a pastebin.com tab open in your browser when you 
+        call WWW::Pastebin::Paste::edit(), your browser's session will be 
+        invalidated and you'll have to log in again there.
+
+        Not the end of the world, but a bit of a pain.
+
+    }#}}}
+
+}#}}}
+
+turtle/ {#{{{
+    
+    bin {{{{
+        dig_cube {{{{
+            Quarrying script.
+
+            Digs a rectangle of a specified length, width, and depth, returning 
+            its inv to a specified box.
+
+            SETUP
+            - Figure out where your box is
+                - This is where the turtle will dump out its inventory.
+                    - It should be a double box, even if it's attached to a hopper 
+                    (the turtle dumps its inv faster than a hopper can drain, 
+                    and the turtle's inv is larger than a small box.)
+                - Create a file in etc/ to contain your coords.  The file's 
+                contents must look like this:
+                            x: 123
+                            y: 456
+                            z: -789
+                ...using the exact coords of your box.
+                - The turtle will fly back to the box from above and come to rest 
+                one space /above/ the box, so be sure the path above is clear.
+            - Edit the script.
+                - Set your desired cols, rows, and depth, all relative to the 
+                start point of the turtle.
+                - "highest" is the Y coord that the turtle will fly up to before 
+                heading back to the box.  It should be high enough to not only 
+                fly out of your quarry, but also to avoid any obstacles (trees, 
+                mountains, houses, whatever) between your quarry and your 
+                dumping box.
+                - Set the name of the file containing your box coords.
+
+        }}}}
+        get_all {{{{
+            Downloads all my scripts from Pastebin.
+
+            Just a shell script (more or less) that calls get_script once per 
+            script to be downloaded.
+        }}}}
+        get_script {{{{
+            Downloads a single script from pastebin.  See get_all for example 
+            usage.
+        }}}}
+        harvest_wheat {{{{
+            TBD
+                - Right now, harvest_wheat has the start point hard-coded.  Instead, the 
+                turtle should record its position when the program is started and assume 
+                that's the correct starting point
+                    - This assumes the user places the turtle correctly
+                    - But it also allows the user to move the turtle to a different farm.
+
+                - At end, find a chest and
+                    - dump wheat from inv into chest
+                    - check own fuel level.  if too low, get coal from chest and refuel
+                    - check own seeds level.  If too low, get seeds from chest
+
+                - Instead of assuming a farm is two double-columns of crops, allow an arg 
+                to declare how many double-columns there are (I can see a villager farm 
+                that consists of 3 double-columns).
+
+        }}}}
+    }}}}
+    lib {{{{
+        harvest {{{{
+            library used by harvest_wheat script.  My best guess is that this 
+            might have some good ideas, but as a whole it's not real useful as a 
+            general-purpose library.
+        }}}}
+        move {{{{
+            Movement-related library.  Will probably be included in every turtle 
+            script I create.
+        }}}}
+        myinv {{{{
+            Turtle inventory utilities.  Will probably be used in every turtle 
+            script.
+        }}}}
+        
+    }}}}
+
+}#}}}
 

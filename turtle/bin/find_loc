@@ -1,4 +1,6 @@
 
+--find_loc
+
 os.loadAPI("lib/move")
 
 if not move.test_gps() then error("GPS system is down!") end

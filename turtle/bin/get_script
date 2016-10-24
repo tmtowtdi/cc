@@ -1,0 +1,23 @@
+
+--get_script
+
+--[[
+    If you're putting your file in a directory, that directory must already 
+    exist.
+--]]
+
+function die_usage()
+    print("get_script <local file path> <pastebin hash>")
+    return
+end
+
+local args = {...}
+if string.len(args[2]) ~= 8 then die_usage() end
+
+local fp   = args[1]
+local hash = args[2]
+
+if fs.exists(fp) then fs.delete(fp) end
+shell.run( "pastebin", "get", hash, fp )
+
+ -- vim: syntax=lua

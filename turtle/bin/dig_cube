@@ -1,10 +1,11 @@
 
+--dig_cube
+
+
 --[[
     Still need to test this with odd rows and odd cols, and then with odd and even and then with
     even and odd.
 --]]
-
---dig_cube
 
 
 --[[
