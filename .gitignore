@@ -2,6 +2,9 @@
 *.swp
 *.swo
 
+# password file
+pass.txt
+
 # Compiled Lua sources
 luac.out
 
