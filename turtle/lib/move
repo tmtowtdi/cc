@@ -1,4 +1,6 @@
 
+-- Search on CHECK
+
 --move
 
 --[[
@@ -21,10 +23,16 @@ local cardinal = {
 
 
 function init()
+    if not test_gps() then return false end
     x, y, z = gps.locate(2)
     if (not x or not y or not z) then error("GPS System is off!") end
     local d = d()
+    return true
 end
+
+function get_x() return x end
+function get_y() return y end
+function get_z() return z end
 
 function a()        -- Turn around
     facing = cardinal[facing]['around']
@@ -141,6 +149,7 @@ function test_gps()
     if t1 then return true else return false end
 end
 
+-- CHECK needs to be replaced by go_home_new(), below.
 function go_home(highest)
     local fn = 'etc/home'
     if fs.exists(fn) then
@@ -152,7 +161,40 @@ function go_home(highest)
     end
     return true
 end
+function go_home_new(highest)
+    local h = highest or 70         -- a fairly reasonable wag
+    local hx = settings.get('x')
+    local hy = settings.get('y')
+    local hz = settings.get('z')
+    if not hx or not hy or not hz then
+        error("You must run bin/set_home first.")
+        return false
+    end
+    goto(hx, hy+1, hz, h)
+    return true
+end
 
+-- CHECK needs tested
+function return_to_box(h)
+    local h = highest or 70         -- a fairly reasonable wag
+    local bx = settings.get('x')
+    local by = settings.get('y')
+    local bz = settings.get('z')
+    if not bx or not by or not bz then
+        error("You must run bin/find_box first.")
+        return false
+    end
+
+    goto(bx, by+1, bz, h)
+    for i = 1,16 do
+        turtle.select(i)
+        local s, d = turtle.getItemDetail()
+        if s then
+            if not turtle.dropDown() then box_is_full = true end
+        end
+    end
+    return (not box_is_full)
+end
 
 
 --[[

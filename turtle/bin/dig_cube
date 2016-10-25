@@ -191,6 +191,26 @@ while curr_depth  >= rdepth do
         end
         col_cnt = col_cnt + 1
 
+        --[[
+            Make sure we're actually where we think we should be or cowardly 
+            bail out.
+        --]]
+        if move.test_gps() then
+            local x, y, z = gps.locate(2)
+            if x ~= move.get_x() or y ~= move.get_y() or z ~= move.get_z() then
+                print("Shit I don't know how we got here.")
+                print("Bailing back home.")
+                return_to_box()
+                go_home()
+                return
+            end
+        else
+            error("GPS is off or we're out of range")
+            return_to_box()
+            go_home()
+            return
+        end
+
         if col_cnt < cols then
             if col_cnt % 2 == 1 then
                 move.r()
