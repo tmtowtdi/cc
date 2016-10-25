@@ -20,6 +20,15 @@
 
     ...That will dig forward 4 blocks, 
     then right 8, forming a rectangle.
+
+    When its inventory fills up, it'll 
+    go back to its box to empty out (so 
+    make sure you've run bin/find_box 
+    first).
+
+    When its job is complete, it'll 
+    head back to its home, so be sure 
+    to also run bin/set_home first.
 --]]
 
 
@@ -131,7 +140,23 @@ function dig_move_forward()
     move.fd(1, true)
     if myinv.all_slots_used() then myinv.consolidate_all() end
     if myinv.all_slots_used() then dump_inv_and_return() end
-
+    if (hit_bedrock or box_is_full) then
+        if hit_bedrock then
+            print("We've hit bedrock.")
+        else
+            print("Our inventory box is full.")
+        end
+        return_to_box()
+        return false
+    end
+    return true
+end
+function dig_move_down()
+    local s,d = turtle.inspectDown()
+    if (s and d.name == 'minecraft:bedrock') then hit_bedrock = true end
+    move.dn(1, true)
+    if myinv.all_slots_used() then myinv.consolidate_all() end
+    if myinv.all_slots_used() then dump_inv_and_return() end
     if (hit_bedrock or box_is_full) then
         if hit_bedrock then
             print("We've hit bedrock.")
@@ -159,7 +184,7 @@ local rdepth = starty - depth
 rows               = rows - 1
 local col_cnt      = 0
 local curr_depth   = starty
-while curr_depth > = rdepth do
+while curr_depth  >= rdepth do
     for i = 1,cols do
         for j = 1,rows do
             if not dig_move_forward() then return end
@@ -183,10 +208,11 @@ while curr_depth > = rdepth do
 
     col_cnt = 0
     curr_depth = curr_depth - 1
-    if curr_depth >= rdepth then move.dn(1, true) end
+    if curr_depth >= rdepth then dig_move_down() end
 end
 
 return_to_box()
+go_home()
 print("Ready for next mission, boss!")
 
 

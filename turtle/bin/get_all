@@ -1,12 +1,15 @@
 
 -- get_all
 
+shell.run( "bin/get_script", "bin/dig_cube", '2DRzRAR3' )
 shell.run( "bin/get_script", "bin/get_all", 'DmEhcUVa' )
 shell.run( "bin/get_script", "bin/get_script", 'pzEBgR8k' )
 shell.run( "bin/get_script", "bin/find_box", 'x1kHs0v3' )
 shell.run( "bin/get_script", "bin/find_loc", 'SEYF57X4' )
 shell.run( "bin/get_script", "bin/harvest_wheat", '8rXFt1YW' )
-shell.run( "bin/get_script", "bin/dig_cube", '2DRzRAR3' )
+shell.run( "bin/get_script", "bin/set_home", 'N30TvHE7' )
+
+shell.run( "bin/get_script", "bin/market", 'w1RtfqFd' )
 
 shell.run( "bin/get_script", "lib/myinv", 'bxF3p2yy' )
 shell.run( "bin/get_script", "lib/move", 'rpdxDz77' )

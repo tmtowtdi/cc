@@ -25,6 +25,7 @@ my %scripts = (
     "$FindBin::Bin/turtle/bin/find_loc"      => 'SEYF57X4',
     "$FindBin::Bin/turtle/bin/harvest_wheat" => '8rXFt1YW',
     "$FindBin::Bin/turtle/bin/dig_cube"      => '2DRzRAR3',
+    "$FindBin::Bin/turtle/bin/set_home"      => 'N30TvHE7',
     "$FindBin::Bin/turtle/lib/myinv"         => 'bxF3p2yy',
     "$FindBin::Bin/turtle/lib/move"          => 'rpdxDz77',
     "$FindBin::Bin/turtle/lib/harvest"       => 'G1u3NJE1',
@@ -33,8 +34,8 @@ my %scripts = (
 
 my $config  = decode_json(read_text('pass.txt'));
 my $account = WWW::Pastebin::Account->new({ 
-    user => $config->{'user'}, 
-    pass => $config->{'pass'}, 
+    user    => $config->{'user'}, 
+    pass    => $config->{'pass'}, 
     api_key => $config->{'api_key'}
 });
 $account->login();

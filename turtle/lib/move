@@ -1,12 +1,14 @@
 
 --move
 
-
 --[[
     You must call move.init() in your 
     calling module before using any 
     other methods.
 --]]
+
+
+os.loadAPI("lib/myinv")
 
 local x, y, z  = nil, nil, nil
 local facing   = nil
@@ -139,6 +141,17 @@ function test_gps()
     if t1 then return true else return false end
 end
 
+function go_home(highest)
+    local fn = 'etc/home'
+    if fs.exists(fn) then
+        local bx, by, bz = myinv.get_coords("etc/home")
+        goto(bx, by, bz, highest)
+    else
+        error("You have not run bin/set_home yet.")
+        return false
+    end
+    return true
+end
 
 
 
@@ -161,7 +174,7 @@ function up(cnt,force)
                 turtle.attackUp()
             end
             wait = wait + 1
-            sleep(1)
+            --sleep(1)
 		end
     y = y + 1
     end
@@ -183,7 +196,7 @@ function dn(cnt,force)
                 turtle.attackDown()
             end
             wait = wait + 1
-            sleep(1)
+            --sleep(1)
 		end
     end
     y = y - 1
@@ -205,7 +218,7 @@ function fd(cnt,force)
                 turtle.attack()
             end
             wait = wait + 1
-            sleep(0.25)
+            --sleep(0.25)
 		end
     end
     if facing == 'n' then z = z-1
@@ -233,7 +246,7 @@ function bk(cnt,force)
                 a()
             end
             wait = wait + 1
-            sleep(1)
+            --sleep(1)
     	end
     end
     if facing == 'n' then z = z+1

@@ -1,0 +1,29 @@
+
+--set_home
+
+--[[
+  Place the turtle and run this to 
+  create etc/home, which will contain 
+  the coords of his "home" spot.
+
+  move.go_home() will take him back to 
+  that spot.
+--]]
+
+os.loadAPI("lib/move")
+
+local args = {...}
+local fn   = args[1] or 'box.txt'
+
+move.init()
+if not move.test_gps() then error("GPS system is down!") end
+local x, y, z = gps.locate(2)
+local fh = fs.open( "etc/home",'w')
+fh.writeLine("x: " .. x)
+fh.writeLine("y: " .. y)
+fh.writeLine("z: " .. z)
+fh.close()
+
+
+ -- vim: syntax=lua
+
