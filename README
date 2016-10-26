@@ -8,8 +8,7 @@ TBD {{{{
 
 Installing {#{{{
     - On a turtle {#{{{
-            > pastebin get JQsniAQj install
-            > install
+            > pastebin get JQsniAQj install > install
 
         That's it.  Running the "install" script will install everything for 
         you.  You can now remove the install script if desired:

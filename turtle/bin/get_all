@@ -11,6 +11,7 @@ local files = {
     "bin/find_box"      = 'x1kHs0v3',
     "bin/find_loc"      = 'SEYF57X4',
     "bin/harvest_wheat" = '8rXFt1YW',
+    "bin/lootbags"      = 'yXLhczPS',
     "bin/set_home"      = 'N30TvHE7',
     "bin/market"        = 'w1RtfqFd',
     "lib/harvest"       = 'G1u3NJE1',
