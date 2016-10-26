@@ -1,10 +1,5 @@
 
---get_script
-
---[[
-    If you're putting your file in a directory, that directory must already 
-    exist.
---]]
+--get_script pzEBgR8k
 
 function die_usage()
     print("get_script <local file path> <pastebin hash>")

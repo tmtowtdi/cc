@@ -1,0 +1,22 @@
+
+-- turtle install JQsniAQj
+
+for k,v in ipairs({'bin', 'etc', 'lib'}) do
+    if not fs.exists(v) then fs.makeDir(v) end
+end
+
+local bootstrap = {
+    'pzEBgR8k' = "bin/get_script",
+    'DmEhcUVa' = "bin/get_all",
+}
+for h,p in pairs(bootstrap) do
+    if not fs.exists(p) then shell.run( "pastebin", "get", h, p ) end
+end
+shell.run( "bin/get_all" )
+
+print("=======================================")
+print("     Done!  You have installed ")
+print("         TMT's CC Utilities.")
+print("=======================================")
+
+ -- vim: syntax=lua

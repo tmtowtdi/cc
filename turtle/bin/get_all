@@ -1,22 +1,26 @@
 
 -- get_all
 
-shell.run( "bin/get_script", "bin/dig_cube", '2DRzRAR3' )
-shell.run( "bin/get_script", "bin/get_all", 'DmEhcUVa' )
-shell.run( "bin/get_script", "bin/get_script", 'pzEBgR8k' )
-shell.run( "bin/get_script", "bin/go_home", 'nCp8t5Q1' )
-shell.run( "bin/get_script", "bin/go_box", 'HaNYCNZM' )
-shell.run( "bin/get_script", "bin/find_box", 'x1kHs0v3' )
-shell.run( "bin/get_script", "bin/find_loc", 'SEYF57X4' )
-shell.run( "bin/get_script", "bin/harvest_wheat", '8rXFt1YW' )
-shell.run( "bin/get_script", "bin/set_home", 'N30TvHE7' )
+-- Do not include the install script here.
+local files = {
+    "bin/dig_cube"      = '2DRzRAR3',
+    "bin/get_all"       = 'DmEhcUVa',
+    "bin/get_script"    = 'pzEBgR8k',
+    "bin/go_home"       = 'nCp8t5Q1',
+    "bin/go_box"        = 'HaNYCNZM',
+    "bin/find_box"      = 'x1kHs0v3',
+    "bin/find_loc"      = 'SEYF57X4',
+    "bin/harvest_wheat" = '8rXFt1YW',
+    "bin/set_home"      = 'N30TvHE7',
+    "bin/market"        = 'w1RtfqFd',
+    "lib/harvest"       = 'G1u3NJE1',
+    "lib/move"          = 'rpdxDz77',
+    "lib/inv"           = 'bxF3p2yy',
+    "lib/settings"      = 'nqQjpWVX',
+}
+for path, hash in pairs(files) do
+    shell.run( "bin/get_script", path, hash )
+end
 
-shell.run( "bin/get_script", "bin/market", 'w1RtfqFd' )
-
-shell.run( "bin/get_script", "lib/harvest", 'G1u3NJE1' )
-shell.run( "bin/get_script", "lib/move", 'rpdxDz77' )
-shell.run( "bin/get_script", "lib/myinv", 'bxF3p2yy' )
-shell.run( "bin/get_script", "lib/settings", 'nqQjpWVX' )
 
  -- vim: syntax=lua
-

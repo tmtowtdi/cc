@@ -1,33 +1,22 @@
 
-search for CHECK
-
 TBD {{{{
-
     bin/dig_cube {#{{{
-        Periodically, I should re-consult the GPS.  If I'm not where I think I 
-        am, I should reset.
-
-        Had an issue yesterday with trying to dig through sand.  More fell 
-        from above, blocking me, so repeated attempts to move forward did not 
-        work and the turtle ended up confused about where it was.
-
-        Also, if I find I can't get a GPS signal, I should do some sort of 
-        reset.  Fly up to "highest" and re-check GPS, go back to box, etc.
+        I added a GPS re-consult after each column is completed.  Needs 
+        tested.
     }#}}}
-
-    - Create an install script
-        - this way, the entire install instructions for my stuff will be:
-            - download this script from pastebin and run it
-            - done
-        - it should:
-            - create bin/, lib/, and etc/
-            - hardcode pastebin commands to pull bin/get_script and 
-              bin/get_all
-            - now call bin/get_all
-
 }}}}
 
-MC Directions {#{{{
+Installing {#{{{
+    - On a turtle {#{{{
+            > pastebin get JQsniAQj install
+            > install
+
+        That's it.  Running the "install" script will install everything for 
+        you.  You can now remove the install script if desired:
+            > rm install
+    }#}}}
+}#}}}
+MC Cardinal Directions {#{{{
     X is east/west
     Z is north/south    (for whatever stupid fucked-up reason)
     Y is up/down        (for whatever stupid fucked-up reason)
@@ -162,6 +151,7 @@ pb.pl and Pastebin API {#{{{
 }#}}}
 
 turtle/ {#{{{
+    This docu really needs to end up somewhere more visible.
     
     bin {{{{
         dig_cube {{{{
@@ -234,7 +224,7 @@ turtle/ {#{{{
             Movement-related library.  Will probably be included in every turtle 
             script I create.
         }}}}
-        myinv {{{{
+        inv {{{{
             Turtle inventory utilities.  Will probably be used in every turtle 
             script.
         }}}}

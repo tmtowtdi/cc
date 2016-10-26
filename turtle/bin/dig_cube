@@ -32,7 +32,7 @@
 --]]
 
 
-os.loadAPI("lib/myinv")
+os.loadAPI("lib/inv")
 os.loadAPI("lib/move")
 os.loadAPI("lib/settings")
 
@@ -144,8 +144,8 @@ function dig_move_forward()
     local s,d = turtle.inspect()
     if (s and d.name == 'minecraft:bedrock') then hit_bedrock = true end
     move.fd(1, true)
-    if myinv.all_slots_used() then myinv.consolidate_all() end
-    if myinv.all_slots_used() then dump_inv_and_return() end
+    if inv.all_slots_used() then inv.consolidate_all() end
+    if inv.all_slots_used() then dump_inv_and_return() end
     if (hit_bedrock or box_is_full) then
         if hit_bedrock then
             print("We've hit bedrock.")
@@ -161,8 +161,8 @@ function dig_move_down()
     local s,d = turtle.inspectDown()
     if (s and d.name == 'minecraft:bedrock') then hit_bedrock = true end
     move.dn(1, true)
-    if myinv.all_slots_used() then myinv.consolidate_all() end
-    if myinv.all_slots_used() then dump_inv_and_return() end
+    if inv.all_slots_used() then inv.consolidate_all() end
+    if inv.all_slots_used() then dump_inv_and_return() end
     if (hit_bedrock or box_is_full) then
         if hit_bedrock then
             print("We've hit bedrock.")

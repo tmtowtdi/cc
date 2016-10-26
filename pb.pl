@@ -5,7 +5,6 @@ use utf8;                       # so literals and identifiers can be in UTF-8
 use warnings;                   # on by default
 use warnings  qw(FATAL utf8);   # fatalize encoding glitches
 use open      qw(:std :utf8);   # undeclared streams in UTF-8
-
 use feature qw(signatures);
 no warnings qw(experimental::signatures);
 
@@ -17,8 +16,9 @@ use JSON;
 use WWW::Pastebin::Account;
 use WWW::Pastebin::Paste;
 
-
+### _DO_ include the install script here.
 my %scripts = (
+    "$FindBin::Bin/turtle/install"           => 'JQsniAQj',
     "$FindBin::Bin/turtle/bin/get_all"       => 'DmEhcUVa',
     "$FindBin::Bin/turtle/bin/get_script"    => 'pzEBgR8k',
     "$FindBin::Bin/turtle/bin/find_box"      => 'x1kHs0v3',
@@ -30,11 +30,11 @@ my %scripts = (
     "$FindBin::Bin/turtle/bin/set_home"      => 'N30TvHE7',
     "$FindBin::Bin/turtle/lib/harvest"       => 'G1u3NJE1',
     "$FindBin::Bin/turtle/lib/move"          => 'rpdxDz77',
-    "$FindBin::Bin/turtle/lib/myinv"         => 'bxF3p2yy',
+    "$FindBin::Bin/turtle/lib/inv"           => 'bxF3p2yy',
     "$FindBin::Bin/turtle/lib/settings"      => 'nqQjpWVX',
 );
 
-
+### You'll need to create pass.txt.  Make sure it's in .gitignore.
 my $config  = decode_json(read_text('pass.txt'));
 my $account = WWW::Pastebin::Account->new({ 
     user    => $config->{'user'}, 

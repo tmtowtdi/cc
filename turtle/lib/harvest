@@ -1,25 +1,26 @@
 
---harvest
+--harvest G1u3NJE1
 
-os.loadAPI("lib/myinv")
+os.loadAPI("lib/inv")
 os.loadAPI("lib/move")
 
 --[[
   For harvesting villager farms, which consist of two or more column-pairs of 
-  crop.  Each column-pair is separated by a single-width irrigation trench. 
+  crop.  Each column-pair is separated by a single-width of something, often 
+  an irrigation trench or wood block pathway.
 
   Turtle must start in front of the left crop column.
   
   "C" marks crop.
-  "I" marks irrigation trench.
+  "S" marks single-width of "something"
   "^" marks turtle's starting point and direction.
-        C C I C C
-        C C I C C
-        C C I C C
-        C C I C C
-        C C I C C
-        C C I C C
-        C C I C C
+        C C S C C
+        C C S C C
+        C C S C C
+        C C S C C
+        C C S C C
+        C C S C C
+        C C S C C
         ^         
 
   CHECK
@@ -38,18 +39,14 @@ os.loadAPI("lib/move")
   Turtle ends up in starting plot, facing in starting direction.
 --]]
 function harvest_col(length)
-  myinv.consolidate("minecraft:wheat_seeds")
-  local seedslot = myinv.find("wheat_seeds")
+  inv.consolidate("minecraft:wheat_seeds")
+  local seedslot = inv.find("wheat_seeds")
   if not seedslot then error("I need wheat seeds to replant.") end
   if turtle.getItemCount(seedslot) < length then error("I don't have enough seeds in my inventory to replant.") end
   turtle.select(seedslot)
   turtle.equipRight()
 
-  for j = 1,length do
-    -- dig ahead to harvest wheat, move forward (which crushes tilled soil)
-    turtle.dig()
-    move.fd(1)
-  end
+  move.fd(length, true)
   for j = 1,length do
     -- move backwards, dig ahead of us with hoe to re-till the soil, then place seed equipped in right
     move.bk(1)
@@ -63,13 +60,13 @@ end
     Diagram shows turtle start and end point for a two-colpair farm.  "S" is 
     turtle start, E is turtle end.  Facing north in both cases.
 
-        C C I C C
-        C C I C C               ^
-        C C I C C               |
-        C C I C C               |
-        C C I C C               N
-        C C I C C
-        C C I C C
+        C C S C C
+        C C S C C               ^
+        C C S C C               |
+        C C S C C               |
+        C C S C C               N
+        C C S C C
+        C C S C C
         S       E
 
 --]]
@@ -78,7 +75,7 @@ function harvest_colpair(rows)
     for i = 1,2 do
         harvest_col(rows)
         move.r()
-        move.fd(1,1)
+        move.fd(1,true)
         move.l()
     end
 end
@@ -94,7 +91,7 @@ function harvest_villager_farm(colpairs, rows)
     for i = 1, colpairs-1 do
         harvest_colpair(rows)
         move.r()
-        move.fd(2)
+        if not move.fd(2) then error("Something is in my way!") return false end
         move.l()
     end
     harvest_colpair(rows)   -- Don't move to the right after finishing the last colpair.
@@ -104,10 +101,10 @@ function harvest_villager_farm(colpairs, rows)
     local moves = (colpairs * 2)    - 1                              + (colpairs - 1)
 
     move.l()
-    move.fd(moves)          -- move back to the starting point
+    -- move back to the starting point
+    if not move.fd(moves) then error("Something is in my way!") return false end
     move.r()
 end
 
-return true
 
  -- vim: syntax=lua
