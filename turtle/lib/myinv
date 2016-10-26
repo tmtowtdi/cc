@@ -159,35 +159,4 @@ function name_is_fq(item_name)
   if string.find(item_name,':') then return true else return false end
 end
 
-
---[[
-    Reads x, y, z coords out of a file.  Good for maintaining dumper box coords.
-        x, y, z = myinv.get_coords("etc/box.txt")
-
-    The file must contain one coord per line, with specifiers, as:
-        x: 12
-        y: 342
-        z: -220
---]]
-function get_coords(f)
-    local fh = fs.open(f, 'r')
-    local x, y, z
-    while true do
-        local line = fh.readLine()
-        if line == nil then break end
-        if string.find(line,'x:') then
-            local xs = string.gsub(line, "x:%s+", "")
-            x = tonumber(xs)
-        elseif string.find(line,'y:') then
-            local ys = string.gsub(line, "y:%s+", "")
-            y = tonumber(ys)
-        elseif string.find(line,'z:') then
-            local zs = string.gsub(line, "z:%s+", "")
-            z = tonumber(zs)
-        end
-    end
-    fh.close()
-    return x, y, z
-end
-
  -- vim: syntax=lua

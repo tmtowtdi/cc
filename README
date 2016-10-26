@@ -2,6 +2,7 @@
 search for CHECK
 
 TBD {{{{
+
     bin/dig_cube {#{{{
         Periodically, I should re-consult the GPS.  If I'm not where I think I 
         am, I should reset.
@@ -12,55 +13,18 @@ TBD {{{{
 
         Also, if I find I can't get a GPS signal, I should do some sort of 
         reset.  Fly up to "highest" and re-check GPS, go back to box, etc.
-
-
-        ----
-        After fixing my_inv and move as specified below, the return_to_box() 
-        and go_home() code here in dig_cube should go away to be replaced by 
-        calls to move.return_to_box() and move.go_home().
-
-    }#}}}
-    lib/my_inv {#{{{
-        get_coords(filename) is getting the current x,y,z coords and saving 
-        them to $filename, which most of my code is defaulting to 
-        "etc/box.txt".
-
-        BUT, I just found the built-in settings API, and it looks like I can 
-        just do this:
-                settings.set("x", x_coord)
-        ...then, later on, I can do this:
-                local x = settings.set("x")
-        
-        The settings API saves its data to .settings in the root (by default).  
-        You can hand its load() and save() methods different filenames if you 
-        really need it.
-
-        CHECK
-        After calling settings.set(...), do I need to also call 
-        settings.save() if I'm using the default storage filename?  I can't 
-        tell from the docs.  I'm leaning towards "no, I do not", but I'm not 
-        sure.
-
-        After figuring this out, get_coords() should turn into 3 simple 
-        "settings.get()" calls and one return call instead of all the crap 
-        that's in there now.
-
-        Once that's done, I can get rid of any instructions that mention 
-        creating "etc/" at bootstrap.
-
-
-    }#}}}
-    lib/move {#{{{
-        Search on CHECK for some new functions that need to be tested.  
-        They're using settings.get() which I haven't messed with yet but 
-        should be OK.
     }#}}}
 
-    - I'd like to add these as turtle scripts
-        return_to_box
-            - after fixing my_inv as specified above
-            - This is a function in
-        go_home
+    - Create an install script
+        - this way, the entire install instructions for my stuff will be:
+            - download this script from pastebin and run it
+            - done
+        - it should:
+            - create bin/, lib/, and etc/
+            - hardcode pastebin commands to pull bin/get_script and 
+              bin/get_all
+            - now call bin/get_all
+
 }}}}
 
 MC Directions {#{{{

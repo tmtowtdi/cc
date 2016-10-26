@@ -1,0 +1,17 @@
+--go_box HaNYCNZM
+
+--[[
+  Returns to one spot above your 
+  selected box and dumps inventory into 
+  the box.
+    > bin/go_box
+    > bin/go_box 100
+--]]
+
+os.loadAPI("lib/move")
+local args    = {...}
+local highest = args[1] or 100
+move.return_to_box(highest)
+
+ -- vim: syntax=lua
+

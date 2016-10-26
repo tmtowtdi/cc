@@ -1,16 +1,8 @@
 
--- Search on CHECK
-
 --move
 
---[[
-    You must call move.init() in your 
-    calling module before using any 
-    other methods.
---]]
-
-
 os.loadAPI("lib/myinv")
+os.loadAPI("lib/settings")
 
 local x, y, z  = nil, nil, nil
 local facing   = nil
@@ -149,37 +141,24 @@ function test_gps()
     if t1 then return true else return false end
 end
 
--- CHECK needs to be replaced by go_home_new(), below.
-function go_home(highest)
-    local fn = 'etc/home'
-    if fs.exists(fn) then
-        local bx, by, bz = myinv.get_coords("etc/home")
-        goto(bx, by, bz, highest)
-    else
-        error("You have not run bin/set_home yet.")
-        return false
-    end
-    return true
-end
-function go_home_new(highest)
-    local h = highest or 70         -- a fairly reasonable wag
-    local hx = settings.get('x')
-    local hy = settings.get('y')
-    local hz = settings.get('z')
+function go_home(h)
+    local h = h or 100           -- a fairly reasonable wag
+    local hx = settings.get('home_x')
+    local hy = settings.get('home_y')
+    local hz = settings.get('home_z')
     if not hx or not hy or not hz then
         error("You must run bin/set_home first.")
         return false
     end
-    goto(hx, hy+1, hz, h)
+    goto(hx, hy, hz, h)
     return true
 end
 
--- CHECK needs tested
 function return_to_box(h)
-    local h = highest or 70         -- a fairly reasonable wag
-    local bx = settings.get('x')
-    local by = settings.get('y')
-    local bz = settings.get('z')
+    local h = h or 100               -- a fairly reasonable wag
+    local bx = settings.get('box_x')
+    local by = settings.get('box_y')
+    local bz = settings.get('box_z')
     if not bx or not by or not bz then
         error("You must run bin/find_box first.")
         return false
@@ -308,8 +287,7 @@ function gotoX(toX,force)
         face_w()
     end
 
-	
-	while x ~= toX do
+    while x ~= toX do
         fd(1,force)
 	end
 end
@@ -356,5 +334,8 @@ function goto(toX, toY, toZ, height, force)
     gotoZ(toZ, force)
     gotoY(toY, force)
 end
+
+init()
+sleep(0.5)
 
  -- vim: syntax=lua

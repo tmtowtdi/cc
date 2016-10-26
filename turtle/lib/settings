@@ -1,0 +1,58 @@
+
+--settings
+
+local fp     = "etc/settings"
+local cooked = {}
+
+function create_file(path)
+    raw = textutils.serialize(cooked)
+    local fh = fs.open(path, 'w')
+    fh.write(raw)
+    fh.close()
+end
+
+function load(path)
+    local path = path or fp
+    if not fs.exists(path) then create_file(path) end
+    local fh = fs.open(path, 'r')
+    local raw = fh.readAll()
+    fh.close()
+    cooked = textutils.unserialize(raw)
+    return true
+end
+
+function save(path)
+    local path = path or fp
+    raw = textutils.serialize(cooked)
+    fh = fs.open(path, 'w')
+    fh.write(raw)
+    fh.close()
+    return true
+end
+
+function get(key)
+    if cooked[key] then return cooked[key] else error(key.." is not set") return false end
+end
+
+function set(key, val)
+    if not key or not val then
+        error("Usage: set(key, val). See unset() to clear a key.")
+        return false
+    end
+    cooked[key] = val
+    save()
+end
+
+function unset(key)
+    if not key then
+        error("Usage: unset(key)")
+        return false
+    end
+    cooked[key] = nil   --yeah, that's how you delete.
+    save()
+    return true
+end
+
+load()
+
+ -- vim: syntax=lua

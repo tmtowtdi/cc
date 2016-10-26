@@ -1,0 +1,13 @@
+--go_home nCp8t5Q1
+
+--[[
+  Returns to your set home spot.
+--]]
+
+os.loadAPI("lib/move")
+local args    = {...}
+local highest = args[1] or 100
+move.go_home(highest)
+
+ -- vim: syntax=lua
+

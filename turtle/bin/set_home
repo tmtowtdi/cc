@@ -11,19 +11,15 @@
 --]]
 
 os.loadAPI("lib/move")
+os.loadAPI("lib/settings")
 
-local args = {...}
-local fn   = args[1] or 'box.txt'
-
-move.init()
 if not move.test_gps() then error("GPS system is down!") end
 local x, y, z = gps.locate(2)
-local fh = fs.open( "etc/home",'w')
-fh.writeLine("x: " .. x)
-fh.writeLine("y: " .. y)
-fh.writeLine("z: " .. z)
-fh.close()
+settings.set('home_x', x)
+settings.set('home_y', y)
+settings.set('home_z', z)
 
+print("Home has been set!")
 
  -- vim: syntax=lua
 

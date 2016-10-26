@@ -13,14 +13,10 @@
 --]]
 
 os.loadAPI("lib/move")
+os.loadAPI("lib/settings")
 
-local args = {...}
-local fn   = args[1] or 'box.txt'
-
-move.init()
 if not move.test_gps() then error("GPS system is down!") end
 local x, y, z = gps.locate(2)
-print(x..' '..y..' '..z)
 move.face_n()
 
 local got_chest = false
@@ -42,12 +38,10 @@ for i = 1,4 do
 end
 
 if got_chest then
-    print("Found a box at "..x..", "..y..", "..z..".")
-    local fh = fs.open( "etc/" .. fn, 'w')
-    fh.writeLine("x: " .. x)
-    fh.writeLine("y: " .. y)
-    fh.writeLine("z: " .. z)
-    fh.close()
+    print("I found a box at "..x..", "..y..", "..z..".")
+    settings.set('box_x', x)
+    settings.set('box_y', y)
+    settings.set('box_z', z)
 else
     error("I was unable to find a box - be sure you put me down right next to one.")
 end

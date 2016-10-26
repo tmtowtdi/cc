@@ -34,6 +34,7 @@
 
 os.loadAPI("lib/myinv")
 os.loadAPI("lib/move")
+os.loadAPI("lib/settings")
 
 local args = {...}
 
@@ -49,7 +50,7 @@ local cols  = tonumber(args[1]) or 8
 local rows  = tonumber(args[2]) or 8
 
 -- relative to the turtle's start point
-local depth = 100
+local depth = tonumber(args[3]) or 100
 
 --[[
     Absolute height to fly up to 
@@ -58,24 +59,29 @@ local depth = 100
     any obstacles between the pit and 
     box.
 --]]
-local highest   = 70
-
---[[
-    File containing the coords of the
-    box we're going to dump to.
-
-    Even if this box is hooked up to a 
-    hopper, it must have an inventory 
-    bigger than the turtle (it must be 
-    a double box).
---]]
-local box_file = "etc/box.txt"
+local highest = tonumber(args[4]) or 70
 
 -- END EDITS
 ---------------------------------------
 
+--[[
+    Neither box nor home coords are used in this script; go_home() and 
+    return_to_box are both in the move library.
+    So we're just sanity-checking that the coords are set now so we don't get 
+    halfway through digging before realizing we don't have a home or box.
+--]]
 -- Coords of the box we'll dump our inv to
-local bx, by, bz = myinv.get_coords(box_file)
+local bx, by, bz = settings.get('box_x'), settings.get('box_y'), settings.get('box_z')
+if not bx or not by or not bz then
+    error("You must call bin/find_box first.")
+    return
+end
+-- Coords of out home spot
+local hx, hy, hz = settings.get('home_x'), settings.get('home_y'), settings.get('home_z')
+if not hx or not hy or not hz then
+    error("You must call bin/set_home first.")
+    return
+end
 
 -- When/if these become true we'll return to the box and quit.
 local hit_bedrock = false
@@ -170,20 +176,11 @@ function dig_move_down()
 end
 
 
-move.init()
-sleep(0.5)
 local startx, starty, startz = gps.locate(2)
-local rdepth = starty - depth
-
-
--- Uncomment to test a new box setup
---return_to_box()
---do return end
-
-
-rows               = rows - 1
-local col_cnt      = 0
-local curr_depth   = starty
+local rdepth                 = starty - depth
+rows                         = rows - 1
+local col_cnt                = 0
+local curr_depth             = starty
 while curr_depth  >= rdepth do
     for i = 1,cols do
         for j = 1,rows do

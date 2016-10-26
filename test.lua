@@ -1,9 +1,5 @@
-#!/usr/bin/lua
+#!/usr/bin/env lua
 
-a = 1
-b = nil
-
-
-if not a or not b then
-    print("shit")
-end
+local args = {...}
+local foo = args[1] or 100;
+print(foo)
