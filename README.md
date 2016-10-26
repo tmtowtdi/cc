@@ -4,15 +4,15 @@ This is a collection of scripts and APIs for the ComputerCraft addon for Minecra
 
 ## Install
 
-In Minecraft, create turtle and open its interface.
+In Minecraft, create a turtle and open its interface.
 
 ```
   > pastebin get JQsniAQj install
   > install
 ```
 
-That install script will install all scripts and APIS.  Once it finishes, you can safely 
-remove it: ` > rm install`
+That install script will install all scripts and APIs.  Once the script finishes, you can 
+safely remove it: ` > rm install`
 
 ## Using
 
