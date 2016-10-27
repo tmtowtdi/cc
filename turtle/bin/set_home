@@ -8,18 +8,29 @@
 
   move.go_home() will take him back to 
   that spot.
+
+  Set home point, save its coords as 
+  "home_x", "home_y", "home_z":
+    > bin/find_home
+
+  Set home point, save its coords as 
+  "other_x", "other_y", "other_z":
+    > bin/find_home other
 --]]
 
 os.loadAPI("lib/move")
 os.loadAPI("lib/settings")
 
+local args = {...}
+local name = args[1] or 'home'
+
 if not move.test_gps() then error("GPS system is down!") end
 local x, y, z = gps.locate(2)
-settings.set('home_x', x)
-settings.set('home_y', y)
-settings.set('home_z', z)
+settings.set(name .. '_x', x)
+settings.set(name .. '_y', y)
+settings.set(name .. '_z', z)
 
-print("Home has been set!")
+print("Home point '"..name.."' has been set!")
 
  -- vim: syntax=lua
 

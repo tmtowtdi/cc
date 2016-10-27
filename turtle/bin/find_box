@@ -7,13 +7,21 @@
   the cooords of the box and write them 
   to "etc/box.txt".
 
-  You can specify a different filename 
-  (but in etc/) with:
-    > bin/find_box some_file_name.txt
+  Find an adjacent box, save its coords 
+  as "box_x", "box_y", "box_z":
+    > bin/find_box
+
+  Find an adjacent box, save its coords 
+  as "other_x", "other_y", "other_z":
+    > bin/find_box other
+
 --]]
 
 os.loadAPI("lib/move")
 os.loadAPI("lib/settings")
+
+local args = {...}
+local name = args[1] or 'box'
 
 if not move.test_gps() then error("GPS system is down!") end
 local x, y, z = gps.locate(2)
@@ -39,9 +47,9 @@ end
 
 if got_chest then
     print("I found a box at "..x..", "..y..", "..z..".")
-    settings.set('box_x', x)
-    settings.set('box_y', y)
-    settings.set('box_z', z)
+    settings.set(name ..'_x', x)
+    settings.set(name .. '_y', y)
+    settings.set(name .. '_z', z)
 else
     error("I was unable to find a box - be sure you put me down right next to one.")
 end

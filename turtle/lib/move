@@ -140,21 +140,38 @@ function test_gps()
 end
 
 --[[
-    Returns the turtle to its set home.
-    First ascends to height h (defaults to 100) to attempt to avoid obstacles.
-    bin/set_home must be run once before this will work.
-    Returns true or false.
+  Returns the turtle to its set home.
+  First ascends to height h (defaults 
+  to 100) to attempt to avoid 
+  obstacles.
+  bin/set_home must be run once before 
+  this will work.
+  Returns true or false.
+
+  Fly up to y==100 then head to home_x, 
+  home_y, home_z
+  > move.go_home()
+
+  Fly up to y==50 then head to home_x, 
+  home_y, home_z
+  > move.go_home(50)
+
+  Fly up to y==50 then head to 
+  origin_x, origin_y, origin_z
+  > move.go_home(50, "origin")
+
 --]]
-function go_home(h)
-    local h = h or 100           -- a fairly reasonable wag
-    local hx = settings.get('home_x')
-    local hy = settings.get('home_y')
-    local hz = settings.get('home_z')
+function go_home(height, name)
+    local height = height or 100           -- a reasonable wag
+    local name   = name or 'home'
+    local hx     = settings.get('home_x')
+    local hy     = settings.get('home_y')
+    local hz     = settings.get('home_z')
     if not hx or not hy or not hz then
         error("You must run bin/set_home first.")
         return false
     end
-    goto(hx, hy, hz, h)
+    goto(hx, hy, hz, height)
     return true
 end
 
