@@ -1,5 +1,5 @@
 
---dig_cube
+--dig_cube 2DRzRAR3
 
 
 --[[
@@ -9,26 +9,39 @@
 
 
 --[[
-    Assumes its starting point is the 
-    SW corner of a cubic rectangle to 
-    dig out.
+  You must run both
+    bin/find_box
+    bin/set_home
+  ...before running this.
 
-    Defaults to an 8x8 square.  You can 
-    determine the length and width at 
-    the command line:
-      > bin/dig_cube 4 8
+  Assumes its starting point is the SW 
+  corner of a cubic rectangle to dig 
+  out.
 
-    ...That will dig forward 4 blocks, 
-    then right 8, forming a rectangle.
+  Defaults to an 8x8 square to a depth 
+  of 100 plots under the starting 
+  point.
+    
+  When its inventory fills up, it'll 
+  fly up to a preset height (defaults 
+  to 70), then go back to its box to 
+  dump its inv, then return to complete 
+  the job.
 
-    When its inventory fills up, it'll 
-    go back to its box to empty out (so 
-    make sure you've run bin/find_box 
-    first).
+  When its job is complete, it'll head 
+  back to its home, so be sure to also 
+  run bin/set_home first.
 
-    When its job is complete, it'll 
-    head back to its home, so be sure 
-    to also run bin/set_home first.
+  Dig 8x8x100 cube
+  > bin/dig_cube
+
+  Dig 4x3x2 cube
+  > bin/dig_cube 4 3 2
+
+  Dig 4x3x2 cube, fly to Y==150 before 
+  returning to box to dump inv to avoid 
+  that tall tree nearby:
+  > bin/dig_cube 4 3 2 150
 --]]
 
 
@@ -36,33 +49,11 @@ os.loadAPI("lib/inv")
 os.loadAPI("lib/move")
 os.loadAPI("lib/settings")
 
-local args = {...}
-
----------------------------------------
--- EDIT BELOW
-
---[[
-    Height (cols), width (rows), and 
-    depth (depth) of the rectangle to 
-    dig.
---]]
-local cols  = tonumber(args[1]) or 8
-local rows  = tonumber(args[2]) or 8
-
--- relative to the turtle's start point
-local depth = tonumber(args[3]) or 100
-
---[[
-    Absolute height to fly up to 
-    before returning to the box.  
-    Should be high enough to fly above 
-    any obstacles between the pit and 
-    box.
---]]
+local args    = {...}
+local cols    = tonumber(args[1]) or 8
+local rows    = tonumber(args[2]) or 8
+local depth   = tonumber(args[3]) or 100
 local highest = tonumber(args[4]) or 70
-
--- END EDITS
----------------------------------------
 
 if not move.has_home('home') or not move.has_box('box') then
   print("You must call both bin/find_box and.")
@@ -82,11 +73,11 @@ function dump_inv_and_return()
   local rx, ry, rz = gps.locate(2)
   local rd         = move.d()
 
-  if not move.return_to_box() then
+  if not move.return_to_box(highest, 'box') then
     if not rx or not ry or not rz then
       --GPS system might must be out of range.  Fly up and try again.
       move.gotoY(highest, true)
-      if not move.return_to_box() then
+      if not move.return_to_box(highest, 'box') then
         error("Bottom of pit was out of GPS range; can't return!")
         return false
       end
@@ -122,7 +113,7 @@ function dig_move_forward()
   local s,d = turtle.inspect()
   if (s and d.name == 'minecraft:bedrock') then
     error("Hit bedrock - done.")
-    move.return_to_box()
+    move.return_to_box(highest, 'box')
     move.dump_inv("dn")
     move.go_home(highest)
   end
@@ -142,7 +133,7 @@ function dig_move_down()
   local s,d = turtle.inspectDown()
   if (s and d.name == 'minecraft:bedrock') then
     error("Hit bedrock - done.")
-    move.return_to_box()
+    move.return_to_box(highest, 'box')
     move.dump_inv("dn")
     move.go_home(highest)
   end
@@ -169,52 +160,50 @@ rows                         = rows - 1
 local col_cnt                = 0
 local curr_depth             = starty
 while curr_depth  >= rdepth do
-    for i = 1,cols do
-        for j = 1,rows do
-            if not dig_move_forward() then return end
-        end
-        col_cnt = col_cnt + 1
+  for i = 1,cols do
+    for j = 1,rows do if not dig_move_forward() then return end end
+    col_cnt = col_cnt + 1
 
-        --[[
-            Make sure we're actually where we think we should be or cowardly 
-            bail out.
-        --]]
-        if move.test_gps() then
-            local x, y, z = gps.locate(2)
-            if x ~= move.get_x() or y ~= move.get_y() or z ~= move.get_z() then
-                print("Shit I don't know how we got here.")
-                print("Bailing back home.")
-                move.return_to_box(highest)
-                move.dump_inv("dn")
-                move.go_home(highest)
-                return
-            end
-        else
-            error("GPS is off or we're out of range")
-            move.return_to_box(highest)
-            move.dump_inv("dn")
-            move.go_home(highest)
-            return
-        end
-
-        if col_cnt < cols then
-            if col_cnt % 2 == 1 then
-                move.r()
-                if not dig_move_forward() then return end
-                move.r()
-            else
-                move.l()
-                if not dig_move_forward() then return end
-                move.l()
-            end
-        else
-            if col_cnt % 2 == 1 then move.l() move.l() else move.r() end
-        end
+    --[[
+      Make sure we're actually where we think we should be or cowardly 
+      bail out.
+    --]]
+    if move.test_gps() then
+      local x, y, z = gps.locate(2)
+      if x ~= move.get_x() or y ~= move.get_y() or z ~= move.get_z() then
+        print("Shit I don't know how we got here.")
+        print("Bailing back home.")
+        move.return_to_box(highest)
+        move.dump_inv("dn")
+        move.go_home(highest)
+        return
+      end
+    else
+      error("GPS is off or we're out of range")
+      move.return_to_box(highest)
+      move.dump_inv("dn")
+      move.go_home(highest)
+      return
     end
 
-    col_cnt = 0
-    curr_depth = curr_depth - 1
-    if curr_depth >= rdepth then dig_move_down() end
+    if col_cnt < cols then
+      if col_cnt % 2 == 1 then
+        move.r()
+        if not dig_move_forward() then return end
+        move.r()
+      else
+        move.l()
+        if not dig_move_forward() then return end
+        move.l()
+      end
+    else
+      if col_cnt % 2 == 1 then move.l() move.l() else move.r() end
+    end
+  end
+
+  col_cnt         = 0
+  curr_depth      = curr_depth - 1
+  if curr_depth > = rdepth then dig_move_down() end
 end
 
 move.return_to_box(highest)

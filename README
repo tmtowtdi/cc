@@ -7,6 +7,11 @@ TBD {{{{
 
         Needs tested
     }#}}}
+
+    What happens when I do this:
+        error("this is a long ass error message that's too wide for the in-game screen")
+    ...should I be breaking that up into multiple print()s followed by a 
+    return()?  Or does error() deal with breakage OK?
 }}}}
 
 Installing {#{{{

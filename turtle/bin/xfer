@@ -1,0 +1,80 @@
+
+--xfer cLpwQi38
+
+os.loadAPI("lib/move")
+
+local args       = {...}
+local wait_time  = args[1] or 300
+local highest    = args[2] or 70
+local src_box    = args[3] or 'src'
+local target_box = args[4] or 'target'
+
+--[[
+  Set a home point for the turtle
+  > bin/set_home
+
+  Find your source box (the one you're 
+  pulling inventory from), then:
+  > bin/find_box src
+
+  Find your target box (the one you're 
+  dumping inventory to), then:
+  > bin/find_box target
+
+  Now run this:
+  > bin/xfer
+
+  ...and this will go to src, pull 
+  items from it, then go to target, 
+  dump items into it, then return to 
+  its home point and wait five minutes.  
+  Lather rinse repeat.
+
+  > bin xfer 100 70 box1 box2
+  ...take from "box1", dump to "box2", 
+  fly up to a Y of 70 between moves, 
+  wait 100 seconds before repeating.
+--]]
+
+function do_suck()  --giggity
+  move.return_to_box(highest, src_box)
+  for i=1,16 do
+    turtle.select(i)
+    turtle.suckDown()
+  end
+end
+
+function do_dump()
+  move.return_to_box(highest, target_box)
+  move.dump_inv('dn')
+end
+
+
+
+--Sanity checks
+if not move.has_home() then
+  error("You must set a home point first") 
+  return
+end
+if not move.has_box(src_box) or not move.has_box(target_box) then
+  error("You must run bin/find_box for both your source and target boxes first.")
+  return
+end
+for i=1,16 do
+  if turtle.getItemCount(i) > 0 then
+    print("Inventory not empty.  Dumping first.")
+    do_dump()
+    break
+  end
+end
+
+--Start
+while true do
+  do_suck()
+  do_dump()
+  move.go_home()
+  sleep( wait_time )
+end
+
+
+ -- vim: syntax=lua ts=2 sw=2

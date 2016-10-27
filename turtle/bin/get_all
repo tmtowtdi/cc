@@ -1,5 +1,5 @@
 
--- get_all
+-- get_all DmEhcUVa
 
 -- Do not include the install script here.
 local files = {
@@ -13,6 +13,7 @@ local files = {
     ["bin/harvest_wheat"] = '8rXFt1YW',
     ["bin/set_home"]      = 'N30TvHE7',
     ["bin/market"]        = 'w1RtfqFd',
+    ["bin/xfer"]          = 'cLpwQi38',
     ["lib/harvest"]       = 'G1u3NJE1',
     ["lib/move"]          = 'rpdxDz77',
     ["lib/inv"]           = 'bxF3p2yy',
@@ -23,4 +24,4 @@ for path, hash in pairs(files) do
 end
 
 
- -- vim: syntax=lua
+ -- vim: syntax=lua ts=2 sw=2

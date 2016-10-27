@@ -11,7 +11,8 @@
 os.loadAPI("lib/move")
 local args    = {...}
 local highest = args[1] or 100
-move.return_to_box(highest)
+local name    = args[2] or 'box'
+move.return_to_box(highest, name)
 move.dump_inv("dn")
 
  -- vim: syntax=lua

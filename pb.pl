@@ -28,6 +28,7 @@ my %scripts = (
     "$FindBin::Bin/turtle/bin/harvest_wheat" => '8rXFt1YW',
     "$FindBin::Bin/turtle/bin/dig_cube"      => '2DRzRAR3',
     "$FindBin::Bin/turtle/bin/set_home"      => 'N30TvHE7',
+    "$FindBin::Bin/turtle/bin/xfer"          => 'cLpwQi38',
     "$FindBin::Bin/turtle/lib/harvest"       => 'G1u3NJE1',
     "$FindBin::Bin/turtle/lib/move"          => 'rpdxDz77',
     "$FindBin::Bin/turtle/lib/inv"           => 'bxF3p2yy',
