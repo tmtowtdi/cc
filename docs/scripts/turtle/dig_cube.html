@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Dig Cube &mdash; ComputerCraft Utilities 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="ComputerCraft Utilities 0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="Scripts" href="../index.html"/>
+        <link rel="next" title="Find Box" href="find_box.html"/>
+        <link rel="prev" title="Scripts" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ComputerCraft Utilities
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Scripts</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#turtle-scripts">Turtle Scripts</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Dig Cube</a></li>
+<li class="toctree-l3"><a class="reference internal" href="find_box.html">Find Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="go_home.html">Go Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_home.html">Set Home</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">ComputerCraft Utilities</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Scripts</a> &raquo;</li>
+      
+    <li>Dig Cube</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/scripts/turtle/dig_cube.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dig-cube">
+<span id="id1"></span><h1>Dig Cube<a class="headerlink" href="#dig-cube" title="Permalink to this headline">¶</a></h1>
+<p>Excavates a rectangle, automatically emptying its inventory when it gets full.
+You can specify the length, width, and depth of the rectangle, along with how
+high the turtle needs to fly up to safely travel between the pit he&#8217;s digging
+and the box into which he&#8217;s dumping his inventory.</p>
+<p>When the pit is finished, the turtle will return to its box one last time to
+dump its inventory, then return to its home spot.</p>
+<p>The turtle starts in the SW corner, so the cube it digs will be forward and
+right of its starting point.  If he begins at &#8220;B&#8221;, facing North, he will dig
+out the blocks marked &#8220;D&#8221;:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span>D D D D    N
+D D D D    ^
+D D D D    |
+B D D D    |
+</pre></div>
+</div>
+<p>Before running this, you must set a home spot named &#8220;home&#8221;, and a dumper box
+named &#8220;box&#8221;.  Set these by running <a class="reference internal" href="set_home.html#set-home"><span class="std std-ref">Set Home</span></a> and <a class="reference internal" href="find_box.html#find-box"><span class="std std-ref">Find Box</span></a> .</p>
+<p>The script can run with no arguments, accepting its defaults, or with up to
+four arguments:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">bin</span><span class="o">/</span><span class="n">dig_cube</span>
+<span class="o">&gt;</span> <span class="n">bin</span><span class="o">/</span><span class="n">dig_cube</span> <span class="mi">5</span> <span class="mi">10</span> <span class="mi">50</span> <span class="mi">100</span>
+</pre></div>
+</div>
+<p>The first version, with no arguments, will dig a cube 8 columns wide, 8 rows
+long, and 100 blocks deep (all relative to the turtle&#8217;s starting point).  When
+the turtle is finished or its inventory fills up, it will fly up to an
+altitude of 70 before flying back to his box.</p>
+<p>The second version, with arguments, will dig a cube 5 columns wide, 10 rows
+long, 50 blocks deep.  When the turtle is finished or its inventory fills up,
+it will fly up to an altitude of 100 before flying back to his box.</p>
+<p><cite>Note</cite> that the altitude argument is <cite>absolute</cite>.  It&#8217;s not 70 or 100 blocks up
+from the turtle&#8217;s location, it&#8217;s Y == 70 (or Y == 100 for the second example).
+The point of the altitude setting is for you to check the area around the
+turtle and find any obstacles (trees, hills, houses, etc), and be sure the
+turtle will fly up high enough to get over all of them.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="find_box.html" class="btn btn-neutral float-right" title="Find Box" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="Scripts" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jonathan Barton.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

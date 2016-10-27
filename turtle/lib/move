@@ -193,17 +193,6 @@ function has_box(name)
 end  
 
 --[[
-
-return_to_box(h)
-  - WAS returning true on error (box_is_full == true == error)
-  - CHANGE to return true for OK, false for error
-
-dump_inv(dir)
-  - adding this
-  - return true for OK, false for error.
-
-
-
     Returns the turtle one block above its set box, and empties the turtle's 
     entire inventory into that box.
     First ascends to height h (defaults to 100) to attempt to avoid obstacles.

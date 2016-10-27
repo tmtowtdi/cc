@@ -7,10 +7,6 @@ use File::Find;
 use File::Slurp;
 use File::Temp;
 
-### If you uncomment the _modules line, remember that I have a section called 
-### "TLE_modules", and the "_modules" line below, as-is, will break the links 
-### to that section.
-###
 File::Copy::mv( '_sources', 'sources' );
 File::Copy::mv( '_static',  'static'  );
 
@@ -23,7 +19,6 @@ sub wanted {
     ### $File::Find::dir - current dir
     ### $File::Find::name - full pathname to file
     ### $_ - current filename
- 
     return unless $_ =~ /\.html$/;
 
     my $tmp_fh = File::Temp->new( UNLINK => 0 );
