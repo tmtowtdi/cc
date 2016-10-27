@@ -1,6 +1,10 @@
 #!/usr/bin/env lua
 
-for k,v in ipairs({'bin', 'etc', 'lib'}) do
-    print(v)
+local files = {
+    ['bin/foo'] = '2DRzRAR3',
+    --lib/settings      = 'nqQjpWVX',
+}
+for path, hash in pairs(files) do
+    print(path..' '..hash)
 end
 
