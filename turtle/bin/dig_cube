@@ -64,71 +64,43 @@ local highest = tonumber(args[4]) or 70
 -- END EDITS
 ---------------------------------------
 
---[[
-    Neither box nor home coords are used in this script; go_home() and 
-    return_to_box are both in the move library.
-    So we're just sanity-checking that the coords are set now so we don't get 
-    halfway through digging before realizing we don't have a home or box.
---]]
--- Coords of the box we'll dump our inv to
-local bx, by, bz = settings.get('box_x'), settings.get('box_y'), settings.get('box_z')
-if not bx or not by or not bz then
-    error("You must call bin/find_box first.")
-    return
-end
--- Coords of out home spot
-local hx, hy, hz = settings.get('home_x'), settings.get('home_y'), settings.get('home_z')
-if not hx or not hy or not hz then
-    error("You must call bin/set_home first.")
-    return
+if not move.has_home('home') or not move.has_box('box') then
+  print("You must call both bin/find_box and.")
+  print("bin/set_home before running this.")
+  return
 end
 
--- When/if these become true we'll return to the box and quit.
-local hit_bedrock = false
-local box_is_full = false
 
 
 
 
 --[[
-    Return to 1 plot above the box, 
-    dump our inv into it.
-    Returns true on success, false if the box is full.
---]]
-function return_to_box()
-    move.goto(bx, by+1, bz, highest)
-    for i = 1,16 do
-        turtle.select(i)
-        local s, d = turtle.getItemDetail()
-        if s then
-            if not turtle.dropDown() then box_is_full = true end
-        end
-    end
-    return (not box_is_full)
-end
-
---[[
-    Goes to the box, dumps 
-    ourinventory, then returns back 
-    where it started.
+  Goes to the box, dumps our inventory, 
+  then returns back where it started.
 --]]
 function dump_inv_and_return()
-    local rx, ry, rz = gps.locate(2)
-    local rd         = move.d()
+  local rx, ry, rz = gps.locate(2)
+  local rd         = move.d()
 
-    return_to_box()
-    if box_is_full then
-        error("Our dumping box is full!")
+  if not move.return_to_box() then
+    if not rx or not ry or not rz then
+      --GPS system might must be out of range.  Fly up and try again.
+      move.gotoY(highest, true)
+      if not move.return_to_box() then
+        error("Bottom of pit was out of GPS range; can't return!")
         return false
-    else
-        if not rx or not ry or not rz then
-            error("Bottom of pit was out of GPS range; can't return!")
-            return            -- my error message was lying!
-        end
-        move.goto(rx, ry, rz, highest)
-        move.face(rd)
-        return true
+      end
     end
+  end
+
+  if not move.dump_inv("dn") then
+    error("Our dumping box is full.  Heading home.")
+    return false
+  end
+
+  move.goto(rx, ry, rz, highest)
+  move.face(rd)
+  return true
 end
 
 --[[
@@ -136,44 +108,59 @@ end
     necessary.
     Automatically goes back to the box 
     to dump inventory when needed.
-    Returns true on success, false if 
-    the box is full or if we hit 
-    bedrock.  
+
+    If we hit bedrock, dumps inventory 
+    in box and goes home.
+
+    If inventory box is full, goes 
+    home.
+    
+    Returns true or false on success or 
+    fail.
 --]]
 function dig_move_forward()
-    local s,d = turtle.inspect()
-    if (s and d.name == 'minecraft:bedrock') then hit_bedrock = true end
-    move.fd(1, true)
-    if inv.all_slots_used() then inv.consolidate_all() end
-    if inv.all_slots_used() then dump_inv_and_return() end
-    if (hit_bedrock or box_is_full) then
-        if hit_bedrock then
-            print("We've hit bedrock.")
-        else
-            print("Our inventory box is full.")
-        end
-        return_to_box()
-        return false
+  local s,d = turtle.inspect()
+  if (s and d.name == 'minecraft:bedrock') then
+    error("Hit bedrock - done.")
+    move.return_to_box()
+    move.dump_inv("dn")
+    move.go_home(highest)
+  end
+  move.fd(1, true)
+  if inv.all_slots_used() then inv.consolidate_all() end
+  if inv.all_slots_used() then
+    if not dump_inv_and_return() then
+      print("Our inventory box is full.")
+      move.go_home(highest)
+      return false
     end
-    return true
+  end
+  return true
 end
+
 function dig_move_down()
-    local s,d = turtle.inspectDown()
-    if (s and d.name == 'minecraft:bedrock') then hit_bedrock = true end
-    move.dn(1, true)
-    if inv.all_slots_used() then inv.consolidate_all() end
-    if inv.all_slots_used() then dump_inv_and_return() end
-    if (hit_bedrock or box_is_full) then
-        if hit_bedrock then
-            print("We've hit bedrock.")
-        else
-            print("Our inventory box is full.")
-        end
-        return_to_box()
-        return false
+  local s,d = turtle.inspectDown()
+  if (s and d.name == 'minecraft:bedrock') then
+    error("Hit bedrock - done.")
+    move.return_to_box()
+    move.dump_inv("dn")
+    move.go_home(highest)
+  end
+  move.dn(1, true)
+  if inv.all_slots_used() then inv.consolidate_all() end
+  if inv.all_slots_used() then
+    if not dump_inv_and_return() then
+      print("Our inventory box is full.")
+      move.go_home(highest)
+      return false
     end
-    return true
+  end
+  return true
 end
+
+
+
+
 
 
 local startx, starty, startz = gps.locate(2)
@@ -197,14 +184,16 @@ while curr_depth  >= rdepth do
             if x ~= move.get_x() or y ~= move.get_y() or z ~= move.get_z() then
                 print("Shit I don't know how we got here.")
                 print("Bailing back home.")
-                return_to_box()
-                go_home()
+                move.return_to_box(highest)
+                move.dump_inv("dn")
+                move.go_home(highest)
                 return
             end
         else
             error("GPS is off or we're out of range")
-            return_to_box()
-            go_home()
+            move.return_to_box(highest)
+            move.dump_inv("dn")
+            move.go_home(highest)
             return
         end
 
@@ -228,8 +217,9 @@ while curr_depth  >= rdepth do
     if curr_depth >= rdepth then dig_move_down() end
 end
 
-return_to_box()
-go_home()
+move.return_to_box(highest)
+move.dump_inv("dn")
+move.go_home(highest)
 print("Ready for next mission, boss!")
 
 

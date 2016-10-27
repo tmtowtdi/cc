@@ -162,20 +162,52 @@ end
 
 --]]
 function go_home(height, name)
-    local height = height or 100           -- a reasonable wag
-    local name   = name or 'home'
-    local hx     = settings.get('home_x')
-    local hy     = settings.get('home_y')
-    local hz     = settings.get('home_z')
-    if not hx or not hy or not hz then
-        error("You must run bin/set_home first.")
-        return false
-    end
-    goto(hx, hy, hz, height)
-    return true
+  local height = height or 100           -- a reasonable wag
+  local name   = name or 'home'
+  local hx     = settings.get(name .. '_x')
+  local hy     = settings.get(name .. '_y')
+  local hz     = settings.get(name .. '_z')
+  if not hx or not hy or not hz then
+      error("You must run bin/set_home first.")
+      return false
+  end
+  goto(hx, hy, hz, height)
+  return true
 end
 
 --[[
+  Check if the user has run the 
+  set_home or find_box scripts yet.
+--]]
+function has_home(name)
+  local name = name or 'home'
+  local hx     = settings.get(name..'_x')
+  local hy     = settings.get(name..'_y')
+  local hz     = settings.get(name..'_z')
+  if not hx or not hy or not hz then return false end
+  return true
+end
+function has_box(name)
+  local name = name or 'box'
+  local bx     = settings.get(name..'_x')
+  local by     = settings.get(name..'_y')
+  local bz     = settings.get(name..'_z')
+  if not bx or not by or not bz then return false end
+  return true
+end  
+
+--[[
+
+return_to_box(h)
+  - WAS returning true on error (box_is_full == true == error)
+  - CHANGE to return true for OK, false for error
+
+dump_inv(dir)
+  - adding this
+  - return true for OK, false for error.
+
+
+
     Returns the turtle one block above its set box, and empties the turtle's 
     entire inventory into that box.
     First ascends to height h (defaults to 100) to attempt to avoid obstacles.
@@ -191,16 +223,45 @@ function return_to_box(h)
         error("You must run bin/find_box first.")
         return false
     end
-
     goto(bx, by+1, bz, h)
     for i = 1,16 do
         turtle.select(i)
         local s, d = turtle.getItemDetail()
         if s then
-            if not turtle.dropDown() then box_is_full = true end
+            if not turtle.dropDown() then return(false) end
         end
     end
-    return (not box_is_full)
+    return true
+end
+
+--[[
+  Drops all inventory items.  
+  Presumably there's a chest in the 
+  direction we're dropping.
+
+  Possible directions are 'dn', 'fd', 
+  and 'up'.  Defaults to 'dn'.
+--]]
+function dump_inv(dir)
+  local dir = dir or 'dn'
+  local drop;
+
+  if dir == 'fd' then drop = turtle.drop
+    elseif dir == 'up' then drop = turtle.dropUp
+    elseif dir == 'dn' then drop = turtle.dropDown
+    else
+      error("Direction '"..dir.."' is invalid.")
+      return false
+  end
+
+  for i = 1,16 do
+    turtle.select(i)
+    local s, d = turtle.getItemDetail()
+    if s then
+        if not drop() then return false end
+    end
+  end
+  return true
 end
 
 
