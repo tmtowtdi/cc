@@ -1,22 +1,6 @@
 
 --inv bxF3p2yy
 
---[[
-    Get the integer first slot containing item_name.
-
-    item_name can be passed as either a FQ name or a "relative" name.
-        wheat_seeds
-        minecraft:wheat_seeds
-    
-    If passed a relative name, the first matching item's slot will be 
-    returned, which could possibly return the wrong item in the case of items 
-    added by multiple addons, eg:
-        copper_ore
-        industrycraft:copper_ore
-        denseores:copper_ore
-
-    ...so if you need a specific item from a specific addon, pass a FQ name.
---]]
 function find(item_name)
   local simp_name = simplify_name(item_name)
   for i = 1,16 do 
@@ -38,10 +22,6 @@ function find(item_name)
   return false
 end
 
---[[
-  Get a table of all slots containing the requested item_name.
-  Same Simple/FQ naming rules as find().
---]]
 function find_all(item_name)
   simp_name = simplify_name(item_name)
   local slots = {}
@@ -62,24 +42,6 @@ function find_all(item_name)
   return slots
 end
 
---[[
-  Finds all inventory slots containing item_name, and attempts to 
-  consolidate those items.
-
-  It's strongly recommended to pass in FQ names, especially for non-vanilla 
-  items which may be duplicated by multiple addons.
-  
-    Before:
-      ---------------------------
-      |  20 dirt   |  empty     |
-      |  10 dirt   |  50 dirt   |
-      ---------------------------
-    After
-      ---------------------------
-      |  64 dirt   |  empty     |
-      |  16 dirt   |  empty     |
-      ---------------------------
---]]
 function consolidate(item_name)
   local slots = find_all(item_name)
   for i = #slots, 1, -1 do
@@ -91,7 +53,6 @@ function consolidate(item_name)
   end
 end
 
--- Consolidates all items in the inventory
 function consolidate_all()
     for i = 1,16 do
         local d = turtle.getItemDetail(i)
@@ -99,10 +60,6 @@ function consolidate_all()
     end
 end
 
---[[
-    Returns true if all inventory slots contain an item.
-    Does not check if the item stacks are full, just if there's something in all slots.
---]]
 function all_slots_used()
     for i = 1,16 do
         if not turtle.getItemDetail(i) then return false end
@@ -110,28 +67,13 @@ function all_slots_used()
     return true
 end
 
-
---[[
-  Given an item name, returns its simple item name.  If the passed name 
-  was already simple, just returns it as-is.
-
-    print simplify_name("dirt")             -- dirt
-    print simplify_name("minecraft:dirt")   -- dirt
-    print simplify_name("foobar:dirt")      -- dirt
-
---]]
 function simplify_name(item_name)
   local new = string.gsub(item_name, "%w+:", "")
   return new
 end
 
---[[
-  Returns true if the passed item_name is FQ.
-    if name_is_fq("dirt") then print("yes") else print("no") end              -- no
-    if name_is_fq("minecraft:dirt") then print("yes") else print("no") end    -- yes
-    if name_is_fq("othermod:dirt") then print("yes") else print("no") end     -- yes
---]]
 function name_is_fq(item_name)
+  item_name = item_name or ''
   if string.find(item_name,':') then return true else return false end
 end
 
