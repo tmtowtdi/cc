@@ -89,18 +89,28 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Move</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#fd-bk-up-dn-move"><code class="docutils literal"><span class="pre">fd,</span> <span class="pre">bk,</span> <span class="pre">up,</span> <span class="pre">dn</span></code> (Move)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#goto"><code class="docutils literal"><span class="pre">goto</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#l-r-a-turn-relative"><code class="docutils literal"><span class="pre">l,</span> <span class="pre">r,</span> <span class="pre">a</span></code> (Turn, relative)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#face-n-face-e-face-s-face-w-turn-absolute"><code class="docutils literal"><span class="pre">face_n,</span> <span class="pre">face_e,</span> <span class="pre">face_s,</span> <span class="pre">face_w</span></code> (Turn, absolute)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#face-turn-absolute-arg"><code class="docutils literal"><span class="pre">face</span></code> (Turn, absolute, arg)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#go-home"><code class="docutils literal"><span class="pre">go_home</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#has-home"><code class="docutils literal"><span class="pre">has_home</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#return-to-box"><code class="docutils literal"><span class="pre">return_to_box</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#has-box"><code class="docutils literal"><span class="pre">has_box</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#dump-inv"><code class="docutils literal"><span class="pre">dump_inv</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#d-get-facing-direction"><code class="docutils literal"><span class="pre">d</span></code> (Get facing direction)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-x-get-x-get-x"><code class="docutils literal"><span class="pre">get_x,</span> <span class="pre">get_x,</span> <span class="pre">get_x</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fd-spaces-force"><code class="docutils literal"><span class="pre">fd(spaces,</span> <span class="pre">force)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bk-spaces-force"><code class="docutils literal"><span class="pre">bk(spaces,</span> <span class="pre">force)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#up-spaces-force"><code class="docutils literal"><span class="pre">up(spaces,</span> <span class="pre">force)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dn-spaces-force"><code class="docutils literal"><span class="pre">dn(spaces,</span> <span class="pre">force)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#goto-x-y-z-height-force"><code class="docutils literal"><span class="pre">goto(X,</span> <span class="pre">Y,</span> <span class="pre">Z,</span> <span class="pre">height,</span> <span class="pre">force)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#l"><code class="docutils literal"><span class="pre">l()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#r"><code class="docutils literal"><span class="pre">r()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a"><code class="docutils literal"><span class="pre">a()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face-n"><code class="docutils literal"><span class="pre">face_n()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face-s"><code class="docutils literal"><span class="pre">face_s()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face-e"><code class="docutils literal"><span class="pre">face_e()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face-w"><code class="docutils literal"><span class="pre">face_w()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#face-dir"><code class="docutils literal"><span class="pre">face(dir)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#go-home-height-name"><code class="docutils literal"><span class="pre">go_home(height,</span> <span class="pre">name)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#has-home-name"><code class="docutils literal"><span class="pre">has_home(name)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#return-to-box-height-name"><code class="docutils literal"><span class="pre">return_to_box(height,</span> <span class="pre">name)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#has-box-name"><code class="docutils literal"><span class="pre">has_box(name)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dump-inv-dir"><code class="docutils literal"><span class="pre">dump_inv(dir)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#d"><code class="docutils literal"><span class="pre">d()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-x"><code class="docutils literal"><span class="pre">get_x()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-y"><code class="docutils literal"><span class="pre">get_y()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-z"><code class="docutils literal"><span class="pre">get_z()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -172,18 +182,26 @@ to move.  If the turtle is surrounded on all sides, this will fail.</p>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#move-methods"><span class="std std-ref">Methods</span></a></dt>
 <dd><ul class="first last simple">
-<li><a class="reference internal" href="#move-method-fd"><span class="std std-ref">fd, bk, up, dn (Move)</span></a></li>
-<li><a class="reference internal" href="#move-method-goto"><span class="std std-ref">goto</span></a></li>
-<li><a class="reference internal" href="#move-method-l"><span class="std std-ref">l, r, a (Turn, relative)</span></a></li>
-<li><a class="reference internal" href="#move-method-face-n"><span class="std std-ref">face_n, face_e, face_s, face_w (Turn, absolute)</span></a></li>
-<li><a class="reference internal" href="#move-method-face"><span class="std std-ref">face (Turn, absolute, arg)</span></a></li>
-<li><a class="reference internal" href="#move-method-go-home"><span class="std std-ref">go_home</span></a></li>
-<li><a class="reference internal" href="#move-method-has-home"><span class="std std-ref">has_home</span></a></li>
-<li><a class="reference internal" href="#move-method-return-to-box"><span class="std std-ref">return_to_box</span></a></li>
-<li><a class="reference internal" href="#move-method-has-box"><span class="std std-ref">has_box</span></a></li>
-<li><a class="reference internal" href="#move-method-dump-inv"><span class="std std-ref">dump_inv</span></a></li>
-<li><a class="reference internal" href="#move-method-d"><span class="std std-ref">d (Get facing direction)</span></a></li>
-<li><a class="reference internal" href="#move-method-get-x"><span class="std std-ref">get_x, get_x, get_x</span></a></li>
+<li><a class="reference internal" href="#move-method-fd"><span class="std std-ref">fd(spaces, force)</span></a></li>
+<li><a class="reference internal" href="#move-method-bk"><span class="std std-ref">bk(spaces, force)</span></a></li>
+<li><a class="reference internal" href="#move-method-up"><span class="std std-ref">up(spaces, force)</span></a></li>
+<li><a class="reference internal" href="#move-method-dn"><span class="std std-ref">dn(spaces, force)</span></a></li>
+<li><a class="reference internal" href="#move-method-goto"><span class="std std-ref">goto(X, Y, Z, height, force)</span></a></li>
+<li><a class="reference internal" href="#move-method-l"><span class="std std-ref">l()</span></a></li>
+<li><a class="reference internal" href="#move-method-r"><span class="std std-ref">r()</span></a></li>
+<li><a class="reference internal" href="#move-method-a"><span class="std std-ref">a()</span></a></li>
+<li><a class="reference internal" href="#move-method-face-n"><span class="std std-ref">face_n()</span></a></li>
+<li><a class="reference internal" href="#move-method-face-s"><span class="std std-ref">face_s()</span></a></li>
+<li><a class="reference internal" href="#move-method-face-e"><span class="std std-ref">face_e()</span></a></li>
+<li><a class="reference internal" href="#move-method-face-w"><span class="std std-ref">face_w()</span></a></li>
+<li><a class="reference internal" href="#move-method-face"><span class="std std-ref">face(dir)</span></a></li>
+<li><a class="reference internal" href="#move-method-go-home"><span class="std std-ref">go_home(height, name)</span></a></li>
+<li><a class="reference internal" href="#move-method-has-home"><span class="std std-ref">has_home(name)</span></a></li>
+<li><a class="reference internal" href="#move-method-return-to-box"><span class="std std-ref">return_to_box(height, name)</span></a></li>
+<li><a class="reference internal" href="#move-method-has-box"><span class="std std-ref">has_box(name)</span></a></li>
+<li><a class="reference internal" href="#move-method-dump-inv"><span class="std std-ref">dump_inv(dir)</span></a></li>
+<li><a class="reference internal" href="#move-method-d"><span class="std std-ref">d()</span></a></li>
+<li><a class="reference internal" href="#move-method-get-x"><span class="std std-ref">get_x()</span></a></li>
 </ul>
 </dd>
 </dl>
@@ -213,109 +231,153 @@ to move.  If the turtle is surrounded on all sides, this will fail.</p>
 </div>
 <div class="section" id="methods">
 <span id="move-methods"></span><h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="fd-bk-up-dn-move">
-<span id="move-method-dn"></span><span id="move-method-up"></span><span id="move-method-bk"></span><span id="move-method-fd"></span><h3><code class="docutils literal"><span class="pre">fd,</span> <span class="pre">bk,</span> <span class="pre">up,</span> <span class="pre">dn</span></code> (Move)<a class="headerlink" href="#fd-bk-up-dn-move" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.DIRECTION(spaces,</span> <span class="pre">force)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">spaces</span></code> (int, defaults to 1)</li>
-<li><code class="docutils literal"><span class="pre">force</span></code> (bool, defaults to false)</li>
-</ul>
+<div class="section" id="fd-spaces-force">
+<span id="move-method-fd"></span><h3><code class="docutils literal"><span class="pre">fd(spaces,</span> <span class="pre">force)</span></code><a class="headerlink" href="#fd-spaces-force" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="bk-spaces-force">
+<span id="move-method-bk"></span><h3><code class="docutils literal"><span class="pre">bk(spaces,</span> <span class="pre">force)</span></code><a class="headerlink" href="#bk-spaces-force" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="up-spaces-force">
+<span id="move-method-up"></span><h3><code class="docutils literal"><span class="pre">up(spaces,</span> <span class="pre">force)</span></code><a class="headerlink" href="#up-spaces-force" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="dn-spaces-force">
+<span id="move-method-dn"></span><h3><code class="docutils literal"><span class="pre">dn(spaces,</span> <span class="pre">force)</span></code><a class="headerlink" href="#dn-spaces-force" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">spaces</span></code></dt>
+<dd>int, defaults to 1</dd>
+<dt><code class="docutils literal"><span class="pre">force</span></code></dt>
+<dd>bool, defaults to false</dd>
+</dl>
 <p>Move the turtle <code class="docutils literal"><span class="pre">spaces</span></code> spaces in the specified direction.  If <code class="docutils literal"><span class="pre">force</span></code> is
 true and the turtle is blocked, it will attempt to both dig and attack in the
 requested direction.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="goto">
-<span id="move-method-goto"></span><h3><code class="docutils literal"><span class="pre">goto</span></code><a class="headerlink" href="#goto" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.goto(X,</span> <span class="pre">Y,</span> <span class="pre">Z,</span> <span class="pre">height,</span> <span class="pre">force)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">X</span></code> (int, required)</li>
-<li><code class="docutils literal"><span class="pre">Y</span></code> (int, required)</li>
-<li><code class="docutils literal"><span class="pre">Z</span></code> (int, required)</li>
-<li><code class="docutils literal"><span class="pre">height</span></code> (int, defaults to nil)</li>
-<li><code class="docutils literal"><span class="pre">force</span></code> (bool, defaults to false)</li>
-</ul>
+<div class="section" id="goto-x-y-z-height-force">
+<span id="move-method-goto"></span><h3><code class="docutils literal"><span class="pre">goto(X,</span> <span class="pre">Y,</span> <span class="pre">Z,</span> <span class="pre">height,</span> <span class="pre">force)</span></code><a class="headerlink" href="#goto-x-y-z-height-force" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">X</span></code></dt>
+<dd>int, required</dd>
+<dt><code class="docutils literal"><span class="pre">Y</span></code></dt>
+<dd>int, required</dd>
+<dt><code class="docutils literal"><span class="pre">Z</span></code></dt>
+<dd>int, required</dd>
+<dt><code class="docutils literal"><span class="pre">height</span></code></dt>
+<dd>int, defaults to nil</dd>
+<dt><code class="docutils literal"><span class="pre">force</span></code></dt>
+<dd>bool, defaults to false</dd>
+</dl>
 <p>Move the turtle directly to the requested coordinates.</p>
 <p>If <code class="docutils literal"><span class="pre">height</span></code> is specified, the turtle will first ascend to that Y value
 before flying to its destination, flying back down only when it&#8217;s directly
 over the destination.</p>
 <p>If <code class="docutils literal"><span class="pre">force</span></code> is true, the turtle will attempt to dig/attack its way through
 any obstacles.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="l-r-a-turn-relative">
-<span id="move-method-a"></span><span id="move-method-r"></span><span id="move-method-l"></span><h3><code class="docutils literal"><span class="pre">l,</span> <span class="pre">r,</span> <span class="pre">a</span></code> (Turn, relative)<a class="headerlink" href="#l-r-a-turn-relative" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.TURN_DIRECTION()</span></code></p>
+<div class="section" id="l">
+<span id="move-method-l"></span><h3><code class="docutils literal"><span class="pre">l()</span></code><a class="headerlink" href="#l" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="r">
+<span id="move-method-r"></span><h3><code class="docutils literal"><span class="pre">r()</span></code><a class="headerlink" href="#r" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="a">
+<span id="move-method-a"></span><h3><code class="docutils literal"><span class="pre">a()</span></code><a class="headerlink" href="#a" title="Permalink to this headline">¶</a></h3>
 <p>Turns the turtle left, right or around (180°).</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="face-n-face-e-face-s-face-w-turn-absolute">
-<span id="move-method-face-w"></span><span id="move-method-face-s"></span><span id="move-method-face-e"></span><span id="move-method-face-n"></span><h3><code class="docutils literal"><span class="pre">face_n,</span> <span class="pre">face_e,</span> <span class="pre">face_s,</span> <span class="pre">face_w</span></code> (Turn, absolute)<a class="headerlink" href="#face-n-face-e-face-s-face-w-turn-absolute" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.FACE_DIRECTION()</span></code></p>
+<div class="section" id="face-n">
+<span id="move-method-face-n"></span><h3><code class="docutils literal"><span class="pre">face_n()</span></code><a class="headerlink" href="#face-n" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="face-s">
+<span id="move-method-face-s"></span><h3><code class="docutils literal"><span class="pre">face_s()</span></code><a class="headerlink" href="#face-s" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="face-e">
+<span id="move-method-face-e"></span><h3><code class="docutils literal"><span class="pre">face_e()</span></code><a class="headerlink" href="#face-e" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="face-w">
+<span id="move-method-face-w"></span><h3><code class="docutils literal"><span class="pre">face_w()</span></code><a class="headerlink" href="#face-w" title="Permalink to this headline">¶</a></h3>
 <p>Turns the turtle to face the requested direction.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="face-turn-absolute-arg">
-<span id="move-method-face"></span><h3><code class="docutils literal"><span class="pre">face</span></code> (Turn, absolute, arg)<a class="headerlink" href="#face-turn-absolute-arg" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.face(dir)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">dir</span></code> (str, One of &#8216;n&#8217;, &#8216;s&#8217;, &#8216;e&#8217;, &#8216;w&#8217;.  Required)</li>
-</ul>
+<div class="section" id="face-dir">
+<span id="move-method-face"></span><h3><code class="docutils literal"><span class="pre">face(dir)</span></code><a class="headerlink" href="#face-dir" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">dir</span></code></dt>
+<dd>str, One of &#8216;n&#8217;, &#8216;s&#8217;, &#8216;e&#8217;, &#8216;w&#8217;.  Required</dd>
+</dl>
 <p>Turns the turtle to face the requested direction.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="go-home">
-<span id="move-method-go-home"></span><h3><code class="docutils literal"><span class="pre">go_home</span></code><a class="headerlink" href="#go-home" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.go_home(height,</span> <span class="pre">name)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">height</span></code> (int, defaults to 100)</li>
-<li><code class="docutils literal"><span class="pre">name</span></code> (str, defaults to &#8220;home&#8221;)</li>
-</ul>
+<div class="section" id="go-home-height-name">
+<span id="move-method-go-home"></span><h3><code class="docutils literal"><span class="pre">go_home(height,</span> <span class="pre">name)</span></code><a class="headerlink" href="#go-home-height-name" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">height</span></code></dt>
+<dd>int, defaults to 100</dd>
+<dt><code class="docutils literal"><span class="pre">name</span></code></dt>
+<dd>str, defaults to &#8220;home&#8221;</dd>
+</dl>
 <p>Returns the turtle to its marked home location.  It first ascends to
 <code class="docutils literal"><span class="pre">height</span></code>.  The default home location is named &#8220;home&#8221;, but if you have a
 custom home location with another name, you may pass that name.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="has-home">
-<span id="move-method-has-home"></span><h3><code class="docutils literal"><span class="pre">has_home</span></code><a class="headerlink" href="#has-home" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.has_home(name)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">name</span></code> (str, defaults to &#8220;home&#8221;)</li>
-</ul>
+<div class="section" id="has-home-name">
+<span id="move-method-has-home"></span><h3><code class="docutils literal"><span class="pre">has_home(name)</span></code><a class="headerlink" href="#has-home-name" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">name</span></code></dt>
+<dd>str, defaults to &#8220;home&#8221;</dd>
+</dl>
 <p>Check if the turtle has a home location named <code class="docutils literal"><span class="pre">name</span></code>.  Returns true if so,
 false if not.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="return-to-box">
-<span id="move-method-return-to-box"></span><h3><code class="docutils literal"><span class="pre">return_to_box</span></code><a class="headerlink" href="#return-to-box" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.return_to_box(height,name)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">height</span></code> (int, defaults to 100)</li>
-<li><code class="docutils literal"><span class="pre">name</span></code> (str, defaults to &#8220;box&#8221;)</li>
-</ul>
+<div class="section" id="return-to-box-height-name">
+<span id="move-method-return-to-box"></span><h3><code class="docutils literal"><span class="pre">return_to_box(height,</span> <span class="pre">name)</span></code><a class="headerlink" href="#return-to-box-height-name" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">height</span></code></dt>
+<dd>int, defaults to 100</dd>
+<dt><code class="docutils literal"><span class="pre">name</span></code></dt>
+<dd>str, defaults to &#8220;box&#8221;</dd>
+</dl>
 <p>Returns the turtle to one slot above the requested box.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="has-box">
-<span id="move-method-has-box"></span><h3><code class="docutils literal"><span class="pre">has_box</span></code><a class="headerlink" href="#has-box" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.has_box(name)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">name</span></code> (str, defaults to &#8220;box&#8221;)</li>
-</ul>
+<div class="section" id="has-box-name">
+<span id="move-method-has-box"></span><h3><code class="docutils literal"><span class="pre">has_box(name)</span></code><a class="headerlink" href="#has-box-name" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">name</span></code></dt>
+<dd>str, defaults to &#8220;box&#8221;</dd>
+</dl>
 <p>Check if the turtle has a box assigned named <code class="docutils literal"><span class="pre">name</span></code>.  Returns true if so,
 false if not.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="dump-inv">
-<span id="move-method-dump-inv"></span><h3><code class="docutils literal"><span class="pre">dump_inv</span></code><a class="headerlink" href="#dump-inv" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.dump_inv(dir)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">dir</span></code> (str, one of &#8216;fd&#8217;, &#8216;up&#8217;, or &#8216;dn&#8217;.  Defaults to &#8216;dn&#8217;)</li>
-</ul>
+<div class="section" id="dump-inv-dir">
+<span id="move-method-dump-inv"></span><h3><code class="docutils literal"><span class="pre">dump_inv(dir)</span></code><a class="headerlink" href="#dump-inv-dir" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">dir</span></code></dt>
+<dd>str, one of &#8216;fd&#8217;, &#8216;up&#8217;, or &#8216;dn&#8217;.  Defaults to &#8216;dn&#8217;</dd>
+</dl>
 <p>Drops all of the turtle&#8217;s internal inventory in the direction requested.  If
 there&#8217;s a chest in the requested direction, items will go into that chest.</p>
 <p>Returns true on success, false on failure (eg the target inventory is full).</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="d-get-facing-direction">
-<span id="move-method-d"></span><h3><code class="docutils literal"><span class="pre">d</span></code> (Get facing direction)<a class="headerlink" href="#d-get-facing-direction" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.d()</span></code></p>
+<div class="section" id="d">
+<span id="move-method-d"></span><h3><code class="docutils literal"><span class="pre">d()</span></code><a class="headerlink" href="#d" title="Permalink to this headline">¶</a></h3>
 <p>Get the direction we&#8217;re currently facing.  Returns one of &#8216;n&#8217;, &#8216;s&#8217;, &#8216;e&#8217;, or
 &#8216;w&#8217; on success, false on failure (eg the GPS system is down or out of range).</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="get-x-get-x-get-x">
-<span id="move-method-get-z"></span><span id="move-method-get-y"></span><span id="move-method-get-x"></span><h3><code class="docutils literal"><span class="pre">get_x,</span> <span class="pre">get_x,</span> <span class="pre">get_x</span></code><a class="headerlink" href="#get-x-get-x-get-x" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">move.get_x(),</span> <span class="pre">move.get_x(),</span> <span class="pre">move.get_x()</span></code></p>
+<div class="section" id="get-x">
+<span id="move-method-get-x"></span><h3><code class="docutils literal"><span class="pre">get_x()</span></code><a class="headerlink" href="#get-x" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="get-y">
+<span id="move-method-get-y"></span><h3><code class="docutils literal"><span class="pre">get_y()</span></code><a class="headerlink" href="#get-y" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="get-z">
+<span id="move-method-get-z"></span><h3><code class="docutils literal"><span class="pre">get_z()</span></code><a class="headerlink" href="#get-z" title="Permalink to this headline">¶</a></h3>
 <p>Get the move module&#8217;s notion of the turtle&#8217;s current X, Y, and Z coordinates.</p>
 </div>
 </div>

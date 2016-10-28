@@ -23,9 +23,17 @@ to move.  If the turtle is surrounded on all sides, this will fail.
 - :ref:`move_synopsis`
 - :ref:`move_methods`
     - :ref:`move_method_fd`
+    - :ref:`move_method_bk`
+    - :ref:`move_method_up`
+    - :ref:`move_method_dn`
     - :ref:`move_method_goto`
     - :ref:`move_method_l`
+    - :ref:`move_method_r`
+    - :ref:`move_method_a`
     - :ref:`move_method_face_n`
+    - :ref:`move_method_face_s`
+    - :ref:`move_method_face_e`
+    - :ref:`move_method_face_w`
     - :ref:`move_method_face`
     - :ref:`move_method_go_home`
     - :ref:`move_method_has_home`
@@ -66,34 +74,51 @@ Methods
 ~~~~~~~~
 
 .. _move_method_fd:
+
+``fd(spaces, force)``
+++++++++++++++++++++++
+
 .. _move_method_bk:
+
+``bk(spaces, force)``
+++++++++++++++++++++++
+
 .. _move_method_up:
+
+``up(spaces, force)``
+++++++++++++++++++++++
+
 .. _move_method_dn:
 
-``fd, bk, up, dn`` (Move)
-++++++++++++++++++++++++++++++++++++++++++++++
+``dn(spaces, force)``
+++++++++++++++++++++++
 
-``move.DIRECTION(spaces, force)``
-
-- ``spaces`` (int, defaults to 1)
-- ``force`` (bool, defaults to false)
+``spaces``
+  int, defaults to 1
+``force``
+  bool, defaults to false
 
 Move the turtle ``spaces`` spaces in the specified direction.  If ``force`` is 
 true and the turtle is blocked, it will attempt to both dig and attack in the 
 requested direction.
 
+----
+
 .. _move_method_goto:
 
-``goto``
+``goto(X, Y, Z, height, force)``
 +++++++++++++++
 
-``move.goto(X, Y, Z, height, force)``
-
-- ``X`` (int, required)
-- ``Y`` (int, required)
-- ``Z`` (int, required)
-- ``height`` (int, defaults to nil)
-- ``force`` (bool, defaults to false)
+``X``
+  int, required
+``Y``
+  int, required
+``Z``
+  int, required
+``height``
+  int, defaults to nil
+``force``
+  bool, defaults to false
 
 Move the turtle directly to the requested coordinates.
 
@@ -104,122 +129,158 @@ over the destination.
 If ``force`` is true, the turtle will attempt to dig/attack its way through 
 any obstacles.
 
+----
+
 .. _move_method_l:
+
+``l()``
++++++++
+
 .. _move_method_r:
+
+``r()``
++++++++
+
 .. _move_method_a:
 
-``l, r, a`` (Turn, relative)
-++++++++++++++++++++++++++++++++
-
-``move.TURN_DIRECTION()``
+``a()``
++++++++
 
 Turns the turtle left, right or around (180°).
 
+----
+
 .. _move_method_face_n:
-.. _move_method_face_e:
+
+``face_n()``
+++++++++++++
+
 .. _move_method_face_s:
+
+``face_s()``
+++++++++++++
+
+.. _move_method_face_e:
+
+``face_e()``
+++++++++++++
+
 .. _move_method_face_w:
 
-``face_n, face_e, face_s, face_w`` (Turn, absolute)
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-``move.FACE_DIRECTION()``
+``face_w()``
+++++++++++++
 
 Turns the turtle to face the requested direction.
+
+----
 
 .. _move_method_face:
 
-``face`` (Turn, absolute, arg)
-++++++++++++++++++
+``face(dir)``
+++++++++
 
-``move.face(dir)``
-
-- ``dir`` (str, One of 'n', 's', 'e', 'w'.  Required)
+``dir``
+  str, One of 'n', 's', 'e', 'w'.  Required
 
 Turns the turtle to face the requested direction.
 
+----
+
 .. _move_method_go_home:
 
-``go_home``
-++++++++++++++++++++++
+``go_home(height, name)``
++++++++++++++++++++++++++
 
-``move.go_home(height, name)``
-
-- ``height`` (int, defaults to 100)
-- ``name`` (str, defaults to "home")
+``height``
+  int, defaults to 100
+``name``
+  str, defaults to "home"
 
 Returns the turtle to its marked home location.  It first ascends to 
 ``height``.  The default home location is named "home", but if you have a 
 custom home location with another name, you may pass that name.
 
+----
+
 .. _move_method_has_home:
 
-``has_home``
-+++++++++++++++++++
+``has_home(name)``
+++++++++++++++++++
 
-``move.has_home(name)``
-
-- ``name`` (str, defaults to "home")
+``name``
+  str, defaults to "home"
 
 Check if the turtle has a home location named ``name``.  Returns true if so, 
 false if not.
 
+----
+
 .. _move_method_return_to_box:
 
-``return_to_box``
-++++++++++++++++++++++++
+``return_to_box(height, name)``
++++++++++++++++++++++++++++++++
 
-``move.return_to_box(height,name)``
-
-- ``height`` (int, defaults to 100)
-- ``name`` (str, defaults to "box")
+``height``
+  int, defaults to 100
+``name``
+  str, defaults to "box"
 
 Returns the turtle to one slot above the requested box.
 
+----
+
 .. _move_method_has_box:
 
-``has_box``
-++++++++++++++++++
+``has_box(name)``
++++++++++++++++++
 
-``move.has_box(name)``
-
-- ``name`` (str, defaults to "box")
+``name``
+  str, defaults to "box"
 
 Check if the turtle has a box assigned named ``name``.  Returns true if so, 
 false if not.
 
+----
+
 .. _move_method_dump_inv:
 
-``dump_inv``
+``dump_inv(dir)``
 +++++++++++++++++++
 
-``move.dump_inv(dir)``
-
-- ``dir`` (str, one of 'fd', 'up', or 'dn'.  Defaults to 'dn')
+``dir``
+  str, one of 'fd', 'up', or 'dn'.  Defaults to 'dn'
 
 Drops all of the turtle's internal inventory in the direction requested.  If 
 there's a chest in the requested direction, items will go into that chest.
 
 Returns true on success, false on failure (eg the target inventory is full).
 
+----
+
 .. _move_method_d:
 
-``d`` (Get facing direction)
-++++++++++++
-
-``move.d()``
+``d()``
++++++++
 
 Get the direction we're currently facing.  Returns one of 'n', 's', 'e', or 
 'w' on success, false on failure (eg the GPS system is down or out of range).
 
-.. _move_method_get_x:
-.. _move_method_get_y:
-.. _move_method_get_z:
+----
 
-``get_x, get_x, get_x``
+.. _move_method_get_x:
+
+``get_x()``
 ++++++++++++++++++++++++++++++++++++++++++++
 
-``move.get_x(), move.get_x(), move.get_x()``
+.. _move_method_get_y:
+
+``get_y()``
+++++++++++++++++++++++++++++++++++++++++++++
+
+.. _move_method_get_z:
+
+``get_z()``
+++++++++++++++++++++++++++++++++++++++++++++
 
 Get the move module's notion of the turtle's current X, Y, and Z coordinates.
 

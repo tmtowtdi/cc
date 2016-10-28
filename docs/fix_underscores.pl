@@ -6,6 +6,9 @@ use File::Copy;
 use File::Find;
 use File::Slurp;
 use File::Temp;
+use FindBin;
+
+chdir($FindBin::Bin);
 
 File::Copy::mv( '_sources', 'sources' );
 File::Copy::mv( '_static',  'static'  );

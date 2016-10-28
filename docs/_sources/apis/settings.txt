@@ -56,39 +56,44 @@ Internal Methods
 These methods exist but are used internally and generally don't ever need to 
 be called by the user.
 
+----
+
 .. _settings_method_ensure_file:
 
-``ensure_file``
+``ensure_file(path)``
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-``settings.ensure_file(file_path)``
-
-- ``file_path`` (str, defaults to 'etc/settings')
+``path``
+  str, defaults to 'etc/settings'
 
 Checks if the state file exists.  If the file does not exist, create it.  
 Returns true on success, false if the file could not be created.
 
+----
+
 .. _settings_method_load:
 
-``load``
+``load(path)``
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-``settings.load(file_path)``
-
-- ``file_path`` (str, defaults to 'etc/settings')
+``path``
+  str, defaults to 'etc/settings'
 
 Loads data from the state file and deserializes it to an internal table.
 
+----
+
 .. _settings_method_save:
 
-``save``
+``save(path)``
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-``settings.save(file_path)``
-
-- ``file_path`` (str, defaults to 'etc/settings')
+``path``
+  str, defaults to 'etc/settings'
 
 Serializes the internal settings table and writes it to the state file.
+
+----
 
 .. _settings_user_methods:
 
@@ -99,49 +104,51 @@ These are the methods you'll use in your scripts.
 
 .. _settings_method_get:
 
-``get``
+``get(key)``
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-``settings.get(key)``
-
-- ``key`` (Any true value, required)
+``key``
+  Any true value, required
 
 Returns the value associated with the key.  Produces error message and returns 
 false if the key is not set.
 
+----
+
 .. _settings_method_set:
 
-``set``
+``set(key, value)``
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-``settings.set(key,value)``
-
-- ``key`` (Any true value, required)
-- ``value`` (Any true value, required)
+``key``
+  Any true value, required
+``value``
+  Any true value, required
 
 Sets the value of key and saves the internal table's state to disk.
 ``value`` must be true; see :ref:`unset` to remove a key.
 
 Returns true on success, false if ``value`` was not a true value.
 
+----
+
 .. _settings_method_unset:
 
-``unset``
+``unset(key)``
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-``settings.unset(key)``
-
-- ``key`` (Any true value, required)
+``key``
+  Any true value, required
 
 Removes the key from the internal table and saves the table's state to disk.
 Produces error and returns false if ``key`` is not a true value.
 
+----
+
 .. _settings_method_getNames:
 
-``getNames``
+``getNames()``
 ++++++++++++++++++++++++++++++++++++++++++++++
-
-``settings.getNames()``
 
 Returns an int-indexed table (an array) of all keys (*names*) currently set in 
 the internal table.

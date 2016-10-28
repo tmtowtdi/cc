@@ -89,16 +89,16 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Settings</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#internal-methods">Internal Methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#ensure-file"><code class="docutils literal"><span class="pre">ensure_file</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#load"><code class="docutils literal"><span class="pre">load</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#save"><code class="docutils literal"><span class="pre">save</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ensure-file-path"><code class="docutils literal"><span class="pre">ensure_file(path)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#load-path"><code class="docutils literal"><span class="pre">load(path)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#save-path"><code class="docutils literal"><span class="pre">save(path)</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#user-methods">User Methods</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#get"><code class="docutils literal"><span class="pre">get</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#set"><code class="docutils literal"><span class="pre">set</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#unset"><code class="docutils literal"><span class="pre">unset</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#getnames"><code class="docutils literal"><span class="pre">getNames</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-key"><code class="docutils literal"><span class="pre">get(key)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-key-value"><code class="docutils literal"><span class="pre">set(key,</span> <span class="pre">value)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unset-key"><code class="docutils literal"><span class="pre">unset(key)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getnames"><code class="docutils literal"><span class="pre">getNames()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -162,9 +162,9 @@ Settings API.</p>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#settings-internal-methods"><span class="std std-ref">Internal Methods</span></a></dt>
 <dd><ul class="first last simple">
-<li><a class="reference internal" href="#settings-method-ensure-file"><span class="std std-ref">ensure_file</span></a></li>
-<li><a class="reference internal" href="#settings-method-load"><span class="std std-ref">load</span></a></li>
-<li><a class="reference internal" href="#settings-method-save"><span class="std std-ref">save</span></a></li>
+<li><a class="reference internal" href="#settings-method-ensure-file"><span class="std std-ref">ensure_file(path)</span></a></li>
+<li><a class="reference internal" href="#settings-method-load"><span class="std std-ref">load(path)</span></a></li>
+<li><a class="reference internal" href="#settings-method-save"><span class="std std-ref">save(path)</span></a></li>
 </ul>
 </dd>
 </dl>
@@ -172,10 +172,10 @@ Settings API.</p>
 <li><dl class="first docutils">
 <dt><a class="reference internal" href="#settings-user-methods"><span class="std std-ref">User Methods</span></a></dt>
 <dd><ul class="first last simple">
-<li><a class="reference internal" href="#settings-method-get"><span class="std std-ref">get</span></a></li>
-<li><a class="reference internal" href="#settings-method-set"><span class="std std-ref">set</span></a></li>
-<li><a class="reference internal" href="#settings-method-unset"><span class="std std-ref">unset</span></a></li>
-<li><a class="reference internal" href="#settings-method-getnames"><span class="std std-ref">getNames</span></a></li>
+<li><a class="reference internal" href="#settings-method-get"><span class="std std-ref">get(key)</span></a></li>
+<li><a class="reference internal" href="#settings-method-set"><span class="std std-ref">set(key, value)</span></a></li>
+<li><a class="reference internal" href="#settings-method-unset"><span class="std std-ref">unset(key)</span></a></li>
+<li><a class="reference internal" href="#settings-method-getnames"><span class="std std-ref">getNames()</span></a></li>
 </ul>
 </dd>
 </dl>
@@ -209,67 +209,74 @@ Settings API.</p>
 <span id="settings-internal-methods"></span><h2>Internal Methods<a class="headerlink" href="#internal-methods" title="Permalink to this headline">¶</a></h2>
 <p>These methods exist but are used internally and generally don&#8217;t ever need to
 be called by the user.</p>
-<div class="section" id="ensure-file">
-<span id="settings-method-ensure-file"></span><h3><code class="docutils literal"><span class="pre">ensure_file</span></code><a class="headerlink" href="#ensure-file" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">settings.ensure_file(file_path)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">file_path</span></code> (str, defaults to &#8216;etc/settings&#8217;)</li>
-</ul>
+<hr class="docutils" />
+<div class="section" id="ensure-file-path">
+<span id="settings-method-ensure-file"></span><h3><code class="docutils literal"><span class="pre">ensure_file(path)</span></code><a class="headerlink" href="#ensure-file-path" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">path</span></code></dt>
+<dd>str, defaults to &#8216;etc/settings&#8217;</dd>
+</dl>
 <p>Checks if the state file exists.  If the file does not exist, create it.
 Returns true on success, false if the file could not be created.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="load">
-<span id="settings-method-load"></span><h3><code class="docutils literal"><span class="pre">load</span></code><a class="headerlink" href="#load" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">settings.load(file_path)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">file_path</span></code> (str, defaults to &#8216;etc/settings&#8217;)</li>
-</ul>
+<div class="section" id="load-path">
+<span id="settings-method-load"></span><h3><code class="docutils literal"><span class="pre">load(path)</span></code><a class="headerlink" href="#load-path" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">path</span></code></dt>
+<dd>str, defaults to &#8216;etc/settings&#8217;</dd>
+</dl>
 <p>Loads data from the state file and deserializes it to an internal table.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="save">
-<span id="settings-method-save"></span><h3><code class="docutils literal"><span class="pre">save</span></code><a class="headerlink" href="#save" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">settings.save(file_path)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">file_path</span></code> (str, defaults to &#8216;etc/settings&#8217;)</li>
-</ul>
+<div class="section" id="save-path">
+<span id="settings-method-save"></span><h3><code class="docutils literal"><span class="pre">save(path)</span></code><a class="headerlink" href="#save-path" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">path</span></code></dt>
+<dd>str, defaults to &#8216;etc/settings&#8217;</dd>
+</dl>
 <p>Serializes the internal settings table and writes it to the state file.</p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="user-methods">
 <span id="settings-user-methods"></span><h2>User Methods<a class="headerlink" href="#user-methods" title="Permalink to this headline">¶</a></h2>
 <p>These are the methods you&#8217;ll use in your scripts.</p>
-<div class="section" id="get">
-<span id="settings-method-get"></span><h3><code class="docutils literal"><span class="pre">get</span></code><a class="headerlink" href="#get" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">settings.get(key)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">key</span></code> (Any true value, required)</li>
-</ul>
+<div class="section" id="get-key">
+<span id="settings-method-get"></span><h3><code class="docutils literal"><span class="pre">get(key)</span></code><a class="headerlink" href="#get-key" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">key</span></code></dt>
+<dd>Any true value, required</dd>
+</dl>
 <p>Returns the value associated with the key.  Produces error message and returns
 false if the key is not set.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="set">
-<span id="settings-method-set"></span><h3><code class="docutils literal"><span class="pre">set</span></code><a class="headerlink" href="#set" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">settings.set(key,value)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">key</span></code> (Any true value, required)</li>
-<li><code class="docutils literal"><span class="pre">value</span></code> (Any true value, required)</li>
-</ul>
+<div class="section" id="set-key-value">
+<span id="settings-method-set"></span><h3><code class="docutils literal"><span class="pre">set(key,</span> <span class="pre">value)</span></code><a class="headerlink" href="#set-key-value" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">key</span></code></dt>
+<dd>Any true value, required</dd>
+<dt><code class="docutils literal"><span class="pre">value</span></code></dt>
+<dd>Any true value, required</dd>
+</dl>
 <p>Sets the value of key and saves the internal table&#8217;s state to disk.
 <code class="docutils literal"><span class="pre">value</span></code> must be true; see <span class="xref std std-ref">unset</span> to remove a key.</p>
 <p>Returns true on success, false if <code class="docutils literal"><span class="pre">value</span></code> was not a true value.</p>
+<hr class="docutils" />
 </div>
-<div class="section" id="unset">
-<span id="settings-method-unset"></span><h3><code class="docutils literal"><span class="pre">unset</span></code><a class="headerlink" href="#unset" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">settings.unset(key)</span></code></p>
-<ul class="simple">
-<li><code class="docutils literal"><span class="pre">key</span></code> (Any true value, required)</li>
-</ul>
+<div class="section" id="unset-key">
+<span id="settings-method-unset"></span><h3><code class="docutils literal"><span class="pre">unset(key)</span></code><a class="headerlink" href="#unset-key" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">key</span></code></dt>
+<dd>Any true value, required</dd>
+</dl>
 <p>Removes the key from the internal table and saves the table&#8217;s state to disk.
 Produces error and returns false if <code class="docutils literal"><span class="pre">key</span></code> is not a true value.</p>
+<hr class="docutils" />
 </div>
 <div class="section" id="getnames">
-<span id="settings-method-getnames"></span><h3><code class="docutils literal"><span class="pre">getNames</span></code><a class="headerlink" href="#getnames" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal"><span class="pre">settings.getNames()</span></code></p>
+<span id="settings-method-getnames"></span><h3><code class="docutils literal"><span class="pre">getNames()</span></code><a class="headerlink" href="#getnames" title="Permalink to this headline">¶</a></h3>
 <p>Returns an int-indexed table (an array) of all keys (<em>names</em>) currently set in
 the internal table.</p>
 </div>
