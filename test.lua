@@ -1,10 +1,12 @@
 #!/usr/bin/env lua
 
-local files = {
-    ['bin/foo'] = '2DRzRAR3',
-    --lib/settings      = 'nqQjpWVX',
-}
-for path, hash in pairs(files) do
-    print(path..' '..hash)
+var = true
+
+for i = 1,5 do
+    print(i)
+    if var then
+        print("in if")
+        break
+    end
 end
 

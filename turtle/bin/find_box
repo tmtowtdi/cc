@@ -39,6 +39,7 @@ for i = 1,4 do
                 elseif f == 's' then z = z + 1
                 elseif f == 'w' then x = x - 1
             end
+            break
         end
     else
         move.r()
@@ -46,7 +47,7 @@ for i = 1,4 do
 end
 
 if got_chest then
-    print("I found a box at "..x..", "..y..", "..z..".")
+    print("I found a box named "..name.." at "..x..", "..y..", "..z..".")
     settings.set(name ..'_x', x)
     settings.set(name .. '_y', y)
     settings.set(name .. '_z', z)
@@ -56,4 +57,9 @@ end
 
 
  -- vim: syntax=lua
+
+
+223, 69, -161
+
+
 

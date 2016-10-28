@@ -163,7 +163,7 @@ function go_home(height, name)
   local hx     = settings.get(name .. '_x')
   local hy     = settings.get(name .. '_y')
   local hz     = settings.get(name .. '_z')
-  if not hx or not hy or not hz then
+  if not has_home(name) then
       error("You must run bin/set_home first.")
       return false
   end
@@ -205,7 +205,7 @@ function return_to_box(h, n)
     local bx = settings.get(n..'_x')
     local by = settings.get(n..'_y')
     local bz = settings.get(n..'_z')
-    if has_box(n) then
+    if not has_box(n) then
         error("You must run bin/find_box first.")
         return false
     end
@@ -366,6 +366,7 @@ function gotoX(toX,force)
     while x ~= toX do fd(1,force) end
 end
 function gotoY(toY,force)
+  toY = tonumber(toY)
   if toY == nil then error("No coordinate specified.",2) end
   local force = force or false
   if y < toY then move = up elseif y > toY then move = dn end

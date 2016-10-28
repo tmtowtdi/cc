@@ -4,8 +4,8 @@
 os.loadAPI("lib/move")
 
 local args       = {...}
-local wait_time  = args[1] or 300
-local highest    = args[2] or 70
+local wait_time  = tonumber(args[1]) or 300
+local highest    = tonumber(args[2]) or 70
 local src_box    = args[3] or 'src'
 local target_box = args[4] or 'target'
 
@@ -37,16 +37,22 @@ local target_box = args[4] or 'target'
 --]]
 
 function do_suck()  --giggity
+  print("Going to "..src_box)
   move.return_to_box(highest, src_box)
+  print("At "..src_box.."; sucking inv")
   for i=1,16 do
     turtle.select(i)
     turtle.suckDown()
   end
+  print("Done sucking.  Giggity.")
 end
 
 function do_dump()
+  print("Going to "..target_box)
   move.return_to_box(highest, target_box)
+  print("At "..target_box.."; dumping inv")
   move.dump_inv('dn')
+  print("Done dumping.")
 end
 
 
@@ -58,6 +64,10 @@ if not move.has_home() then
 end
 if not move.has_box(src_box) or not move.has_box(target_box) then
   error("You must run bin/find_box for both your source and target boxes first.")
+  return
+end
+if highest <= move.get_y() then
+  error("Your 'fly-to' height is lower than your current height.  Derp.")
   return
 end
 for i=1,16 do
@@ -72,8 +82,11 @@ end
 while true do
   do_suck()
   do_dump()
-  move.go_home()
-  sleep( wait_time )
+  print("Heading home.")
+  move.go_home(highest)
+  print("I'm home. Sleeping for "..wait_time.." seconds.")
+  for i=1,wait_time do sleep(1) write(".") end
+  print("")
 end
 
 

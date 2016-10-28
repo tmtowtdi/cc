@@ -6,8 +6,8 @@ for k,v in ipairs({'bin', 'etc', 'lib'}) do
 end
 
 local bootstrap = {
-    'pzEBgR8k' = "bin/get_script",
-    'DmEhcUVa' = "bin/get_all",
+    pzEBgR8k = "bin/get_script",
+    DmEhcUVa = "bin/get_all",
 }
 for h,p in pairs(bootstrap) do
     if not fs.exists(p) then shell.run( "pastebin", "get", h, p ) end
@@ -20,3 +20,6 @@ print("         TMT's CC Utilities.")
 print("=======================================")
 
  -- vim: syntax=lua
+
+
+ 230 143 -134

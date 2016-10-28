@@ -7,21 +7,48 @@ TBD {{{{
 
         Needs tested
     }#}}}
+    bin/xfer {
+        Working pretty well, but it definitely needs a check on the "target" 
+        box to see if it's full and go home and give up if so.
+    }
 
     What happens when I do this:
         error("this is a long ass error message that's too wide for the in-game screen")
     ...should I be breaking that up into multiple print()s followed by a 
     return()?  Or does error() deal with breakage OK?
+
+    - Need a "show_settings" script
+    - Settings API does need a getNames() method.
+
+
 }}}}
 
 Installing {#{{{
     - On a turtle {#{{{
-            > pastebin get JQsniAQj install > install
+            > pastebin get JQsniAQj install
+            > install
 
         That's it.  Running the "install" script will install everything for 
         you.  You can now remove the install script if desired:
             > rm install
     }#}}}
+    On a GPS satellite {{{{
+        The full GPS system is 4 computers (regular is fine), and 4 wireless 
+        modems.
+
+        For each machine, place it next to a disk drive with my GPS disk in 
+        it, and:
+            > label set gps (Yes, all four machines can have the same label)
+            > copy disk/startup .
+        
+        Place the machines per the diagram in the first post here:
+            http://www.computercraft.info/forums2/index.php?/topic/3088-how-to-guide-gps-global-position-system/
+
+        Once placed, edit each machine's startup script and enter its x, y, z 
+        coordinates.  Yes, this is a massive pain in the ass.
+
+        Add a modem to each machine, then run its startup script.
+    }}}}
 }#}}}
 MC Cardinal Directions {#{{{
     X is east/west
@@ -54,25 +81,6 @@ MC Cardinal Directions {#{{{
     Yes, moving North goes DOWN on the z axis for whatever stupid fucked-up 
     reason.
 }#}}}
-New In-Game Machine Bootstrap {{{{
-
-    First, create the directories my code requires:
-        > mkdir bin
-        > mkdir etc
-        > mkdir lib
-
-    This should be the only two times you have to type in Pastebin hashes:
-        > pastebin get pzEBgR8k bin/get_script
-        > pastebin get DmEhcUVa bin/get_all
-
-    bin/get_all calls bin/get_script once for each of my scripts, so just run 
-    it now:
-        > bin/get_all
-    
-    And you're set.  Anytime any of my code gets edited on Pastebin, just call 
-    bin/get_all again to get the latest.
-
-}}}}
 Why Pastebin instead of Github {#{{{
     
     I tried both and ended up using Pastebin and my own custom uploader.
