@@ -16,17 +16,16 @@ TBD {{{{
             consolidate()
     }
 
-    What happens when I do this:
-        error("this is a long ass error message that's too wide for the in-game screen")
-    ...should I be breaking that up into multiple print()s followed by a 
-    return()?  Or does error() deal with breakage OK?
-
-    - Need a "show_settings" script
-    - Settings API does need a getNames() method.
-
-
 }}}}
 
+Building Documentation {#{{{
+    $ cd write_docs
+    $ make html
+    $ cd ../docs
+    $ ./fix_underscores.pl      (stop forgetting this step, numbnuts.)
+
+    Done.  Add, commit, push, and your online docs are updated.
+}#}}}
 Installing {#{{{
     - On a turtle {#{{{
             > pastebin get JQsniAQj install
