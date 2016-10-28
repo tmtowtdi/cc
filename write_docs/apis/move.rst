@@ -1,7 +1,7 @@
 
 .. highlight:: lua
 
-.. _move:
+.. _apis_move:
 
 Move
 ====
@@ -70,10 +70,10 @@ Methods
 .. _move_method_up:
 .. _move_method_dn:
 
-``move.fd(), move.bk(), move.up(), move.dn()``
+``fd, bk, up, dn`` (Move)
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-**Args**:
+``move.DIRECTION(spaces, force)``
 
 - ``spaces`` (int, defaults to 1)
 - ``force`` (bool, defaults to false)
@@ -84,14 +84,14 @@ requested direction.
 
 .. _move_method_goto:
 
-``move.goto()``
+``goto``
 +++++++++++++++
 
-**Args**:
+``move.goto(X, Y, Z, height, force)``
 
-- ``X`` (int)
-- ``Y`` (int)
-- ``Z`` (int)
+- ``X`` (int, required)
+- ``Y`` (int, required)
+- ``Z`` (int, required)
 - ``height`` (int, defaults to nil)
 - ``force`` (bool, defaults to false)
 
@@ -108,10 +108,10 @@ any obstacles.
 .. _move_method_r:
 .. _move_method_a:
 
-``move.l(), move.r(), move.a()``
+``l, r, a`` (Turn, relative)
 ++++++++++++++++++++++++++++++++
 
-**No Args**
+``move.TURN_DIRECTION()``
 
 Turns the turtle left, right or around (180°).
 
@@ -120,30 +120,30 @@ Turns the turtle left, right or around (180°).
 .. _move_method_face_s:
 .. _move_method_face_w:
 
-``move.face_n(), move.face_e(), move.face_s(), move.face_w()``
+``face_n, face_e, face_s, face_w`` (Turn, absolute)
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**No Args**
+``move.FACE_DIRECTION()``
 
 Turns the turtle to face the requested direction.
 
 .. _move_method_face:
 
-``move.face()``
+``face`` (Turn, absolute, arg)
 ++++++++++++++++++
 
-**Args**
+``move.face(dir)``
 
-- ``dir`` (str, One of 'n', 's', 'e', 'w')
+- ``dir`` (str, One of 'n', 's', 'e', 'w'.  Required)
 
 Turns the turtle to face the requested direction.
 
 .. _move_method_go_home:
 
-``move.go_home()``
+``go_home``
 ++++++++++++++++++++++
 
-**Args**
+``move.go_home(height, name)``
 
 - ``height`` (int, defaults to 100)
 - ``name`` (str, defaults to "home")
@@ -154,10 +154,10 @@ custom home location with another name, you may pass that name.
 
 .. _move_method_has_home:
 
-``move.has_home()``
+``has_home``
 +++++++++++++++++++
 
-**Args**
+``move.has_home(name)``
 
 - ``name`` (str, defaults to "home")
 
@@ -166,10 +166,10 @@ false if not.
 
 .. _move_method_return_to_box:
 
-``move.return_to_box()``
+``return_to_box``
 ++++++++++++++++++++++++
 
-**Args**
+``move.return_to_box(height,name)``
 
 - ``height`` (int, defaults to 100)
 - ``name`` (str, defaults to "box")
@@ -178,10 +178,10 @@ Returns the turtle to one slot above the requested box.
 
 .. _move_method_has_box:
 
-``move.has_box()``
+``has_box``
 ++++++++++++++++++
 
-**Args**
+``move.has_box(name)``
 
 - ``name`` (str, defaults to "box")
 
@@ -190,10 +190,10 @@ false if not.
 
 .. _move_method_dump_inv:
 
-``move.dump_inv()``
+``dump_inv``
 +++++++++++++++++++
 
-**Args**
+``move.dump_inv(dir)``
 
 - ``dir`` (str, one of 'fd', 'up', or 'dn'.  Defaults to 'dn')
 
@@ -204,10 +204,10 @@ Returns true on success, false on failure (eg the target inventory is full).
 
 .. _move_method_d:
 
-``move.d()``
+``d`` (Get facing direction)
 ++++++++++++
 
-**No Args**
+``move.d()``
 
 Get the direction we're currently facing.  Returns one of 'n', 's', 'e', or 
 'w' on success, false on failure (eg the GPS system is down or out of range).
@@ -216,11 +216,10 @@ Get the direction we're currently facing.  Returns one of 'n', 's', 'e', or
 .. _move_method_get_y:
 .. _move_method_get_z:
 
-``move.get_x(), move.get_x(), move.get_x()``
+``get_x, get_x, get_x``
 ++++++++++++++++++++++++++++++++++++++++++++
 
-**No Args**
+``move.get_x(), move.get_x(), move.get_x()``
 
 Get the move module's notion of the turtle's current X, Y, and Z coordinates.
-
 

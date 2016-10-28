@@ -4,55 +4,66 @@
 local fp     = "etc/settings"
 local cooked = {}
 
-function create_file(path)
-    raw = textutils.serialize(cooked)
+function ensure_file(path)
+  raw = textutils.serialize(cooked)
+  if not fs.exists(path) then
     local fh = fs.open(path, 'w')
+    if not fh then return false end
     fh.write(raw)
     fh.close()
+  end
+  return true
 end
 
 function load(path)
-    local path = path or fp
-    if not fs.exists(path) then create_file(path) end
-    local fh = fs.open(path, 'r')
-    local raw = fh.readAll()
-    fh.close()
-    cooked = textutils.unserialize(raw)
-    return true
+  local path = path or fp
+  ensure_file(path)
+  local fh = fs.open(path, 'r')
+  local raw = fh.readAll()
+  fh.close()
+  cooked = textutils.unserialize(raw)
+  return true
 end
 
 function save(path)
-    local path = path or fp
-    raw = textutils.serialize(cooked)
-    fh = fs.open(path, 'w')
-    fh.write(raw)
-    fh.close()
-    return true
+  local path = path or fp
+  raw = textutils.serialize(cooked)
+  fh = fs.open(path, 'w')
+  fh.write(raw)
+  fh.close()
+  return true
 end
 
 function get(key)
-    if cooked[key] then return cooked[key] else error(key.." is not set") return false end
+  if cooked[key] then return cooked[key] else error(key.." is not set") return false end
 end
 
 function set(key, val)
-    if not key or not val then
-        error("Usage: set(key, val). See unset() to clear a key.")
-        return false
-    end
-    cooked[key] = val
-    save()
+  if not key or not val then
+    error("Usage: set(key, val). See unset() to clear a key.")
+    return false
+  end
+  cooked[key] = val
+  save()
 end
 
 function unset(key)
-    if not key then
-        error("Usage: unset(key)")
-        return false
-    end
-    cooked[key] = nil   --yeah, that's how you delete.
-    save()
-    return true
+  if not key then
+    error("Usage: unset(key)")
+    return false
+  end
+  -- this doesn't just set 'key' to nil, it removes 'key' altogether.
+  cooked[key] = nil
+  save()
+  return true
+end
+
+function getNames()
+  local names = {}
+  for k,v in pairs(cooked) do table.insert(names,k) end
+  return names
 end
 
 load()
 
- -- vim: syntax=lua
+ -- vim: syntax=lua tw=39 ts=2 sw=2

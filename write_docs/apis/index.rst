@@ -6,7 +6,7 @@
 APIs
 ====
 
-All apis live in ``lib/`` and can be imported in to any script with::
+All APIs can be imported into any script with::
 
     os.loadAPI("lib/APINAME")
     
