@@ -8,6 +8,13 @@ use File::Slurp;
 use File::Temp;
 use FindBin;
 
+chdir("$FindBin::Bin/write_docs");
+system("make html");
+say '';
+say "Documentation has been generated.";
+
+
+
 chdir("$FindBin::Bin/docs");
 
 File::Copy::mv( '_sources', 'sources' );
