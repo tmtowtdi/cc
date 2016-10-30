@@ -4,8 +4,8 @@
    contain the root `toctree` directive.
 
 
-Welcome to ComputerCraft Utilities's documentation!
-===================================================
+bar Welcome to ComputerCraft Utilities's documentation!
+============================================================
 
 Contents:
 
