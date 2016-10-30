@@ -11,9 +11,13 @@ TBD {{{{
         Working pretty well, but it definitely needs a check on the "target" 
         box to see if it's full and go home and give up if so.
     }#}}}
-    lib/inv {
+    lib/inv {{{{
         Needs tested, particularly:
             consolidate()
+    }}}}
+
+    docs {
+        Add "scripts_" to the ref name of each script.
     }
 
 }}}}

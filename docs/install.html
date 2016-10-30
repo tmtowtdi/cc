@@ -30,6 +30,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
     <link rel="top" title="ComputerCraft Utilities 0.1 documentation" href="index.html"/>
         <link rel="next" title="Scripts" href="scripts/index.html"/>
         <link rel="prev" title="Welcome to ComputerCraft Utilities’s documentation!" href="index.html"/> 
@@ -83,7 +86,12 @@
             
                 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#on-a-turtle">On a Turtle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#labels-are-not-optional">Labels Are Not Optional!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#on-a-gps-satellite">On a GPS Satellite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#on-any-other-machine">On Any Other Machine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#updating">Updating</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="scripts/index.html">Scripts</a></li>
@@ -134,16 +142,81 @@
             
   <div class="section" id="installing">
 <h1>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="on-a-turtle">
-<h2>On a Turtle<a class="headerlink" href="#on-a-turtle" title="Permalink to this headline">¶</a></h2>
-<p>On any newly-created turtle, type:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">pastebin</span> <span class="n">get</span> <span class="n">JQsniAQj</span> <span class="n">install</span>
-<span class="o">&gt;</span> <span class="n">install</span>
+<ul>
+<li><p class="first"><a class="reference internal" href="#installing-labels"><span class="std std-ref">Labels Are Not Optional!</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#installing-gps"><span class="std std-ref">On a GPS Satellite</span></a></p>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#installing-other"><span class="std std-ref">On Any Other Machine</span></a></dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#installing-updating-other"><span class="std std-ref">Updating</span></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="labels-are-not-optional">
+<span id="installing-labels"></span><h2>Labels Are Not Optional!<a class="headerlink" href="#labels-are-not-optional" title="Permalink to this headline">¶</a></h2>
+<p>Labels are <em>not</em> just cutesy but otherwise-pointless machine names.  If you
+don&#8217;t label your machine, then any time you pick it up (break it with a pick),
+it will reset to its default code, exactly as it existed when you first created
+it.</p>
+<p>That means that all scripts and APIs you&#8217;d downloaded to it, along with any
+custom files you&#8217;d created, will be gone.</p>
+<p>The only way to save a machine&#8217;s state is to label it.  Once you&#8217;ve done that,
+you can pick it up and put it down at will.</p>
+<p><em>Label your shit.</em></p>
+</div>
+<div class="section" id="on-a-gps-satellite">
+<span id="installing-gps"></span><h2>On a GPS Satellite<a class="headerlink" href="#on-a-gps-satellite" title="Permalink to this headline">¶</a></h2>
+<p>A GPS satellite machine is usually just a regular computer, but you can use any
+computer or turtle, as long as it has a modem attached.</p>
+<p>Get four such machines.  Label each one (all four can share the same label if
+desired), then pull the startup script</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; label set GPS
+&gt; pastebin get DkS2Evw3 startup
 </pre></div>
 </div>
-<p>After the install script completes, you can delete it:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">rm</span> <span class="n">install</span>
+<p>Place the machines per the diagram image in the <a class="reference external" href="http://www.computercraft.info/forums2/index.php?/topic/3088-how-to-guide-gps-global-position-system/">first post in this thread, by
+BigSHinyToys.</a></p>
+<p>Now, and yes, this is a pain in the ass, approach each individual machine,
+figure out its exact X, Y, Z coordinates, and edit its startup script to include
+those coordinates.  Then start the machine</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; startup
 </pre></div>
+</div>
+</div>
+<div class="section" id="on-any-other-machine">
+<span id="installing-other"></span><h2>On Any Other Machine<a class="headerlink" href="#on-any-other-machine" title="Permalink to this headline">¶</a></h2>
+<p>On any brand-new machine, type</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; label set &lt;LABELNAME&gt;
+&gt; pastebin get JQsniAQj install
+&gt; install
+</pre></div>
+</div>
+<p>...replace <strong>&lt;LABELNAME&gt;</strong> with any name you want to give the machine.</p>
+<p>After the install script completes, you can delete it</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; rm install
+</pre></div>
+</div>
+<div class="section" id="updating">
+<span id="installing-updating-other"></span><h3>Updating<a class="headerlink" href="#updating" title="Permalink to this headline">¶</a></h3>
+<p>The installer script installed an updater script.  You can run it any time to
+update to the latest version of the code</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/get_all
+</pre></div>
+</div>
+<p>If a new script or API gets added and you want that, you&#8217;ll need to run that
+updater script twice in a row</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/get_all
+...output scrolls past...
+&gt; bin/get_all
+</pre></div>
+</div>
+<p>...The first run gets the newer <code class="docutils literal"><span class="pre">get_all</span></code> script, which will know how to
+download the new script/API you&#8217;re interested in.  The second run will run this
+new version of <code class="docutils literal"><span class="pre">get_all</span></code>, pulling the new script/API.</p>
 </div>
 </div>
 </div>

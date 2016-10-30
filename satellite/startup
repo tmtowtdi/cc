@@ -1,3 +1,5 @@
 
+-- GPS satellite startup DkS2Evw3
+
 shell.run("gps", "host", XCOORD, YCOORD, ZCOORD)
 

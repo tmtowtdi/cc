@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Reds (API) &mdash; ComputerCraft Utilities 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="ComputerCraft Utilities 0.1 documentation" href="../index.html"/>
+        <link rel="up" title="APIs" href="index.html"/>
+        <link rel="next" title="Settings" href="settings.html"/>
+        <link rel="prev" title="Move" href="move.html"/> 
+
+  
+  <script src="../static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ComputerCraft Utilities
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/index.html">Scripts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">APIs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="inv.html">Inv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="move.html">Move</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Reds (API)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#protocol">Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sides">Sides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#timer-args"><code class="docutils literal"><span class="pre">timer(args)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repeat-send-args"><code class="docutils literal"><span class="pre">repeat_send(args)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repeat-rcv-args"><code class="docutils literal"><span class="pre">repeat_rcv(args)</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ComputerCraft Utilities</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">APIs</a> &raquo;</li>
+      
+    <li>Reds (API)</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../sources/apis/reds.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="reds-api">
+<span id="apis-reds"></span><h1>Reds (API)<a class="headerlink" href="#reds-api" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal"><span class="pre">reds</span></code> API is structured so that it can be used like any other API, in a
+script, but its methods can also be used from the terminal as documented by
+using <a class="reference internal" href="../scripts/turtle/reds.html#scripts-reds"><span class="std std-ref">Reds (Script)</span></a>.</p>
+<p>For example, to toggle a redstone signal on the right side every 3 seconds:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">bin</span><span class="o">/</span><span class="n">reds</span> <span class="n">timer</span> <span class="n">right</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>To accomplish this, each method accepts a single table of arguments, instead
+of a series of scalar arguments as most other API methods do.</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="#apis-reds-synopsis"><span class="std std-ref">Synopsis</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#apis-reds-troubleshooting"><span class="std std-ref">Troubleshooting</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#apis-reds-protocol"><span class="std std-ref">Protocol</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="#apis-reds-sides"><span class="std std-ref">Sides</span></a></p>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#apis-reds-methods"><span class="std std-ref">Methods</span></a></dt>
+<dd><ul class="first last simple">
+<li><a class="reference internal" href="#apis-reds-method-timer"><span class="std std-ref">timer(args)</span></a></li>
+<li><a class="reference internal" href="#apis-reds-method-repeat-send"><span class="std std-ref">repeat_send(args)</span></a></li>
+<li><a class="reference internal" href="#apis-reds-method-repeat-rcv"><span class="std std-ref">repeat_rcv(args)</span></a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="synopsis">
+<span id="apis-reds-synopsis"></span><h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">os</span><span class="p">.</span><span class="n">loadAPI</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">lib/reds&quot;</span><span class="p">)</span>
+
+<span class="c1">-- Toggle a redstone signal on the right side every 3 seconds</span>
+<span class="n">reds</span><span class="p">.</span><span class="n">timer</span><span class="p">({</span> <span class="s1">&#39;</span><span class="s">right&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="p">})</span>
+
+<span class="c1">-- Send message about incoming redstone signal</span>
+<span class="n">reds</span><span class="p">.</span><span class="n">repeat_send</span><span class="p">({</span> <span class="s2">&quot;</span><span class="s">foo&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">back&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">right&quot;</span><span class="p">,</span> <span class="mf">.5</span> <span class="p">})</span>
+
+<span class="c1">-- Receive message about incoming redstone signal</span>
+<span class="n">reds</span><span class="p">.</span><span class="n">repeat_rcv</span><span class="p">({</span> <span class="s2">&quot;</span><span class="s">foo&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">right&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">front&quot;</span> <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<span id="apis-reds-troubleshooting"></span><h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>&#8220;This &#64;#$% API keeps throwing errors when I try to use it in my code!&#8221;.
+You&#8217;re probably doing something like this:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">start_timer</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="k">if</span> <span class="n">start_timer</span> <span class="o">==</span> <span class="kc">true</span> <span class="k">then</span>
+    <span class="n">reds</span><span class="p">.</span><span class="n">timer</span><span class="p">(</span> <span class="s1">&#39;</span><span class="s">right&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Nope nope nope.  You have to pass those arguments in as a table:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">start_timer</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="k">if</span> <span class="n">start_timer</span> <span class="o">==</span> <span class="kc">true</span> <span class="k">then</span>
+    <span class="n">reds</span><span class="p">.</span><span class="n">timer</span><span class="p">({</span> <span class="s1">&#39;</span><span class="s">right&#39;</span><span class="p">,</span> <span class="mi">3</span> <span class="p">})</span>  <span class="c1">-- Curlies!</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="protocol">
+<span id="apis-reds-protocol"></span><h2>Protocol<a class="headerlink" href="#protocol" title="Permalink to this headline">¶</a></h2>
+<p>Message senders like <a class="reference internal" href="#apis-reds-method-repeat-send"><span class="std std-ref">repeat_send(args)</span></a> broadcast their
+messages, meaning that any machine listening over rednet can receive them.  To
+make sure that a given sender&#8217;s messages are only acted on by intended
+receivers, messages are sent using a <code class="docutils literal"><span class="pre">protocol</span></code>.</p>
+<p>This <code class="docutils literal"><span class="pre">protocol</span></code> is simply a string.  All receivers set up to listen over a
+sender&#8217;s <code class="docutils literal"><span class="pre">protocol</span></code> will receive that sender&#8217;s messages.  So multiple
+receivers can react to a single sender&#8217;s messages by all listening on the same
+<code class="docutils literal"><span class="pre">protocol</span></code>.</p>
+<p>But at the same time, you can have multiple sender/receiver pairs in range of
+each other without getting their messages crossed.</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span>+----------------+             +----------------+
+|     Sender     |             |     Sender     |
+| Protocol &quot;foo&quot; |             | Protocol &quot;bar&quot; |
++----------------+             +----------------+
+        |                               |
+        |                       +-------+
+        |                       |
+        +--------------------------------------------+
+        |                       |                    |
+        |                       |                    |
++----------------+     +----------------+     +----------------+
+|    Receiver    |     |    Receiver    |     |    Receiver    |
+| Protocol &quot;foo&quot; |     | Protocol &quot;bar&quot; |     | Protocol &quot;foo&quot; |
++----------------+     +----------------+     +----------------+
+</pre></div>
+</div>
+</div>
+<div class="section" id="sides">
+<span id="apis-reds-sides"></span><h2>Sides<a class="headerlink" href="#sides" title="Permalink to this headline">¶</a></h2>
+<p>Some methods accept (or require) a <code class="docutils literal"><span class="pre">side</span></code> argument.  In all cases, that
+argument&#8217;s value is a string that must be one of</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">front</span></code></li>
+<li><code class="docutils literal"><span class="pre">back</span></code></li>
+<li><code class="docutils literal"><span class="pre">right</span></code></li>
+<li><code class="docutils literal"><span class="pre">left</span></code></li>
+<li><code class="docutils literal"><span class="pre">top</span></code></li>
+<li><code class="docutils literal"><span class="pre">bottom</span></code></li>
+</ul>
+<p>That list of acceptable <code class="docutils literal"><span class="pre">side</span></code> values can be retrieved as a table by calling
+<code class="docutils literal"><span class="pre">redstone.getSides()</span></code>.</p>
+</div>
+<div class="section" id="methods">
+<span id="apis-reds-methods"></span><h2>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="timer-args">
+<span id="apis-reds-method-timer"></span><h3><code class="docutils literal"><span class="pre">timer(args)</span></code><a class="headerlink" href="#timer-args" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">args</span></code> is a table with the keys:</dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal"><span class="pre">side</span></code></dt>
+<dd>See <a class="reference internal" href="#apis-reds-sides"><span class="std std-ref">Sides</span></a>.  Side to produce redstone signal, defaults to &#8216;front&#8217;.</dd>
+<dt><code class="docutils literal"><span class="pre">on_for</span></code></dt>
+<dd>number, seconds to produce redstone signal, defaults to 1.</dd>
+<dt><code class="docutils literal"><span class="pre">off_for</span></code></dt>
+<dd>number, seconds to produce no redstone signal, defaults to 1.</dd>
+</dl>
+</dd>
+</dl>
+<p>Produces a full-strength (15) redstone signal on <code class="docutils literal"><span class="pre">side</span></code> for <code class="docutils literal"><span class="pre">on_for</span></code>
+seconds, then switches that signal off (0) for <code class="docutils literal"><span class="pre">off_for</span></code> seconds.</p>
+<hr class="docutils" />
+</div>
+<div class="section" id="repeat-send-args">
+<span id="apis-reds-method-repeat-send"></span><h3><code class="docutils literal"><span class="pre">repeat_send(args)</span></code><a class="headerlink" href="#repeat-send-args" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">args</span></code> is a table with the keys:</dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal"><span class="pre">protocol</span></code></dt>
+<dd>See <a class="reference internal" href="#apis-reds-protocol"><span class="std std-ref">Protocol</span></a>.
+Required.</dd>
+<dt><code class="docutils literal"><span class="pre">in_side</span></code></dt>
+<dd>See <a class="reference internal" href="#apis-reds-sides"><span class="std std-ref">Sides</span></a>.  Side to watch for incoming redstone signal.
+Defaults to &#8216;front&#8217;.</dd>
+<dt><code class="docutils literal"><span class="pre">out_side</span></code></dt>
+<dd>See <a class="reference internal" href="#apis-reds-sides"><span class="std std-ref">Sides</span></a>.  Side with modem over which we broadcast.
+Defaults to &#8216;front&#8217;.</dd>
+<dt><code class="docutils literal"><span class="pre">loop_time</span></code></dt>
+<dd>number, seconds to sleep before re-checking signals strength on
+<code class="docutils literal"><span class="pre">in_side</span></code>.  Fractional seconds are accepted.
+Defaults to 1.</dd>
+</dl>
+</dd>
+</dl>
+<p>Every <code class="docutils literal"><span class="pre">loop_time</span></code> seconds, check <code class="docutils literal"><span class="pre">in_side</span></code> for a redstone signal.  If that
+incoming signal changes in strength from that detected on the previous loop,
+send a message out the modem on <code class="docutils literal"><span class="pre">out_side</span></code>.</p>
+<p>The sent message goes out using <code class="docutils literal"><span class="pre">protocol</span></code>, so <em>only</em> receivers listening
+for that <code class="docutils literal"><span class="pre">protocol</span></code> will notice the message.  The sent message is the
+integer strength of the detected redstone signal.</p>
+<p>This method behaves as a service, and blocks infinitely.</p>
+<p>From the terminal, look for signal from the back, re-check for signal delta
+every .5 seconds.  When signal delta is detected, send message using protocol
+foo over the modem on the right:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">bin</span><span class="o">/</span><span class="n">reds</span> <span class="n">repeat_send</span> <span class="n">foo</span> <span class="n">back</span> <span class="n">right</span> <span class="mf">.5</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+</div>
+<div class="section" id="repeat-rcv-args">
+<span id="apis-reds-method-repeat-rcv"></span><h3><code class="docutils literal"><span class="pre">repeat_rcv(args)</span></code><a class="headerlink" href="#repeat-rcv-args" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">args</span></code> is a table with the keys:</dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal"><span class="pre">protocol</span></code></dt>
+<dd>See <a class="reference internal" href="#apis-reds-protocol"><span class="std std-ref">Protocol</span></a>.
+Required.</dd>
+<dt><code class="docutils literal"><span class="pre">in_side</span></code></dt>
+<dd>See <a class="reference internal" href="#apis-reds-sides"><span class="std std-ref">Sides</span></a>.  Side to watch for incoming redstone signal.
+Required.</dd>
+<dt><code class="docutils literal"><span class="pre">out_side</span></code></dt>
+<dd>See <a class="reference internal" href="#apis-reds-sides"><span class="std std-ref">Sides</span></a>.  Side with modem over which we broadcast.
+Required.</dd>
+</dl>
+</dd>
+</dl>
+<p>Listens for <code class="docutils literal"><span class="pre">rednet_message</span></code> events over the modem on <code class="docutils literal"><span class="pre">in_side</span></code>, using
+<code class="docutils literal"><span class="pre">protocol</span></code>.  When such a message is received, outputs a redstone signal of
+the strength indicated by the message on <code class="docutils literal"><span class="pre">out_side</span></code>.</p>
+<p>This method behaves as a service, and blocks infinitely.</p>
+<p>From the terminal, listen to the modem on the right for messages over protocol
+foo, produce matching redstone signal out the front:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">bin</span><span class="o">/</span><span class="n">reds</span> <span class="n">repeat_rcv</span> <span class="n">foo</span> <span class="n">right</span> <span class="n">front</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="settings.html" class="btn btn-neutral float-right" title="Settings" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="move.html" class="btn btn-neutral" title="Move" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jonathan Barton.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../static/jquery.js"></script>
+      <script type="text/javascript" src="../static/underscore.js"></script>
+      <script type="text/javascript" src="../static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

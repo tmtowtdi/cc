@@ -17,5 +17,6 @@ All APIs can be imported into any script with::
    harvest
    inv
    move
+   reds
    settings
 
