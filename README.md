@@ -2,20 +2,13 @@
 
 This is a collection of scripts and APIs for the ComputerCraft addon for Minecraft.
 
-## Install
+## Status
 
-In Minecraft, create a turtle and open its interface.
-
-```
-  > pastebin get JQsniAQj install
-  > install
-```
-
-That install script will install all scripts and APIs.  Once the script finishes, you can 
-safely remove it: ` > rm install`
+This is being worked on as a hobby, intended to be used by two guys on a 
+private server.  If you found this by searching for "computercraft" or some 
+such, you're welcome to use it, but be aware that there may be issues.
 
 ## Using
 
-Scripts are in `bin/` and are ready to use.  Try them out or see the documentation.  APIs 
-are in `lib/`.  To use them in your own code, see the documentation.
+See the HTML documentation linked above.
 
