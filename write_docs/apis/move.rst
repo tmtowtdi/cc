@@ -107,7 +107,7 @@ requested direction.
 .. _move_method_goto:
 
 ``goto(X, Y, Z, height, force)``
-+++++++++++++++
+++++++++++++++++++++++++++++++++
 
 ``X``
   int, required
@@ -177,7 +177,7 @@ Turns the turtle to face the requested direction.
 .. _move_method_face:
 
 ``face(dir)``
-++++++++
++++++++++++++
 
 ``dir``
   str, One of 'n', 's', 'e', 'w'.  Required

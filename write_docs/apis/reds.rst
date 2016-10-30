@@ -82,7 +82,7 @@ receivers can react to a single sender's messages by all listening on the same
 But at the same time, you can have multiple sender/receiver pairs in range of 
 each other without getting their messages crossed.
 
-::
+.. code-block:: text
 
    +----------------+             +----------------+
    |     Sender     |             |     Sender     |
@@ -206,5 +206,4 @@ From the terminal, listen to the modem on the right for messages over protocol
 foo, produce matching redstone signal out the front::
 
     > bin/reds repeat_rcv foo right front
-----
 

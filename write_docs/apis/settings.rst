@@ -105,7 +105,7 @@ These are the methods you'll use in your scripts.
 .. _settings_method_get:
 
 ``get(key)``
-++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++
 
 ``key``
   Any true value, required
@@ -118,7 +118,7 @@ false if the key is not set.
 .. _settings_method_set:
 
 ``set(key, value)``
-++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++
 
 ``key``
   Any true value, required
@@ -126,7 +126,7 @@ false if the key is not set.
   Any true value, required
 
 Sets the value of key and saves the internal table's state to disk.
-``value`` must be true; see :ref:`unset` to remove a key.
+``value`` must be true; see :ref:`settings_method_unset` to remove a key.
 
 Returns true on success, false if ``value`` was not a true value.
 
@@ -135,7 +135,7 @@ Returns true on success, false if ``value`` was not a true value.
 .. _settings_method_unset:
 
 ``unset(key)``
-++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++
 
 ``key``
   Any true value, required
@@ -148,7 +148,7 @@ Produces error and returns false if ``key`` is not a true value.
 .. _settings_method_getNames:
 
 ``getNames()``
-++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++
 
 Returns an int-indexed table (an array) of all keys (*names*) currently set in 
 the internal table.
