@@ -159,18 +159,19 @@ return him to later on.</p>
 clear to the air above, since the turtle is going to be coming in from
 altitude.</p>
 <p>Place your turtle in his spot and assign it as his home:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">bin</span><span class="o">/</span><span class="n">set_home</span>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/set_home
 </pre></div>
 </div>
 <p>Now, any other script can send him home again by using the move module&#8217;s
 go_home() method.</p>
 <p>By default, <code class="docutils literal"><span class="pre">set_home</span></code> sets a home named, simply, &#8220;home&#8221;.  But you can set
 other named home spots by passing a name:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">bin</span><span class="o">/</span><span class="n">set_home</span> <span class="n">house</span>
-<span class="o">&gt;</span> <span class="n">bin</span><span class="o">/</span><span class="n">set_home</span> <span class="n">farm</span>
-<span class="o">...</span><span class="n">etc</span><span class="o">...</span>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/set_home house
+&gt; bin/set_home farm
+...etc...
 </pre></div>
 </div>
+<p>You can send a turtle back to an assigned home with <a class="reference internal" href="go_home.html#scripts-go-home"><span class="std std-ref">Go Home</span></a> .</p>
 </div>
 
 

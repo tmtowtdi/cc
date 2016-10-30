@@ -159,9 +159,9 @@
             
   <div class="section" id="settings">
 <span id="apis-settings"></span><h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
-<p>ComputerCraft 1.77 includes a settings API, but that version of CC is for MC
-1.89.  If you&#8217;re running a lower-version MC server, this mirrors that CCv1.77
-Settings API.</p>
+<p>ComputerCraft 1.77 includes a <a class="reference external" href="http://www.computercraft.info/wiki/Settings_(API)">settings API</a> , but that version of CC
+is for MC  1.89.  If you&#8217;re running a lower-version MC server, this mirrors
+that CCv1.77 Settings API.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="#settings-synopsis"><span class="std std-ref">Synopsis</span></a></p>
 </li>
@@ -199,9 +199,9 @@ Settings API.</p>
 <span class="c1">-- Well, we probably don&#39;t need that &#39;job&#39; key set any more, so unset it.</span>
 <span class="n">settings</span><span class="p">.</span><span class="n">unset</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">job&quot;</span><span class="p">)</span>
 
-<span class="c1">-- Later, in any other script, you can retrieve that:</span>
+<span class="c1">-- Later, in any other script, you can retrieve that name:</span>
 <span class="kd">local</span> <span class="n">n</span> <span class="o">=</span> <span class="n">settings</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">name&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                        <span class="c1">-- Notch</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                            <span class="c1">-- Notch</span>
 
 <span class="c1">-- Get a list of all set keys</span>
 <span class="kd">local</span> <span class="n">all</span> <span class="o">=</span> <span class="n">settings</span><span class="p">.</span><span class="n">getNames</span><span class="p">()</span>

@@ -16,9 +16,13 @@ TBD {{{{
             consolidate()
     }}}}
 
-    docs {
-        Add "scripts_" to the ref name of each script.
-    }
+    I'm starting to decide that there are GPS satellite machines, and then 
+    there's everything else.  Computers and turtles will get the same code -- 
+    keeping it separate is too much of a pain.
+
+    So scripts that are turtle-only should start out with some sort of 
+    sanity-check to ensure that the machine in question is actually a turtle, 
+    and not a computer.  I'm not sure how to do that.
 
 }}}}
 
