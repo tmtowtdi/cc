@@ -126,14 +126,18 @@ empty if ``name`` was not found.
 ``name``
   str, required
 
-Consolidates non-full stacks of the same item to go from this::
+Consolidates non-full stacks of the same item to go from this:
+
+.. code-block:: text
 
         ---------------------------
         |  20 dirt   |  empty     |
         |  10 dirt   |  50 dirt   |
         ---------------------------
 
-...to this::
+...to this:
+
+.. code-block:: text
 
         ---------------------------
         |  64 dirt   |  empty     |
@@ -172,9 +176,7 @@ Returns true/false on success/failure.
   str, required
 
 Get the simple form of ``name``.  If ``name`` is already simple, it will be 
-returned unmolested.
-
-::
+returned unmolested::
 
     -- Both print "dirt"
     print( inv.simplify_name("dirt") )
@@ -194,4 +196,3 @@ Tells you if ``name`` is FQ or not.
 
 Returns true if ``name`` is FQ, false if not.
 
-----

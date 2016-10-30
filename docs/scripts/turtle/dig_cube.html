@@ -24,7 +24,7 @@
 
   
   
-    <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   
 
   
@@ -39,7 +39,7 @@
         <link rel="prev" title="Scripts" href="../index.html"/> 
 
   
-  <script src="../../static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -91,8 +91,15 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html#turtle-scripts">Turtle Scripts</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Dig Cube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="find_box.html">Find Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="find_loc.html">Find Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="get_all.html">Get All</a></li>
+<li class="toctree-l3"><a class="reference internal" href="get_script.html">Get Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="go_box.html">Go Box</a></li>
 <li class="toctree-l3"><a class="reference internal" href="go_home.html">Go Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="harvest_wheat.html">Harvest Wheat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reds.html">Reds (Script)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="set_home.html">Set Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xfer.html">Xfer</a></li>
 </ul>
 </li>
 </ul>
@@ -134,7 +141,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../sources/scripts/turtle/dig_cube.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/scripts/turtle/dig_cube.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -145,7 +152,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="dig-cube">
-<span id="id1"></span><h1>Dig Cube<a class="headerlink" href="#dig-cube" title="Permalink to this headline">¶</a></h1>
+<span id="scripts-dig-cube"></span><h1>Dig Cube<a class="headerlink" href="#dig-cube" title="Permalink to this headline">¶</a></h1>
 <p>Excavates a rectangle, automatically emptying its inventory when it gets full.
 You can specify the length, width, and depth of the rectangle, along with how
 high the turtle needs to fly up to safely travel between the pit he&#8217;s digging
@@ -155,18 +162,21 @@ dump its inventory, then return to its home spot.</p>
 <p>The turtle starts in the SW corner, so the cube it digs will be forward and
 right of its starting point.  If he begins at &#8220;B&#8221;, facing North, he will dig
 out the blocks marked &#8220;D&#8221;:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span></span>D D D D    N
-D D D D    ^
-D D D D    |
-B D D D    |
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="o">..</span>
 </pre></div>
 </div>
+<blockquote>
+<div>D D D D    N
+D D D D    ^
+D D D D    |
+B D D D    |</div></blockquote>
 <p>Before running this, you must set a home spot named &#8220;home&#8221;, and a dumper box
-named &#8220;box&#8221;.  Set these by running <a class="reference internal" href="set_home.html#set-home"><span class="std std-ref">Set Home</span></a> and <a class="reference internal" href="find_box.html#find-box"><span class="std std-ref">Find Box</span></a> .</p>
+named &#8220;box&#8221;.  Set these by running <a class="reference internal" href="set_home.html#scripts-set-home"><span class="std std-ref">Set Home</span></a> and
+<a class="reference internal" href="find_box.html#scripts-find-box"><span class="std std-ref">Find Box</span></a> .</p>
 <p>The script can run with no arguments, accepting its defaults, or with up to
-four arguments:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">bin</span><span class="o">/</span><span class="n">dig_cube</span>
-<span class="o">&gt;</span> <span class="n">bin</span><span class="o">/</span><span class="n">dig_cube</span> <span class="mi">5</span> <span class="mi">10</span> <span class="mi">50</span> <span class="mi">100</span>
+four arguments</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/dig_cube
+&gt; bin/dig_cube 5 10 50 100
 </pre></div>
 </div>
 <p>The first version, with no arguments, will dig a cube 8 columns wide, 8 rows
@@ -230,15 +240,15 @@ turtle will fly up high enough to get over all of them.</p>
             HAS_SOURCE:  true
         };
     </script>
-      <script type="text/javascript" src="../../static/jquery.js"></script>
-      <script type="text/javascript" src="../../static/underscore.js"></script>
-      <script type="text/javascript" src="../../static/doctools.js"></script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
 
   
 
   
   
-    <script type="text/javascript" src="../../static/js/theme.js"></script>
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
   

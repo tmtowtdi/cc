@@ -1,7 +1,7 @@
 
 .. highlight:: lua
 
-.. _find_box:
+.. _scripts_find_box:
 
 Find Box
 ========

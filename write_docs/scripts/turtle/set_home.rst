@@ -1,7 +1,7 @@
 
 .. highlight:: lua
 
-.. _set_home:
+.. _scripts_set_home:
 
 Set Home
 ========

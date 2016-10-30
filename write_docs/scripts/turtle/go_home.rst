@@ -1,5 +1,5 @@
 
-.. _go_home:
+.. _scripts_go_home:
 
 Go Home
 =======

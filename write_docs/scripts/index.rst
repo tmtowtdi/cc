@@ -17,6 +17,7 @@ Turtle Scripts
    turtle/go_box
    turtle/go_home
    turtle/harvest_wheat
+   turtle/reds
    turtle/set_home
    turtle/xfer
 

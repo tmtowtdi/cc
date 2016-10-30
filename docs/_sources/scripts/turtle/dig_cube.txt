@@ -1,6 +1,6 @@
 .. highlight:: lua
 
-.. _dig_cube:
+.. _scripts_dig_cube:
 
 Dig Cube
 =========
@@ -17,16 +17,21 @@ The turtle starts in the SW corner, so the cube it digs will be forward and
 right of its starting point.  If he begins at "B", facing North, he will dig 
 out the blocks marked "D"::
 
+..
+
     D D D D    N
     D D D D    ^
     D D D D    |
     B D D D    |
 
 Before running this, you must set a home spot named "home", and a dumper box 
-named "box".  Set these by running :ref:`set_home` and :ref:`find_box` .
+named "box".  Set these by running :ref:`scripts_set_home` and 
+:ref:`scripts_find_box` .
 
 The script can run with no arguments, accepting its defaults, or with up to 
-four arguments::
+four arguments
+
+.. code-block:: text
 
     > bin/dig_cube
     > bin/dig_cube 5 10 50 100
