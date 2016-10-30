@@ -11,13 +11,16 @@ local files = {
     ["bin/find_box"]      = 'x1kHs0v3',
     ["bin/find_loc"]      = 'SEYF57X4',
     ["bin/harvest_wheat"] = '8rXFt1YW',
+    ["bin/reds"]          = 'L5egEbry',
     ["bin/set_home"]      = 'N30TvHE7',
     ["bin/market"]        = 'w1RtfqFd',
     ["bin/xfer"]          = 'cLpwQi38',
-    ["lib/harvest"]       = 'G1u3NJE1',
-    ["lib/move"]          = 'rpdxDz77',
-    ["lib/inv"]           = 'bxF3p2yy',
-    ["lib/settings"]      = 'nqQjpWVX',
+
+    ["lib/harvest"]  = 'G1u3NJE1',
+    ["lib/inv"]      = 'bxF3p2yy',
+    ["lib/move"]     = 'rpdxDz77',
+    ["lib/reds"]     = 'iPfT2SHV',
+    ["lib/settings"] = 'nqQjpWVX',
 }
 for path, hash in pairs(files) do
     shell.run( "bin/get_script", path, hash )

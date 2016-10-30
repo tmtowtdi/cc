@@ -70,11 +70,11 @@ end
   then returns back where it started.
 --]]
 function dump_inv_and_return()
-  local rx, ry, rz = gps.locate(2)
-  local rd         = move.d()
+  local r  = vector.new( gps.locate(2) )
+  local rd = move.d()
 
   if not move.return_to_box(highest, 'box') then
-    if not rx or not ry or not rz then
+    if not r.x or not r.y or not r.z then
       --GPS system might must be out of range.  Fly up and try again.
       move.gotoY(highest, true)
       if not move.return_to_box(highest, 'box') then
@@ -89,7 +89,7 @@ function dump_inv_and_return()
     return false
   end
 
-  move.goto(rx, ry, rz, highest)
+  move.goto(r.x, r.y, r.z, highest)
   move.face(rd)
   return true
 end
@@ -154,11 +154,11 @@ end
 
 
 
-local startx, starty, startz = gps.locate(2)
-local rdepth                 = starty - depth
+local start = vector.new( gps.locate(2) )
+local rdepth                 = start.y - depth
 rows                         = rows - 1
 local col_cnt                = 0
-local curr_depth             = starty
+local curr_depth             = start.y
 while curr_depth  >= rdepth do
   for i = 1,cols do
     for j = 1,rows do if not dig_move_forward() then return end end
@@ -169,8 +169,8 @@ while curr_depth  >= rdepth do
       bail out.
     --]]
     if move.test_gps() then
-      local x, y, z = gps.locate(2)
-      if x ~= move.get_x() or y ~= move.get_y() or z ~= move.get_z() then
+      local c = vector.new( gps.locate(2) )
+      if c.x ~= move.get_x() or c.y ~= move.get_y() or c.z ~= move.get_z() then
         print("Shit I don't know how we got here.")
         print("Bailing back home.")
         move.return_to_box(highest)

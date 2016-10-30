@@ -24,7 +24,7 @@ local args = {...}
 local name = args[1] or 'box'
 
 if not move.test_gps() then error("GPS system is down!") end
-local x, y, z = gps.locate(2)
+local c = vector.new( gps.locate(2) )
 move.face_n()
 
 local got_chest = false
@@ -35,9 +35,9 @@ for i = 1,4 do
             got_chest = true
             local f = move.d()
             if f == 'n' then z = z - 1
-                elseif f == 'e' then x = x + 1
-                elseif f == 's' then z = z + 1
-                elseif f == 'w' then x = x - 1
+                elseif f == 'e' then c.x = c.x + 1
+                elseif f == 's' then c.z = c.z + 1
+                elseif f == 'w' then c.x = c.x - 1
             end
             break
         end

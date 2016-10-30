@@ -1,0 +1,84 @@
+
+--lib/reds L5egEbry
+
+--[[
+  Originally named "rs".  But when you os.loadAPI('lib/rs') the script works, 
+  but then you get peripheral errors when you try to edit anything until you 
+  reboot.
+
+  I assume something else on the system is named 'rs' and I was overwriting 
+  that.  Changing name to "reds" fixed the problem.
+--]]
+
+
+--[[
+  Starts a timer, outputting a redstone signal on a given side with a given 
+  delay.
+
+  reds.timer()              -- front, on 1 sec, off 1 sec
+  reds.timer("right", 3)    -- right, on 3 secs, off 1 sec
+  reds.timer("back", 2, 4)  -- back, on 2 secs, off 4 secs
+--]]
+function timer(args)
+  local side   = args[1] or 'front'
+  local onfor  = tonumber(args[2]) or 1
+  local offfor = tonumber(args[3]) or 1
+  local mybool = true
+  while true do
+    redstone.setOutput(side, mybool)
+    if mybool then sleep(onfor) else sleep(offfor) end
+    mybool = not mybool
+  end
+end
+
+--[[
+  Takes a redstone signal from in_side, broadcasts it to all machines 
+  listening for protocol through the modem on out_side.  Checks for incoming 
+  signal once every loop_time seconds.
+
+  protocol is simply a string shared by the sender and intended recipient(s).
+
+  rednet.open(side) has no retval, but throws exception if no modem on side
+
+--]]
+function repeat_send(args)
+  local protocol    = args[1]
+  local in_side     = args[2]   -- redstone
+  local out_side    = args[3]   -- modem
+  local loop_time   = args[4] or 1
+  local last_signal = 20
+
+  rednet.open(out_side)
+  while true do
+    signal = redstone.getAnalogInput(in_side)
+    if signal ~= last_signal then
+      rednet.broadcast( signal, protocol )
+      last_signal = signal
+    end
+    sleep( loop_time )
+  end
+end
+
+--[[
+  Listens for a broadcast using protocol over the modem on side in_side.  The 
+  message should be an integer redstone signal strength.
+
+  When a message is received, outputs a redstone signal of that strength on 
+  out_side.
+--]]
+function repeat_rcv(args)
+  local protocol    = args[1]
+  local in_side     = args[2]   -- modem
+  local out_side    = args[3]   -- redstone
+
+  rednet.open(in_side)
+  while true do
+    local event, id, msg, prot = os.pullEvent('rednet_message')
+    if prot == protocol and type(msg) == 'number' and msg <= 15 then
+      redstone.setAnalogOutput(out_side, msg)
+    end
+  end
+end
+
+
+ -- vim: syntax=lua ts=2 sw=2

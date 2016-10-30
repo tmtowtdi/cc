@@ -1,0 +1,30 @@
+
+--bin/reds iPfT2SHV
+
+--[[
+  bin/reds COMMAND [ARG1] [,ARG2] ... [,ARGN]
+
+  bin/reds timer front 10
+  bin/reds timer right 2
+    etc
+--]]
+
+
+os.loadAPI("lib/reds")
+
+-- Great googly-moogly this whole thing is hideous.
+local origargs = {...}
+local cmd      = origargs[1]
+local passargs = {}
+
+-- Wrap all args in quotes, then join them into a single string
+for i = 2,#origargs do table.insert(passargs, '"'..origargs[i]..'"') end
+local argstr = table.concat(passargs, ',')
+
+-- Build the command and eval it.
+local do_eet = "reds."..cmd.."({"..argstr.."})"
+assert( loadstring(do_eet)() )
+
+
+
+ -- vim: syntax=lua ts=2 sw=2

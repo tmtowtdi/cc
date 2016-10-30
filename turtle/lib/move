@@ -15,8 +15,8 @@ local cardinal = {
 
 function init()
   if not test_gps() then return false end
-  x, y, z = gps.locate(2)
-  if (not x or not y or not z) then error("GPS System is off!") end
+  local c = vector.new( gps.locate(2) )
+  if (not c.x or not c.y or not c.z) then error("GPS System is off!") end
   local d = d()
   sleep(0.5)
   return true
@@ -95,11 +95,11 @@ end
     Returns one of 'n', 'e', 's', 'w' on success, false on failure.
 --]]
 function find_direction()
-  local startx, starty, startz = gps.locate(2)
-  local endx, endy, endz       = nil, nil, nil
-  local turns                  = 0
+  local start  = vector.new( gps.locate(2) )
+  local finish = vector.new() -- 'end' is a reserved word.
+  local turns  = 0
 
-  while not endx do
+  while not finish.x do
     plot_blocked, data = turtle.inspect()
     if (plot_blocked and (data.name ~= 'minecraft:water' and data.name ~= 'minecraft:flowing_water' and data.name ~= "minecraft:lava" and data.name ~= "minecraft:flowing_lava") ) then
       turtle.turnRight()
@@ -110,15 +110,15 @@ function find_direction()
       end
     else
       if not turtle.forward() then error("I should have been able to move forward but I could not.") end
-      endx, endy, endz = gps.locate(2)
+      local finish = vector.new( gps.locate(2) )
       turtle.back()
     end
   end
 
-  if endx ~= startx then
-    if endx > startx then facing = 'e' else facing = 'w' end
+  if finish.x ~= start.x then
+    if finish.x > start.x then facing = 'e' else facing = 'w' end
   else
-    if endz > startz then facing = 's' else facing = 'n' end
+    if finish.z > start.z then facing = 's' else facing = 'n' end
   end
 
   -- Turn back the way we were originally facing
@@ -131,8 +131,8 @@ end
     Returns true or false.
 --]]
 function test_gps()
-  local t1, t2, t3 = gps.locate(2)
-  if t1 then return true else return false end
+  local t = vector.new( gps.locate(2) )
+  if t.x then return true else return false end
 end
 
 --[[

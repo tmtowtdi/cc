@@ -25,10 +25,10 @@ local args = {...}
 local name = args[1] or 'home'
 
 if not move.test_gps() then error("GPS system is down!") end
-local x, y, z = gps.locate(2)
-settings.set(name .. '_x', x)
-settings.set(name .. '_y', y)
-settings.set(name .. '_z', z)
+local c = vector.new( gps.locate(2) )
+settings.set(name .. '_x', c.x)
+settings.set(name .. '_y', c.y)
+settings.set(name .. '_z', c.z)
 
 print("Home point '"..name.."' has been set!")
 

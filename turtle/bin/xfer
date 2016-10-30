@@ -36,7 +36,7 @@ local target_box = args[4] or 'target'
   wait 100 seconds before repeating.
 --]]
 
-function do_suck()  --giggity
+function do_suck()
   print("Going to "..src_box)
   move.return_to_box(highest, src_box)
   print("At "..src_box.."; sucking inv")
@@ -51,8 +51,12 @@ function do_dump()
   print("Going to "..target_box)
   move.return_to_box(highest, target_box)
   print("At "..target_box.."; dumping inv")
-  move.dump_inv('dn')
-  print("Done dumping.")
+  if move.dump_inv('dn') then
+    print("Done dumping.")
+    return true
+  else
+    return false
+  end
 end
 
 
@@ -73,7 +77,12 @@ end
 for i=1,16 do
   if turtle.getItemCount(i) > 0 then
     print("Inventory not empty.  Dumping first.")
-    do_dump()
+    if not do_dump() then
+      print("Our target box is full!")
+      print("Giving up and heading home.")
+      move.go_home(highest)
+      return
+    end
     break
   end
 end
@@ -81,7 +90,12 @@ end
 --Start
 while true do
   do_suck()
-  do_dump()
+  if not do_dump() then
+    print("Our target box is full!")
+    print("Giving up and heading home.")
+    move.go_home(highest)
+    return
+  end
   print("Heading home.")
   move.go_home(highest)
   print("I'm home. Sleeping for "..wait_time.." seconds.")

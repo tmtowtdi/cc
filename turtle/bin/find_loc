@@ -4,7 +4,7 @@
 os.loadAPI("lib/move")
 
 if not move.test_gps() then error("GPS system is down!") end
-local x, y, z = gps.locate(2)
+local c = vector.new( gps.locate(2) )
 
 print("     Y axis       ")
 print("        +         ")
@@ -16,6 +16,6 @@ print("        |         ")
 print("        |         ")
 print("        N         ")
 print("        -         ")
-print("X: "..x..", Y: "..y..", Z: "..z)
+print("X: "..c.x..", Y: "..c.y..", Z: "..c.z)
 
  -- vim: syntax=lua

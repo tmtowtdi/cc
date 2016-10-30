@@ -51,8 +51,8 @@ end
     direction.  Record that spot; if we're not in the same spot and facing the 
     same direction when we're done, we'll stop.
 --]]
-local sx, sy, sz = gps.locate(2)
-local sface      = move.d()
+local s     = vector.new( gps.locate(2) )
+local sface = move.d()
 
 function growth_complete()
   local s, d = turtle.inspect()
@@ -75,10 +75,10 @@ while true do
   end
   harvest.harvest_villager_farm(cols, rows)
 
-    local ex, ey, ez = gps.locate(2)
-    local eface      = move.find_direction()    -- not move.d(); we want guaranteed accuracy here.
+    local e     = vector.new( gps.locate(2) )
+    local eface = move.find_direction()    -- not move.d(); we want guaranteed accuracy here.
 
-    if not( sx==ex and sy==ey and sz==ez and sface==eface ) then
+    if not( s.x==e.x and s.y==e.y and s.z==e.z and sface==eface ) then
         error("We're not back in our starting position for some reason; quitting.")
     end
 end
