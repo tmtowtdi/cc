@@ -1,5 +1,9 @@
 
 TBD {{{{
+
+    Ack for "CHECK"
+
+
     bin/dig_cube {#{{{
         - I added a GPS re-consult after each column is completed.
         - I also changed it to use go_home, dump_inv, return_to_box from the 

@@ -26,6 +26,8 @@ to move.  If the turtle is surrounded on all sides, this will fail.
     - :ref:`move_method_bk`
     - :ref:`move_method_up`
     - :ref:`move_method_dn`
+    - :ref:`move_method_strafe_r`
+    - :ref:`move_method_strafe_l`
     - :ref:`move_method_goto`
     - :ref:`move_method_l`
     - :ref:`move_method_r`
@@ -101,6 +103,35 @@ Methods
 Move the turtle ``spaces`` spaces in the specified direction.  If ``force`` is 
 true and the turtle is blocked, it will attempt to both dig and attack in the 
 requested direction.
+
+----
+
+.. _move_method_strafe_r:
+
+``strafe_r:(spaces, force)``
+++++++++++++++++++++++++++++
+
+.. _move_method_strafe_l:
+
+``strafe_l(spaces, force)``
++++++++++++++++++++++++++++
+
+``spaces``
+  int, defaults to 1
+``force``
+  bool, defaults to false
+
+Both "strafe" the turtle one or more spaces in the indicated direction, 
+meaning it will move right or left but end up facing the same direction.
+
+The turtle can't actually strafe, so this does turn him; it just ensures he 
+ends up facing in his original direction.  This is just syntactic sugar for::
+
+  -- strafe_r()
+  move.r() move.fd(spaces, force) move.l()
+
+  -- strafe_l()
+  move.l() move.fd(spaces, force) move.r()
 
 ----
 

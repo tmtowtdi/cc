@@ -15,9 +15,9 @@ dump its inventory, then return to its home spot.
 
 The turtle starts in the SW corner, so the cube it digs will be forward and 
 right of its starting point.  If he begins at "B", facing North, he will dig 
-out the blocks marked "D"::
+out the blocks marked "D":
 
-..
+.. code-block:: text
 
     D D D D    N
     D D D D    ^
@@ -29,12 +29,15 @@ named "box".  Set these by running :ref:`scripts_set_home` and
 :ref:`scripts_find_box` .
 
 The script can run with no arguments, accepting its defaults, or with up to 
-four arguments
+four arguments:
 
 .. code-block:: text
 
     > bin/dig_cube
     > bin/dig_cube 5 10 50 100
+
+    ...that's:
+    > bin/dig_cube COLS ROWS DEPTH RETURN_HEIGHT
 
 The first version, with no arguments, will dig a cube 8 columns wide, 8 rows 
 long, and 100 blocks deep (all relative to the turtle's starting point).  When 

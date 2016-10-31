@@ -1,8 +1,12 @@
 #!/usr/bin/env lua
 
-local mybool = true
+local foo = {'on', 'two', 'three'}
 
-for i=1,5 do
-  print(mybool)
-  mybool = not mybool
+print(#foo)
+
+for k,v in ipairs(foo) do
+    print(v)
 end
+
+
+ -- vim: syntax=lua ts=2 sw=2

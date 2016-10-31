@@ -6,9 +6,12 @@
 Settings
 ========
 
-ComputerCraft 1.77 includes a settings API, but that version of CC is for MC 
-1.89.  If you're running a lower-version MC server, this mirrors that CCv1.77 
-Settings API.
+ComputerCraft 1.77 includes a `settings API 
+<http://www.computercraft.info/wiki/Settings_(API)>`_ , but that version of CC 
+is for MC  1.89.  If you're running a lower-version MC server, this mirrors 
+that CCv1.77 Settings API.
+
+
 
 - :ref:`settings_synopsis`
 - :ref:`settings_internal_methods`
@@ -38,9 +41,9 @@ Synopsis
     -- Well, we probably don't need that 'job' key set any more, so unset it.
     settings.unset("job")
 
-    -- Later, in any other script, you can retrieve that:
+    -- Later, in any other script, you can retrieve that name:
     local n = settings.get("name")
-    print(n)                        -- Notch
+    print(n)                            -- Notch
 
     -- Get a list of all set keys
     local all = settings.getNames()

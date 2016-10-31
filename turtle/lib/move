@@ -26,7 +26,6 @@ function get_x() return x end
 function get_y() return y end
 function get_z() return z end
 
--- Turn around, left, right
 function a()
   facing = cardinal[facing]['around']
   turtle.turnLeft()
@@ -41,7 +40,6 @@ function r()
   return turtle.turnRight()
 end
 
--- Face a cardinal direction
 function face_n()
   local d = d()
   if d == 'e' then l() elseif d == 's' then a() elseif d == 'w' then r() end
@@ -74,10 +72,6 @@ function face(dir)
   return true
 end
 
---[[
-    Get the direction the turtle is facing theoretically.
-    Returns one of 'n', 'e', 's', 'w' on success, false on failure.
---]]
 function d()
   if not facing then
     if not test_gps() then return false end
@@ -86,14 +80,6 @@ function d()
   return facing
 end
 
-
---[[
-    Get the direction the turtle is facing empirically.
-    If the turtle can not move laterally, this function cannot determine its 
-    facing direction and will fail.
-
-    Returns one of 'n', 'e', 's', 'w' on success, false on failure.
---]]
 function find_direction()
   local start  = vector.new( gps.locate(2) )
   local finish = vector.new() -- 'end' is a reserved word.
@@ -126,37 +112,11 @@ function find_direction()
   return facing
 end
 
---[[
-    Determines if the GPS system working and in range.
-    Returns true or false.
---]]
 function test_gps()
   local t = vector.new( gps.locate(2) )
   if t.x then return true else return false end
 end
 
---[[
-  Returns the turtle to its set home.
-  First ascends to height h (defaults 
-  to 100) to attempt to avoid 
-  obstacles.
-  bin/set_home must be run once before 
-  this will work.
-  Returns true or false.
-
-  Fly up to y==100 then head to home_x, 
-  home_y, home_z
-  > move.go_home()
-
-  Fly up to y==50 then head to home_x, 
-  home_y, home_z
-  > move.go_home(50)
-
-  Fly up to y==50 then head to 
-  origin_x, origin_y, origin_z
-  > move.go_home(50, "origin")
-
---]]
 function go_home(height, name)
   local height = height or 100           -- a reasonable wag
   local name   = name or 'home'
@@ -192,13 +152,6 @@ function has_box(name)
   return true
 end  
 
---[[
-    Returns the turtle one block above its set box, and empties the turtle's 
-    entire inventory into that box.
-    First ascends to height h (defaults to 100) to attempt to avoid obstacles.
-    bin/find_box must be run once before this will work.
-    Returns true or false.
---]]
 function return_to_box(h, n)
     local h = h or 100               -- a fairly reasonable wag
     local n = n or 'box'
@@ -213,14 +166,6 @@ function return_to_box(h, n)
     return true
 end
 
---[[
-  Drops all inventory items.  
-  Presumably there's a chest in the 
-  direction we're dropping.
-
-  Possible directions are 'dn', 'fd', 
-  and 'up'.  Defaults to 'dn'.
---]]
 function dump_inv(dir)
   local dir = dir or 'dn'
   local drop;
@@ -243,15 +188,6 @@ function dump_inv(dir)
   return true
 end
 
-
---[[
-    Move in a given direction (up, dn, fd, bk) a given number of times 
-    (defaults to 1).
-    If passed a true value as the second argument, will attempt to force its 
-    way in the given direction.
-    "Force" means it will attempt to both dig and attack in the given 
-    direction if it is unable to move that way after the first attempt.
---]]
 function up(cnt,force)
 	local cnt   = cnt or 1
     local force = force or false
@@ -347,18 +283,9 @@ function bk(cnt,force)
 	return cnt
 end
 
---[[
-    Go to a specific point.
-        goto(x, y, z, height, force)
+function strafe_r(cnt,force) r() fd(cnt, force) l() end
+function strafe_l(cnt,force) l() fd(cnt, force) r() end
 
-    Height arg is an optional int.  If passed, the turtle first ascends to 
-    that height to attempt to avoid obstacles.
-
-    Force arg is an optional boolean.  If true, the turtle will try to force 
-    its way through obstacles by digging and/or attacking.
-
-    gotoX(), gotoY(), and gotoZ() generally won't be interesting to the user.
---]]
 function gotoX(toX,force)
     if toX == nil then error("No coordinate specified.",2) end
     local force = force or false

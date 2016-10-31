@@ -30,9 +30,6 @@
   
 
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="ComputerCraft Utilities 0.1 documentation" href="../index.html"/>
         <link rel="up" title="APIs" href="index.html"/>
         <link rel="next" title="Reds (API)" href="reds.html"/>
@@ -98,6 +95,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#bk-spaces-force"><code class="docutils literal"><span class="pre">bk(spaces,</span> <span class="pre">force)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#up-spaces-force"><code class="docutils literal"><span class="pre">up(spaces,</span> <span class="pre">force)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dn-spaces-force"><code class="docutils literal"><span class="pre">dn(spaces,</span> <span class="pre">force)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#strafe-r-spaces-force"><code class="docutils literal"><span class="pre">strafe_r:(spaces,</span> <span class="pre">force)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#strafe-l-spaces-force"><code class="docutils literal"><span class="pre">strafe_l(spaces,</span> <span class="pre">force)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#goto-x-y-z-height-force"><code class="docutils literal"><span class="pre">goto(X,</span> <span class="pre">Y,</span> <span class="pre">Z,</span> <span class="pre">height,</span> <span class="pre">force)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#l"><code class="docutils literal"><span class="pre">l()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#r"><code class="docutils literal"><span class="pre">r()</span></code></a></li>
@@ -192,6 +191,8 @@ to move.  If the turtle is surrounded on all sides, this will fail.</p>
 <li><a class="reference internal" href="#move-method-bk"><span class="std std-ref">bk(spaces, force)</span></a></li>
 <li><a class="reference internal" href="#move-method-up"><span class="std std-ref">up(spaces, force)</span></a></li>
 <li><a class="reference internal" href="#move-method-dn"><span class="std std-ref">dn(spaces, force)</span></a></li>
+<li><a class="reference internal" href="#move-method-strafe-r"><span class="std std-ref">strafe_r:(spaces, force)</span></a></li>
+<li><a class="reference internal" href="#move-method-strafe-l"><span class="std std-ref">strafe_l(spaces, force)</span></a></li>
 <li><a class="reference internal" href="#move-method-goto"><span class="std std-ref">goto(X, Y, Z, height, force)</span></a></li>
 <li><a class="reference internal" href="#move-method-l"><span class="std std-ref">l()</span></a></li>
 <li><a class="reference internal" href="#move-method-r"><span class="std std-ref">r()</span></a></li>
@@ -257,6 +258,30 @@ to move.  If the turtle is surrounded on all sides, this will fail.</p>
 <p>Move the turtle <code class="docutils literal"><span class="pre">spaces</span></code> spaces in the specified direction.  If <code class="docutils literal"><span class="pre">force</span></code> is
 true and the turtle is blocked, it will attempt to both dig and attack in the
 requested direction.</p>
+<hr class="docutils" />
+</div>
+<div class="section" id="strafe-r-spaces-force">
+<span id="move-method-strafe-r"></span><h3><code class="docutils literal"><span class="pre">strafe_r:(spaces,</span> <span class="pre">force)</span></code><a class="headerlink" href="#strafe-r-spaces-force" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="strafe-l-spaces-force">
+<span id="move-method-strafe-l"></span><h3><code class="docutils literal"><span class="pre">strafe_l(spaces,</span> <span class="pre">force)</span></code><a class="headerlink" href="#strafe-l-spaces-force" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">spaces</span></code></dt>
+<dd>int, defaults to 1</dd>
+<dt><code class="docutils literal"><span class="pre">force</span></code></dt>
+<dd>bool, defaults to false</dd>
+</dl>
+<p>Both &#8220;strafe&#8221; the turtle one or more spaces in the indicated direction,
+meaning it will move right or left but end up facing the same direction.</p>
+<p>The turtle can&#8217;t actually strafe, so this does turn him; it just ensures he
+ends up facing in his original direction.  This is just syntactic sugar for:</p>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="c1">-- strafe_r()</span>
+<span class="n">move</span><span class="p">.</span><span class="n">r</span><span class="p">()</span> <span class="n">move</span><span class="p">.</span><span class="n">fd</span><span class="p">(</span><span class="n">spaces</span><span class="p">,</span> <span class="n">force</span><span class="p">)</span> <span class="n">move</span><span class="p">.</span><span class="n">l</span><span class="p">()</span>
+
+<span class="c1">-- strafe_l()</span>
+<span class="n">move</span><span class="p">.</span><span class="n">l</span><span class="p">()</span> <span class="n">move</span><span class="p">.</span><span class="n">fd</span><span class="p">(</span><span class="n">spaces</span><span class="p">,</span> <span class="n">force</span><span class="p">)</span> <span class="n">move</span><span class="p">.</span><span class="n">r</span><span class="p">()</span>
+</pre></div>
+</div>
 <hr class="docutils" />
 </div>
 <div class="section" id="goto-x-y-z-height-force">

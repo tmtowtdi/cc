@@ -42,6 +42,24 @@ function find_all(item_name)
   return slots
 end
 
+function find_ccper_slot(type)
+  local dmg;
+  if type == 'drive' then dmg = 0
+    elseif type == 'modem' then dmg = 1
+    elseif type == 'monitor' then dmg = 2
+    elseif type == 'printer' then dmg = 3
+    else
+      error("Invalid 'type' value: "..type..".")
+      return false
+  end
+  local per_slots = inv.find_all('ComputerCraft:CC-Peripheral')
+  for k,slot in ipairs(per_slots) do
+    d = turtle.getItemDetail(slot)
+    if d.damage == dmg then return slot end
+  end
+  return false
+end
+
 function consolidate(item_name)
   local slots = find_all(item_name)
   for i = #slots, 1, -1 do
@@ -77,4 +95,4 @@ function name_is_fq(item_name)
   if string.find(item_name,':') then return true else return false end
 end
 
- -- vim: syntax=lua
+ -- vim: syntax=lua ts=2 sw=2

@@ -19,10 +19,10 @@ local height = args[1] or 140
 --]]
 function set_peripherals(coords_vec)
   move.strafe_l()
-  turtle.select( find_per_slot("modem") )
+  turtle.select( find_ccper_slot("modem") )
   turtle.place()
   move.strafe_r(2)
-  turtle.select( find_per_slot("drive") )
+  turtle.select( find_ccper_slot("drive") )
   turtle.place()
   turtle.select( inv.find("ComputerCraft:disk") )
 
@@ -114,19 +114,6 @@ function check_inv()
   return true
 end
 
-function find_per_slot(type)
-  local dmg;
-  if type == 'drive' then dmg = 0
-    elseif type == 'modem' then dmg = 1
-  end
-
-  local per_slots = inv.find_all('ComputerCraft:CC-Peripheral')
-  for k,slot in ipairs(per_slots) do
-    d = turtle.getItemDetail(slot)
-    if d.damage == dmg then return slot end
-  end
-  return false
-end
 
 
 function write_startup_file(fname, vec)

@@ -13,7 +13,9 @@ First, find the spot that you want to be this turtle's home.  It should be
 clear to the air above, since the turtle is going to be coming in from 
 altitude.
 
-Place your turtle in his spot and assign it as his home::
+Place your turtle in his spot and assign it as his home:
+
+.. code-block:: text
 
     > bin/set_home
 
@@ -21,9 +23,13 @@ Now, any other script can send him home again by using the move module's
 go_home() method.
 
 By default, ``set_home`` sets a home named, simply, "home".  But you can set 
-other named home spots by passing a name::
+other named home spots by passing a name:
+
+.. code-block:: text
 
     > bin/set_home house
     > bin/set_home farm
     ...etc...
+
+You can send a turtle back to an assigned home with :ref:`scripts_go_home` .
 

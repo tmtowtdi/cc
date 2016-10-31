@@ -13,6 +13,7 @@ Inventory management API.
 - :ref:`inv_methods`
     - :ref:`inv_method_find`
     - :ref:`inv_method_find_all`
+    - :ref:`inv_method_find_ccper_slot`
     - :ref:`inv_method_consolidate`
     - :ref:`inv_method_all_slots_used`
     - :ref:`inv_method_simplify_name`
@@ -115,6 +116,25 @@ Get all slots in the internal inventory containing one or more items of
 
 Returns an int-indexed table (array) of slot numbers.  This array will be 
 empty if ``name`` was not found.
+
+----
+
+.. _inv_method_find_ccper_slot:
+
+``find_ccper_slot(type)``
++++++++++++++++++++++++++
+
+``type``
+  str, one of 'drive', 'modem', 'monitor', 'printer'.  Required.
+
+These four ComputerCraft peripherals all have the same name, but different 
+'damage' (metadata) values.
+
+Digging out the correct item isn't technically difficult, but is always more 
+trouble than desired, and requires looking up which item has which metadata 
+value (again).
+
+This method saves you that messing around.
 
 ----
 

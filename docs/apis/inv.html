@@ -30,9 +30,6 @@
   
 
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="ComputerCraft Utilities 0.1 documentation" href="../index.html"/>
         <link rel="up" title="APIs" href="index.html"/>
         <link rel="next" title="Move" href="move.html"/>
@@ -96,6 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#find-name"><code class="docutils literal"><span class="pre">find(name)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#find-all-name"><code class="docutils literal"><span class="pre">find_all(name)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#find-ccper-slot-type"><code class="docutils literal"><span class="pre">find_ccper_slot(type)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#consolidate-name"><code class="docutils literal"><span class="pre">consolidate(name)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#all-slots-used"><code class="docutils literal"><span class="pre">all_slots_used()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#simplify-name-name"><code class="docutils literal"><span class="pre">simplify_name(name)</span></code></a></li>
@@ -168,6 +166,7 @@
 <dd><ul class="first last simple">
 <li><a class="reference internal" href="#inv-method-find"><span class="std std-ref">find(name)</span></a></li>
 <li><a class="reference internal" href="#inv-method-find-all"><span class="std std-ref">find_all(name)</span></a></li>
+<li><a class="reference internal" href="#inv-method-find-ccper-slot"><span class="std std-ref">find_ccper_slot(type)</span></a></li>
 <li><a class="reference internal" href="#inv-method-consolidate"><span class="std std-ref">consolidate(name)</span></a></li>
 <li><a class="reference internal" href="#inv-method-all-slots-used"><span class="std std-ref">all_slots_used()</span></a></li>
 <li><a class="reference internal" href="#inv-method-simplify-name"><span class="std std-ref">simplify_name(name)</span></a></li>
@@ -253,6 +252,20 @@ the first slot containing either <code class="docutils literal"><span class="pre
 <code class="docutils literal"><span class="pre">name</span></code>.  Follows the same naming rules as <a class="reference internal" href="#inv-method-find"><span class="std std-ref">find(name)</span></a>.</p>
 <p>Returns an int-indexed table (array) of slot numbers.  This array will be
 empty if <code class="docutils literal"><span class="pre">name</span></code> was not found.</p>
+<hr class="docutils" />
+</div>
+<div class="section" id="find-ccper-slot-type">
+<span id="inv-method-find-ccper-slot"></span><h3><code class="docutils literal"><span class="pre">find_ccper_slot(type)</span></code><a class="headerlink" href="#find-ccper-slot-type" title="Permalink to this headline">¶</a></h3>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">type</span></code></dt>
+<dd>str, one of &#8216;drive&#8217;, &#8216;modem&#8217;, &#8216;monitor&#8217;, &#8216;printer&#8217;.  Required.</dd>
+</dl>
+<p>These four ComputerCraft peripherals all have the same name, but different
+&#8216;damage&#8217; (metadata) values.</p>
+<p>Digging out the correct item isn&#8217;t technically difficult, but is always more
+trouble than desired, and requires looking up which item has which metadata
+value (again).</p>
+<p>This method saves you that messing around.</p>
 <hr class="docutils" />
 </div>
 <div class="section" id="consolidate-name">

@@ -29,3 +29,5 @@ other named boxes by passing a name::
     > bin/find_box mob_farm
     ...etc...
 
+You can send a turtle back to his assigned box with :ref:`scripts_go_box` .
+
