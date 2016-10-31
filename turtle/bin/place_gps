@@ -73,6 +73,9 @@ function check_inv()
     But d.damage shows 1 for the modem and 0 for the drive.  Which is fucking 
     ridiculous, but there is a difference.
 
+    FWIW, both the massive sword sil gave me and a regular diamond pickaxe 
+    show d.damage as 0.  So I have no idea what that field is supposed to be.
+
 
 
     So:
