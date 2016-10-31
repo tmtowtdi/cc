@@ -1,4 +1,6 @@
 
+-- Search on CHECK
+
 --place_gps TuerqNSi
 
 os.loadAPI("lib/inv")
@@ -7,99 +9,125 @@ os.loadAPI("lib/move")
 local args   = {...}
 local height = args[1] or 140
 
+--[[
+  Assumes you've just placed a computer, which is in front of you.
+  Places a modem on the machine's left, and a disk drive on its right, 
+  then inserts a disk into the drive, and creates a startup file on 
+  the disk.
+  Turtle ends up back at its starting position
+  CHECK totally untested.
+--]]
+function set_peripherals(coords_vec)
+  move.strafe_l()
+  turtle.select( find_per_slot("modem") )
+  turtle.place()
+  move.strafe_r(2)
+  turtle.select( find_per_slot("drive") )
+  turtle.place()
+  turtle.select( inv.find("ComputerCraft:disk") )
+
+  -- CHECK does this put the disk in the drive?  Should but untested.
+  turtle.place()  
+
+  -- CHECK I'm assuming we're adjacent to the drive we just placed so we 
+  -- should be able to access it.
+  write_startup_file("disk/startup", coords_vec)
+
+  move.strafe_l()
+end
+
 function place_gps()
-    -- Bottom row east
-    move.face_e()
-    move.fd(3)
-    bot_e = vector.new( gps.locate(2) )
-    move.bk()
-    turtle.select( inv.find("ComputerCraft:CC-Computer") )
-    turtle.place()
-    write_startup_file("e_startup", bot_e)
+  -- Bottom row east
+  move.face_e()
+  move.fd(3)
+  bot_e = vector.new( gps.locate(2) )
+  move.bk()
+  turtle.select( inv.find("ComputerCraft:CC-Computer") )
+  turtle.place()
+  set_peripherals(bot_e)
 
-    -- Bottom row west
-    move.a()
-    move.fd(5)
-    bot_w = vector.new( gps.locate(2) )
-    move.bk()
-    turtle.select( inv.find("ComputerCraft:CC-Computer") )
-    turtle.place()
-    write_startup_file("w_startup", bot_w)
+  -- Bottom row west
+  move.a()
+  move.fd(5)
+  bot_w = vector.new( gps.locate(2) )
+  move.bk()
+  turtle.select( inv.find("ComputerCraft:CC-Computer") )
+  turtle.place()
+  set_peripherals(bot_w)
 
-    turtle.bk(2)    -- Back to center
-    turtle.up(3)    -- Up to top row
+  turtle.bk(2)    -- Back to center
+  turtle.up(3)    -- Up to top row
 
-    -- Top row north
-    move.r()
-    move.fd(3)
-    top_n = vector.new( gps.locate(2) )
-    move.bk()
-    turtle.select( inv.find("ComputerCraft:CC-Computer") )
-    turtle.place()
-    write_startup_file("n_startup", top_n)
+  -- Top row north
+  move.r()
+  move.fd(3)
+  top_n = vector.new( gps.locate(2) )
+  move.bk()
+  turtle.select( inv.find("ComputerCraft:CC-Computer") )
+  turtle.place()
+  set_peripherals(top_n)
 
-    -- Top row south
-    move.a()
-    move.fd(5)
-    top_s = vector.new( gps.locate(2) )
-    move.bk()
-    turtle.select( inv.find("ComputerCraft:CC-Computer") )
-    turtle.place()
-    write_startup_file("s_startup", top_s)
+  -- Top row south
+  move.a()
+  move.fd(5)
+  top_s = vector.new( gps.locate(2) )
+  move.bk()
+  turtle.select( inv.find("ComputerCraft:CC-Computer") )
+  turtle.place()
+  set_peripherals(top_s)
 
-    move.bk(2)    -- Back to center
-    return true
+  move.bk(2)    -- Back to center
+  return true
 end
 
 function check_inv()
-    print("check_inv doesn't actually do anything yet.")
-    return true
-    --[[
-    ComputerCraft:CC-Computer           (reg or advanced == same name)
-    ComputerCraft:CC-TurtleExpanded     (wireless trtles)
-    ComputerCraft:CC-Turtle             (trtles no modem)
-    ComputerCraft:CC-Peripheral         (wireless modem, disk drive)
-    ComputerCraft:disk                  floppy disk
+  print("check_inv doesn't actually do anything yet.")
+  return true
 
-    We have to have:
-        - 4 computers
-        - 4 modems
-        - 4 disk drives
-        - 4 floppies
+  -- Computers
+  local comp_num   = 0
+  local comp_slots = inv.find_all('ComputerCraft:CC-Computer')
+  for k,slot in ipairs(comp_slots) do
+    comp_num = comp_num + turtle.getItemCount( slot )
+    if comp_num >= 4 then break end
+  end
+  if comp_num < 4 then error("Not enough computers in inv.") return false end
 
+  -- Floppies (they don't stack)
+  local disk_slots = inv.find_all('ComputerCraft:disk')
+  if #disk_slots < 4 then error("Not enough floppy disks in inv.") return false end
 
-    d = turtle.getItemDetail()
-    d.name for both drives and modems is "CC-Peripheral".
-    But d.damage shows 1 for the modem and 0 for the drive.  Which is fucking 
-    ridiculous, but there is a difference.
+  -- Drives and modems
+  local drive_num   = 0
+  local modem_num   = 0
+  local per_slots = inv.find_all('ComputerCraft:CC-Peripheral')
+  for k,slot in ipairs(per_slots) do
+    local cnt = turtle.getItemCount( slot )
+    d = turtle.getItemDetail(slot)
+    if d.damage == 0 then drive_num = drive_num + cnt
+      elseif d.damage == 1 then modem_num = modem_num + cnt
+    end
+  end
+  if drive_num < 4 then error("Not enough disk drives in inv.") return false end
+  if modem_num < 4 then error("Not enough modems in inv.") return false end
 
-    FWIW, both the massive sword sil gave me and a regular diamond pickaxe 
-    show d.damage as 0.  So I have no idea what that field is supposed to be.
-
-
-
-    So:
-        - cnt = turtle.getItemCount( inv.find('ComputerCraft:CC-Computer') )
-            - cnt must be >= 4
-        - cnt = turtle.getItemCount( inv.find('ComputerCraft:disk') )
-            - cnt must be >= 4
-        - slots = inv.find_all('ComputerCraft:CC-Peripheral')
-            - foreach s slots do:
-                - if can equip from s:
-                    - do peripheral.getType() to ensure it's a modem.  
-                      Remember "modem_slot" in a variable.
-                    - Make sure we've got 4.
-                - if cannot equip from s:
-                    - Assume it's a disk drive.
-                    - Make sure we've got 4.
-
-        BUT I've posted a question in the "ask a pro" forum on 
-        computercraft.info asking if there's some other way to ID these 
-        things.  I'm a new user so my post has to be moderated, so I can't 
-        post a link to it.
-
-    --]]
+  return true
 end
+
+function find_per_slot(type)
+  local dmg;
+  if type == 'drive' then dmg = 0
+    elseif type == 'modem' then dmg = 1
+  end
+
+  local per_slots = inv.find_all('ComputerCraft:CC-Peripheral')
+  for k,slot in ipairs(per_slots) do
+    d = turtle.getItemDetail(slot)
+    if d.damage == dmg then return slot end
+  end
+  return false
+end
+
 
 function write_startup_file(fname, vec)
     local h = fs.open(fname, 'w')
@@ -108,28 +136,34 @@ function write_startup_file(fname, vec)
     return true;
 end
 
-s = get_start()
-check_inv()
+
+
+
+
+if not check_inv() then
+  error("We can't build the GPS without the ingredients.")
+  return
+end
+print("Inventory checks out.")
+
+s = vector.new( gps.locate(2) )
+print("Got starting location.")
+
 move.up( height)
+print("At height, starting to build GPS.")
 place_gps()
+
+print("Returning home again.")
 move.goto(s.x, s.y, s.z)    -- fly back down to start
 
+print("---------------------------------------")
+print("Your new GPS system is in place.  Fly")
+print("up to it, and, on all four computers,")
+print("type this:")
+print("   > copy disk/startup .")
+print("   > startup")
+print("...and your GPS system will be on.")
+print("---------------------------------------")
 
---[[
-    Turtle is placing computers but not putting modems on them.  He has to 
-    move to the side, then back up one space, then place the modem.  He cannot 
-    be right next to the computer when he places the modem.
-        He does not have to move to the side -- modem _can_ be placed over the 
-        "screen" side of the computer.
 
-    If we also have 4 disk drives and 4 floppies in inv, place one drive next 
-    to each machine, place a floppy, and copy the startup file to the disk.
-        I'm strongly contemplating having check_inv() require the four drives 
-        and four floppies.
-
-    And in that case, name the copied file to simply "startup".
-
-    User will still have to fly up to each machine, but then will only need to 
-    "copy disk/startup ." on each one.
---]]
-
+ -- vim: syntax=lua ts=2 sw=2
