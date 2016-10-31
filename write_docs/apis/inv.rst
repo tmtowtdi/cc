@@ -14,6 +14,10 @@ Inventory management API.
     - :ref:`inv_method_find`
     - :ref:`inv_method_find_all`
     - :ref:`inv_method_find_ccper_slot`
+    - :ref:`inv_method_isa_ccdrive`
+    - :ref:`inv_method_isa_ccmodem`
+    - :ref:`inv_method_isa_ccmonitor`
+    - :ref:`inv_method_isa_ccprinter`
     - :ref:`inv_method_consolidate`
     - :ref:`inv_method_all_slots_used`
     - :ref:`inv_method_simplify_name`
@@ -135,6 +139,50 @@ trouble than desired, and requires looking up which item has which metadata
 value (again).
 
 This method saves you that messing around.
+
+----
+
+.. _inv_method_isa_ccdrive:
+
+``isa_ccdrive(d)``
++++++++++++++++++++++++++
+
+.. _inv_method_isa_ccmodem:
+
+``isa_ccmodem(d)``
++++++++++++++++++++++++++
+
+.. _inv_method_isa_ccmonitor:
+
+``isa_ccmonitor(d)``
++++++++++++++++++++++++++
+
+.. _inv_method_isa_ccprinter:
+
+``isa_ccprinter(d)``
++++++++++++++++++++++++++
+
+``type``
+  table, return value from turtle.getItemDetail().  Required.
+
+Get the type of peripheral you just queried.  See 
+:ref:`inv_method_find_ccper_slot` for details.
+
+----
+
+.. _inv_method_ccper_type:
+
+``ccper_type(d)``
++++++++++++++++++
+
+``type``
+  table, return value from turtle.getItemDetail().  Required.
+
+Get the type of ComputerCraft peripheral you just queried.  See 
+:ref:`inv_method_find_ccper_slot` for details.
+
+Returns one of 'drive', 'modem', 'monitor', 'printer' on success, false on 
+failure (the queried item is not a ComputerCraft peripheral.)
 
 ----
 
