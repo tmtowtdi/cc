@@ -60,6 +60,33 @@ function find_ccper_slot(type)
   return false
 end
 
+function isa_ccdrive(d)
+  if d.name == 'ComputerCraft:CC-Peripheral' and d.damage == 0 then return true end
+  return false
+end
+function isa_ccmodem(d)
+  if d.name == 'ComputerCraft:CC-Peripheral' and d.damage == 1 then return true end
+  return false
+end
+function isa_ccmonitor(d)
+  if d.name == 'ComputerCraft:CC-Peripheral' and d.damage == 2 then return true end
+  return false
+end
+function isa_ccprinter(d)
+  if d.name == 'ComputerCraft:CC-Peripheral' and d.damage == 3 then return true end
+  return false
+end
+
+function ccper_type(d)
+  if d.name == 'ComputerCraft:CC-Peripheral' then
+    if d.damage == 0 then return 'drive' end
+    if d.damage == 1 then return 'modem' end
+    if d.damage == 2 then return 'monitor' end
+    if d.damage == 3 then return 'printer' end
+  end
+  return false
+end
+
 function consolidate(item_name)
   local slots = find_all(item_name)
   for i = #slots, 1, -1 do
