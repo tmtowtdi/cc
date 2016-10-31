@@ -24,6 +24,13 @@ TBD {{{{
     sanity-check to ensure that the machine in question is actually a turtle, 
     and not a computer.  I'm not sure how to do that.
 
+
+
+    - Turtles _can_ place items in midair.  I could write code to have a 
+      turtle place the four GPS satellite computers.
+        - Can I get the placing turtle to transmit the correct startup script 
+          to each?
+
 }}}}
 
 Building Documentation {#{{{
