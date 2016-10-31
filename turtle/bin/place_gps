@@ -4,10 +4,24 @@
 --place_gps TuerqNSi
 
 os.loadAPI("lib/inv")
-os.loadAPI("lib/move")
 
-local args   = {...}
-local height = args[1] or 140
+local args    = {...}
+local height  = args[1] or 140
+local has_gps = false
+
+function strafe_r(num) 
+ num = num or 1
+ turtle.turnRight()
+ for i=1,num do turtle.forward() end
+ turtle.turnLeft()
+end
+
+function strafe_l(num) 
+ num = num or 1
+ turtle.turnLeft()
+ for i=1,num do turtle.forward() end
+ turtle.turnRight()
+end
 
 --[[
   Assumes you've just placed a computer, which is in front of you.
@@ -18,10 +32,10 @@ local height = args[1] or 140
   CHECK totally untested.
 --]]
 function set_peripherals(coords_vec)
-  move.strafe_l()
+  strafe_l()
   turtle.select( inv.find_ccper_slot("modem") )
   turtle.place()
-  move.strafe_r(2)
+  strafe_r(2)
   turtle.select( inv.find_ccper_slot("drive") )
   turtle.place()
   turtle.select( inv.find("ComputerCraft:disk") )
@@ -33,57 +47,55 @@ function set_peripherals(coords_vec)
   -- should be able to access it.
   write_startup_file("disk/startup", coords_vec)
 
-  move.strafe_l()
+  strafe_l()
 end
 
 function place_gps()
-  -- Bottom row east
-  move.face_e()
-  move.fd(3)
-  bot_e = vector.new( gps.locate(2) )
-  move.bk()
-  turtle.select( inv.find("ComputerCraft:CC-Computer") )
-  turtle.place()
-  set_peripherals(bot_e)
+  local bot_e, bot_w, top_n, top_s
 
-  -- Bottom row west
-  move.a()
-  move.fd(5)
-  bot_w = vector.new( gps.locate(2) )
-  move.bk()
+  -- Bottom row 1
+  for i = 1,3 do turtle.forward() end
+  if has_gps then bot_e = vector.new( gps.locate(2) ) end
+  turtle.back()
   turtle.select( inv.find("ComputerCraft:CC-Computer") )
   turtle.place()
-  set_peripherals(bot_w)
+  if bot_e then set_peripherals(bot_e) end
+
+  -- Bottom row 2
+  for i = 1,2 do turtle.turnRight() end
+  for i = 1,5 do turtle.forward() end
+  if has_gps then bot_w = vector.new( gps.locate(2) ) end
+  turtle.back()
+  turtle.select( inv.find("ComputerCraft:CC-Computer") )
+  turtle.place()
+  if bot_w then set_peripherals(bot_w) end
 
   turtle.bk(2)    -- Back to center
   turtle.up(3)    -- Up to top row
 
-  -- Top row north
-  move.r()
-  move.fd(3)
-  top_n = vector.new( gps.locate(2) )
-  move.bk()
+  -- Top row 1
+  turtle.turnRight()
+  for i = 1,3 do turtle.forward() end
+  if has_gps then top_n = vector.new( gps.locate(2) ) end
+  turtle.back()
   turtle.select( inv.find("ComputerCraft:CC-Computer") )
   turtle.place()
-  set_peripherals(top_n)
+  if top_n then set_peripherals(top_n) end
 
-  -- Top row south
-  move.a()
-  move.fd(5)
-  top_s = vector.new( gps.locate(2) )
-  move.bk()
+  -- Top row 2
+  for i = 1,2 do turtle.turnRight() end
+  for i = 1,5 do turtle.forward() end
+  if has_gps then top_s = vector.new( gps.locate(2) ) end
+  turtle.back()
   turtle.select( inv.find("ComputerCraft:CC-Computer") )
   turtle.place()
-  set_peripherals(top_s)
+  if top_s then set_peripherals(top_s) end
 
-  move.bk(2)    -- Back to center
+  for i = 1,2 do turtle.back() end -- Back to center
   return true
 end
 
 function check_inv()
-  print("check_inv doesn't actually do anything yet.")
-  return true
-
   -- Computers
   local comp_num   = 0
   local comp_slots = inv.find_all('ComputerCraft:CC-Computer')
@@ -94,8 +106,10 @@ function check_inv()
   if comp_num < 4 then error("Not enough computers in inv.") return false end
 
   -- Floppies (they don't stack)
-  local disk_slots = inv.find_all('ComputerCraft:disk')
-  if #disk_slots < 4 then error("Not enough floppy disks in inv.") return false end
+  if has_gps then
+    local disk_slots = inv.find_all('ComputerCraft:disk')
+    if #disk_slots < 4 then error("Not enough floppy disks in inv.") return false end
+  end
 
   -- Drives and modems
   local drive_num   = 0
@@ -103,18 +117,18 @@ function check_inv()
   local per_slots = inv.find_all('ComputerCraft:CC-Peripheral')
   for k,slot in ipairs(per_slots) do
     local cnt = turtle.getItemCount( slot )
-    d = turtle.getItemDetail(slot)
-    if d.damage == 0 then drive_num = drive_num + cnt
-      elseif d.damage == 1 then modem_num = modem_num + cnt
+    local d   = turtle.getItemDetail(slot)
+    if inv.isa_ccdrive(d) then drive_num = drive_num + cnt
+      elseif inv.isa_ccmodem(d) then modem_num = modem_num + cnt
     end
   end
-  if drive_num < 4 then error("Not enough disk drives in inv.") return false end
+  if has_gps then
+    if drive_num < 4 then error("Not enough disk drives in inv.") return false end
+  end
   if modem_num < 4 then error("Not enough modems in inv.") return false end
 
   return true
 end
-
-
 
 function write_startup_file(fname, vec)
     local h = fs.open(fname, 'w')
@@ -126,6 +140,14 @@ end
 
 
 
+-- Main
+local s = vector.new( gps.locate(2) )
+if s.x then
+  print("We're in range of a GPS system.")
+  has_gps = true
+else
+  print("We're not in range of a GPS system.")
+end
 
 if not check_inv() then
   error("We can't build the GPS without the ingredients.")
@@ -133,23 +155,40 @@ if not check_inv() then
 end
 print("Inventory checks out.")
 
-s = vector.new( gps.locate(2) )
-print("Got starting location.")
-
-move.up( height)
+for i=1,height do turtle.up() end
 print("At height, starting to build GPS.")
 place_gps()
 
 print("Returning home again.")
-move.goto(s.x, s.y, s.z)    -- fly back down to start
+for i=1,height do turtle.down() end   -- fly back down to start
 
 print("---------------------------------------")
-print("Your new GPS system is in place.  Fly")
-print("up to it, and, on all four computers,")
-print("type this:")
-print("   > copy disk/startup .")
-print("   > startup")
-print("...and your GPS system will be on.")
+if has_gps then
+  print("Your new GPS system is in place.  Fly")
+  print("up to it, and, on all four computers,")
+  print("type this:")
+  print("   > copy disk/startup .")
+  print("   > startup")
+  print("...and your GPS system will be on.")
+  print("")
+  print("If you like, you can take down the disk")
+  print("drives (and disks) after copying the") 
+  print("startup files off of them.")
+else
+  print("Your new GPS system is in place.  Fly")
+  print("up to it and then, for each of the ")
+  print("four machines, figure out its X, Y, Z")
+  print("coordinates.  Then type this:")
+  print("   > pastebin get DkS2Evw3 startup")
+  print("")
+  print("Next, edit that startup script; enter")
+  print("the machine's coordinates and save")
+  print("the script.")
+  print("")
+  print("Last, run each machine's startup")
+  print("script, and your GPS system will")
+  print("be on.")
+end
 print("---------------------------------------")
 
 
