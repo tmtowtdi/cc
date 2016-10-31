@@ -1,0 +1,311 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Place GPS System &mdash; ComputerCraft Utilities 0.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="ComputerCraft Utilities 0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="Scripts" href="../index.html"/>
+        <link rel="next" title="Reds (Script)" href="reds.html"/>
+        <link rel="prev" title="Harvest Wheat" href="harvest_wheat.html"/> 
+
+  
+  <script src="../../static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ComputerCraft Utilities
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Scripts</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#turtle-scripts">Turtle Scripts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="dig_cube.html">Dig Cube</a></li>
+<li class="toctree-l3"><a class="reference internal" href="find_box.html">Find Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="find_loc.html">Find Location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="get_all.html">Get All</a></li>
+<li class="toctree-l3"><a class="reference internal" href="get_script.html">Get Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="go_box.html">Go Box</a></li>
+<li class="toctree-l3"><a class="reference internal" href="go_home.html">Go Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="harvest_wheat.html">Harvest Wheat</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Place GPS System</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#required-inventory">Required Inventory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running">Running</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#final-steps">Final Steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-restarts">Server Restarts</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="reds.html">Reds (Script)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="set_home.html">Set Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xfer.html">Xfer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">ComputerCraft Utilities</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Scripts</a> &raquo;</li>
+      
+    <li>Place GPS System</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../sources/scripts/turtle/place_gps.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="place-gps-system">
+<span id="scripts-place-gps"></span><h1>Place GPS System<a class="headerlink" href="#place-gps-system" title="Permalink to this headline">¶</a></h1>
+<p>Sends a turtle directly up and sets up a GPS system that all rednet-equipped
+turtles in range can then use to get their locations.</p>
+<p>Setting up a GPS system is much more of a pain if you&#8217;re not already in range
+of another GPS system.  Your very first GPS system will need to be set up this
+way.</p>
+<p>But subsequent GPS systems will be much easier to set up, provided they&#8217;re in
+range of the original system.  Setting up new systems in range of the old one
+allow you to increase your GPS system coverage.</p>
+<div class="section" id="required-inventory">
+<h2>Required Inventory<a class="headerlink" href="#required-inventory" title="Permalink to this headline">¶</a></h2>
+<p>You must equip your turtle with the needed parts first.  Setting up a system
+that&#8217;s not in range of any other systems actually requires fewer parts than
+setting up one that is in range.</p>
+<p>All GPS systems, whether they&#8217;re in range of another system or not, require:</p>
+<ul class="simple">
+<li>Four computers (regular or advanced work equally well)</li>
+<li>Four modems</li>
+</ul>
+<p>If you&#8217;re extending your original GPS system (eg if you&#8217;re already in range of
+another functioning GPS system), you&#8217;ll also need:</p>
+<ul class="simple">
+<li>Four disk drives</li>
+<li>Four floppy disks</li>
+</ul>
+</div>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>Whether you&#8217;re in range of another GPS system or not, equip your turtle with
+the required items, then place it on the ground directly under the spot where
+you want your GPS system to be placed, then start the build:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/place_gps
+</pre></div>
+</div>
+<p>By default, that will fly up 140 spots and begin building your system, but you
+can specify a different number of spots to move up:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/place_gps 120
+</pre></div>
+</div>
+<p>After the turtle places the GPS computers, it will return to its starting
+position.</p>
+</div>
+<div class="section" id="final-steps">
+<h2>Final Steps<a class="headerlink" href="#final-steps" title="Permalink to this headline">¶</a></h2>
+<p>After the turtle returns, your GPS system will be almost, but not quite,
+ready; it still needs human interaction to turn on.</p>
+<p>Each GPS computer needs to have a startup script containing its own X, Y, and
+Z coordinates hardcoded in the script.</p>
+<div class="section" id="in-range">
+<h3>In Range<a class="headerlink" href="#in-range" title="Permalink to this headline">¶</a></h3>
+<p>If you&#8217;re in range of another GPS system, the human interaction is pretty
+easy.  Each computer is next to a disk drive that&#8217;s loaded with the correct
+startup script, containing the correct coordinates.  You just have to get up
+to each computer, copy that startup script off the disk, and run it:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; copy disk/startup .
+&gt; startup
+</pre></div>
+</div>
+</div>
+<div class="section" id="out-of-range">
+<h3>Out Of Range<a class="headerlink" href="#out-of-range" title="Permalink to this headline">¶</a></h3>
+<p>If you&#8217;re <em>not</em> in range of another GPS system, the turtle that built this
+current system had no way of creating the correct startup files, so you&#8217;re
+going to need to create them yourself.</p>
+<p>Get up to the newly-created computers, and for each one:</p>
+<ul class="simple">
+<li>Figure out its X, Y, Z coordinates (use F3)</li>
+<li>Download the startup script template: <code class="docutils literal"><span class="pre">&gt;</span> <span class="pre">pastebin</span> <span class="pre">get</span> <span class="pre">DkS2Evw3</span> <span class="pre">startup</span></code></li>
+<li>Edit the startup script; enter the X, Y, Z coordinates into the script.</li>
+<li>Run the script: <code class="docutils literal"><span class="pre">&gt;</span> <span class="pre">startup</span></code></li>
+</ul>
+</div>
+</div>
+<div class="section" id="server-restarts">
+<h2>Server Restarts<a class="headerlink" href="#server-restarts" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">startup</span></code> scripts on each machine automatically run when the machine
+reboots.  However, computers appear not to turn on automatically when the
+server is stopped and then restarted.</p>
+<p>If your established GPS system suddenly stops working, go up to the four
+computers that make up the system and right-click on each one.  This will
+start the computer and run its startup script.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="reds.html" class="btn btn-neutral float-right" title="Reds (Script)" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="harvest_wheat.html" class="btn btn-neutral" title="Harvest Wheat" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Jonathan Barton.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../static/jquery.js"></script>
+      <script type="text/javascript" src="../../static/underscore.js"></script>
+      <script type="text/javascript" src="../../static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -30,6 +30,19 @@ TBD {{{{
 
 
 
+    place_gps()
+        Hey doofus - stop using the move module for this.  The whole point of 
+        the exercise is that we haven't got a GPS system set up yet.
+
+        Holy fucking shit I'm a moron.  The entire deal with the startup 
+        script and disks requires that I'm already in-range of a GPS system.
+
+        I guess that's not out of the question -- we set up the first system 
+        the hard way, then additional systems can be set up just in-range of 
+        the old system, extending its range.
+
+
+
     - Turtles _can_ place items in midair.  I could write code to have a 
       turtle place the four GPS satellite computers.
         - Can I get the placing turtle to transmit the correct startup script 

@@ -1,12 +1,9 @@
 #!/usr/bin/env lua
 
-local foo = {'on', 'two', 'three'}
+local foo, bar, baz
 
-print(#foo)
+bar = 3
 
-for k,v in ipairs(foo) do
-    print(v)
-end
-
+print(bar)
 
  -- vim: syntax=lua ts=2 sw=2
