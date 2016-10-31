@@ -68,10 +68,12 @@ function check_inv()
         - 4 floppies
 
 
-    Drives and modesm both show as "CC-Peripheral", but modem can be equipped, 
-    while dd cannot.  If you equip the modem on the right, then do
-        print( peripheral.getType('right') )
-    ...you get "modem".
+    d = turtle.getItemDetail()
+    d.name for both drives and modems is "CC-Peripheral".
+    But d.damage shows 1 for the modem and 0 for the drive.  Which is fucking 
+    ridiculous, but there is a difference.
+
+
 
     So:
         - cnt = turtle.getItemCount( inv.find('ComputerCraft:CC-Computer') )
