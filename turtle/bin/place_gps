@@ -32,10 +32,14 @@ end
   CHECK totally untested.
 --]]
 function set_peripherals(coords_vec)
-  strafe_l()
+  strafe_l(2)
+  turtle.forward()
+  turtle.turnRight()
   turtle.select( inv.find_ccper_slot("modem") )
   turtle.place()
-  strafe_r(2)
+  turtle.turnLeft()
+  turtle.back()
+  strafe_r(3)
   turtle.select( inv.find_ccper_slot("drive") )
   turtle.place()
   turtle.select( inv.find("ComputerCraft:disk") )

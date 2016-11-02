@@ -29,6 +29,7 @@ local c = vector.new( gps.locate(2) )
 settings.set(name .. '_x', c.x)
 settings.set(name .. '_y', c.y)
 settings.set(name .. '_z', c.z)
+settings.set(name .. '_vec', c)
 
 print("Home point '"..name.."' has been set!")
 

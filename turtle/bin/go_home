@@ -5,9 +5,35 @@
 --]]
 
 os.loadAPI("lib/move")
-local args    = {...}
-local highest = args[1] or 100
-move.go_home(highest)
+local args   = {...}
+local height = args[1] or 100
+local name   = args[2] or 'home'
+
+function die_usage()
+    print("---------------------------------------")
+    print("bin/go_home [height] [, name]")
+    print("")
+    print("Send the turtle to its home spot (set")
+    print("with bin/set_home).  ")
+    print("")
+    print("height - how high to fly up first.")
+    print("  Defaults to 100.")
+    print("name - which home to go to.  Defaults")
+    print("  to 'home'.")
+    print("---------------------------------------")
+end
+
+if height == "-h" then
+    die_usage()
+    return
+end
+
+if move.has_home(name) then
+    move.go_home(height, name)
+else
+    error("You don't have a home named "..name..".  Set one using bin/set_home.")
+    return
+end
 
  -- vim: syntax=lua
 

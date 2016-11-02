@@ -3,7 +3,7 @@
 
 os.loadAPI("lib/settings")
 
-local x, y, z  = nil, nil, nil
+local loc      = vector.new()
 local facing   = nil
 local cardinal = {
     ['n'] = { ['right'] = 'e', ['left'] = 'w', ['around'] = 's' },
@@ -15,16 +15,19 @@ local cardinal = {
 
 function init()
   if not test_gps() then return false end
-  local c = vector.new( gps.locate(2) )
-  if (not c.x or not c.y or not c.z) then error("GPS System is off!") end
-  local d = d()
+  loc = vector.new( gps.locate(2) )
+  if (not loc.x or not loc.y or not loc.z) then error("GPS System is off!") end
+  if not d() then
+    error("GPS is not on!")
+    return false
+  end
   sleep(0.5)
   return true
 end
 
-function get_x() return x end
-function get_y() return y end
-function get_z() return z end
+function get_x() return loc.x end
+function get_y() return loc.y end
+function get_z() return loc.z end
 
 function a()
   facing = cardinal[facing]['around']
@@ -81,11 +84,12 @@ function d()
 end
 
 function find_direction()
-  local start  = vector.new( gps.locate(2) )
-  local finish = vector.new() -- 'end' is a reserved word.
-  local turns  = 0
+  local start   = vector.new( gps.locate(2) )
+  local finish  = vector.new()
+  local got_dir = false
+  local turns   = 0
 
-  while not finish.x do
+  while not got_dir do
     plot_blocked, data = turtle.inspect()
     if (plot_blocked and (data.name ~= 'minecraft:water' and data.name ~= 'minecraft:flowing_water' and data.name ~= "minecraft:lava" and data.name ~= "minecraft:flowing_lava") ) then
       turtle.turnRight()
@@ -96,7 +100,8 @@ function find_direction()
       end
     else
       if not turtle.forward() then error("I should have been able to move forward but I could not.") end
-      local finish = vector.new( gps.locate(2) )
+      finish = vector.new( gps.locate(2) )
+      got_dir = true
       turtle.back()
     end
   end
@@ -120,13 +125,13 @@ end
 function go_home(height, name)
   local height = height or 100           -- a reasonable wag
   local name   = name or 'home'
-  local hx     = settings.get(name .. '_x')
-  local hy     = settings.get(name .. '_y')
-  local hz     = settings.get(name .. '_z')
   if not has_home(name) then
       error("You must run bin/set_home first.")
       return false
   end
+  local hx     = settings.get(name .. '_x')
+  local hy     = settings.get(name .. '_y')
+  local hz     = settings.get(name .. '_z')
   goto(hx, hy, hz, height)
   return true
 end
@@ -190,8 +195,8 @@ end
 
 function up(cnt,force)
 	local cnt   = cnt or 1
-    local force = force or false
-    local wait  = 0
+  local force = force or false
+  local wait  = 0
 	for i=1,cnt do
         while not turtle.up() do
             if wait == 5 then
@@ -205,7 +210,7 @@ function up(cnt,force)
             wait = wait + 1
             --sleep(1)
 		end
-    y = y + 1
+    loc.y = loc.y + 1
     end
 	return cnt
 end
@@ -227,7 +232,7 @@ function dn(cnt,force)
             --sleep(1)
 		end
     end
-    y = y - 1
+    loc.y = loc.y - 1
 	return cnt
 end
 function fd(cnt,force)
@@ -248,10 +253,10 @@ function fd(cnt,force)
             --sleep(0.25)
 		end
     end
-    if facing == 'n' then z = z-1
-        elseif facing == 'e' then x = x+1
-        elseif facing == 's' then z = z+1
-        elseif facing == 'w' then x = x-1
+    if facing == 'n' then loc.z = loc.z-1
+        elseif facing == 'e' then loc.x = loc.x+1
+        elseif facing == 's' then loc.z = loc.z+1
+        elseif facing == 'w' then loc.x = loc.x-1
     end
 	return cnt
 end
@@ -275,10 +280,10 @@ function bk(cnt,force)
             --sleep(1)
     	end
     end
-    if facing == 'n' then z = z+1
-        elseif facing == 'e' then x = x-1
-        elseif facing == 's' then z = z-1
-        elseif facing == 'w' then x = x+1
+    if facing == 'n' then loc.z = loc.z+1
+        elseif facing == 'e' then loc.x = loc.x-1
+        elseif facing == 's' then loc.z = loc.z-1
+        elseif facing == 'w' then loc.x = loc.x+1
     end
 	return cnt
 end
@@ -289,34 +294,35 @@ function strafe_l(cnt,force) l() fd(cnt, force) r() end
 function gotoX(toX,force)
     if toX == nil then error("No coordinate specified.",2) end
     local force = force or false
-    if x < toX then face_e() else face_w() end
-    while x ~= toX do fd(1,force) end
+    if loc.x < toX then face_e() else face_w() end
+    while loc.x ~= toX do fd(1,force) end
 end
 function gotoY(toY,force)
   toY = tonumber(toY)
   if toY == nil then error("No coordinate specified.",2) end
   local force = force or false
-  if y < toY then move = up elseif y > toY then move = dn end
-	while y ~= toY do move(1,force) end
+  if loc.y < toY then move = up elseif loc.y > toY then move = dn end
+  while loc.y ~= toY do move(1,force) end
 end
 function gotoZ(toZ,force)
     if toZ == nil then error("No coordinate specified.",2) end
     local force = force or false
-    if z < toZ then face_s() else face_n() end
-    while z ~= toZ do fd(1, force) end
+    if loc.z < toZ then face_s() else face_n() end
+    while loc.z ~= toZ do fd(1, force) end
 end
 function goto(toX, toY, toZ, height, force)
-    local toX = toX or x
-    local toY = toY or y
-    local toZ = toZ or z
     if height then gotoY(height, true) end
     gotoX(toX, force)
     gotoZ(toZ, force)
     gotoY(toY, force)
 end
 
+-- 230 72 -176
 
 
-init()
+if not init() then
+  error("We're out of GPS range!")
+  return
+end
 
  -- vim: syntax=lua ts=2 sw=2
