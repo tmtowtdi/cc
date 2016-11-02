@@ -1,7 +1,7 @@
 
 -- Search on CHECK
 
---place_gps TuerqNSi 1478124649 TuerqNSi 1478124440 TuerqNSi 1478122223 TuerqNSi 1478121414 TuerqNSi 1478120858 TuerqNSi
+--place_gps TuerqNSi 1478129818
 
 os.loadAPI("lib/inv")
 
@@ -39,8 +39,9 @@ function set_peripherals(coords_vec)
   turtle.place()
   turtle.turnLeft()
   turtle.back()
-  strafe_r(3)
+  strafe_r(2)
   if has_gps then
+    strafe_r()
     turtle.select( inv.find_ccper_slot("drive") )
     turtle.place()
     turtle.select( inv.find("ComputerCraft:disk") )
@@ -49,9 +50,8 @@ function set_peripherals(coords_vec)
     -- CHECK I'm assuming we're adjacent to the drive we just placed so we 
     -- should be able to access it.
     write_startup_file("disk/startup", coords_vec)
+    strafe_l()
   end
-
-  strafe_l()
 end
 
 function place_gps()
@@ -170,6 +170,7 @@ place_gps()
 
 print("Returning home again.")
 for i=1,height do turtle.down() end   -- fly back down to start
+turtle.turnLeft()                     -- face original direction
 
 
 --[[
@@ -201,6 +202,17 @@ else
   print("be on.")
 end
 print("---------------------------------------")
+
+
+bott
+  E 338 7 377
+  W 332 7 377
+
+top
+  N 335 10 374
+  S 335 10 380
+
+
 --]]
 
 

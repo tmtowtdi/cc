@@ -1,5 +1,5 @@
 
---settings nqQjpWVX 1478125391 nqQjpWVX 1478124649 nqQjpWVX 1478124440 nqQjpWVX 1478122223 nqQjpWVX 1478121414 nqQjpWVX 1478120858
+--settings nqQjpWVX 1478129818
 
 local fp     = "etc/settings"
 local cooked = {}

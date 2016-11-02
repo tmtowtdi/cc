@@ -20,15 +20,26 @@ TBD {{{{
             consolidate()
     }}}}
 
+    - bin/place_gps is properly setting up the GPS system, with modems, when 
+      there's not already a gps system in range.
+
     - Make sure ALL APIs return true on success, false on failure.
+
+    - ABSOLUTELY DO NOT NOT NOT GIVE ALL FOUR GPS MACHINES THE SAME LABEL
+        - That will duplicate their code - they become symlinks of each other.  
+          They'll all end up with the same coords in their startups.
+        - You could label them all "GPS", then do the "pastebin get" on one of 
+          them to pull the startup template.  That would put that same 
+          template on all four machines.  But then you'd have to re-label each 
+          one and it's probably not worth the trouble.
 
     - I'm starting to decide that there are GPS satellite machines, and then 
       there's everything else.  Computers and turtles will get the same code 
       -- keeping it separate is too much of a pain.
 
-      So scripts that are turtle-only should start out with some sort of 
-      sanity-check to ensure that the machine in question is actually a 
-      turtle, and not a computer.  I'm not sure how to do that.
+        So scripts that are turtle-only should start out with some sort of 
+        sanity-check to ensure that the machine in question is actually a 
+        turtle, and not a computer.  I'm not sure how to do that.
 
     - Add a die_usage() to all bin/ scripts.  See bin/go_home for eg.
 

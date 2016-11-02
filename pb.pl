@@ -57,15 +57,13 @@ foreach my $path(keys %scripts) {
     my $content = read_text($path);
     my $bn = basename($path);
     $content =~ s/^
-        --\s?
-        $bp
-        [^\n]*
-    /--$bn $hash $update/xsm;
+                    --\s?  $bn  .*
+                $/--$bn $hash $update/xm;    # no 's'!
     write_text($path, $content);
 
     my $paste   = WWW::Pastebin::Paste->new({ hash => $hash });
     $paste->edit($account, $content);
-    say "Updated $bp.";
+    say "Updated $bn.";
 }
 say "\nUpdate time for all is $update.";
 

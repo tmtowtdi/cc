@@ -1,5 +1,5 @@
 
---get_script pzEBgR8k 1478125391 pzEBgR8k 1478124649 pzEBgR8k 1478124440 pzEBgR8k 1478122223 pzEBgR8k 1478121414 pzEBgR8k 1478120858 pzEBgR8k
+--get_script pzEBgR8k 1478129818
 
 function die_usage()
     print("get_script <local file path> <pastebin hash>")
