@@ -1,7 +1,7 @@
 
 -- Search on CHECK
 
---place_gps TuerqNSi 1478125391 TuerqNSi 1478124649 TuerqNSi 1478124440 TuerqNSi 1478122223 TuerqNSi 1478121414 TuerqNSi 1478120858 TuerqNSi
+--place_gps TuerqNSi 1478124649 TuerqNSi 1478124440 TuerqNSi 1478122223 TuerqNSi 1478121414 TuerqNSi 1478120858 TuerqNSi
 
 os.loadAPI("lib/inv")
 
@@ -40,16 +40,16 @@ function set_peripherals(coords_vec)
   turtle.turnLeft()
   turtle.back()
   strafe_r(3)
-  turtle.select( inv.find_ccper_slot("drive") )
-  turtle.place()
-  turtle.select( inv.find("ComputerCraft:disk") )
-
-  -- CHECK does this put the disk in the drive?  Should but untested.
-  turtle.place()  
-
-  -- CHECK I'm assuming we're adjacent to the drive we just placed so we 
-  -- should be able to access it.
-  write_startup_file("disk/startup", coords_vec)
+  if has_gps then
+    turtle.select( inv.find_ccper_slot("drive") )
+    turtle.place()
+    turtle.select( inv.find("ComputerCraft:disk") )
+    -- CHECK does this put the disk in the drive?  Should but untested.
+    turtle.place()  
+    -- CHECK I'm assuming we're adjacent to the drive we just placed so we 
+    -- should be able to access it.
+    write_startup_file("disk/startup", coords_vec)
+  end
 
   strafe_l()
 end
@@ -59,20 +59,22 @@ function place_gps()
 
   -- Bottom row 1
   for i = 1,3 do turtle.forward() end
+  local bot_e = vector.new()
   if has_gps then bot_e = vector.new( gps.locate(2) ) end
   turtle.back()
   turtle.select( inv.find("ComputerCraft:CC-Computer") )
   turtle.place()
-  if bot_e then set_peripherals(bot_e) end
+  set_peripherals(bot_e)
 
   -- Bottom row 2
   for i = 1,2 do turtle.turnRight() end
   for i = 1,5 do turtle.forward() end
+  local bot_w = vector.new()
   if has_gps then bot_w = vector.new( gps.locate(2) ) end
   turtle.back()
   turtle.select( inv.find("ComputerCraft:CC-Computer") )
   turtle.place()
-  if bot_w then set_peripherals(bot_w) end
+  set_peripherals(bot_w)
 
   for i=1,2 do turtle.back() end    -- Back to center
   for i=1,3 do turtle.up() end      -- Up to top row
@@ -80,20 +82,22 @@ function place_gps()
   -- Top row 1
   turtle.turnRight()
   for i = 1,3 do turtle.forward() end
+  local bot_n = vector.new()
   if has_gps then top_n = vector.new( gps.locate(2) ) end
   turtle.back()
   turtle.select( inv.find("ComputerCraft:CC-Computer") )
   turtle.place()
-  if top_n then set_peripherals(top_n) end
+  set_peripherals(bot_n)
 
   -- Top row 2
   for i = 1,2 do turtle.turnRight() end
   for i = 1,5 do turtle.forward() end
+  local bot_s = vector.new()
   if has_gps then top_s = vector.new( gps.locate(2) ) end
   turtle.back()
   turtle.select( inv.find("ComputerCraft:CC-Computer") )
   turtle.place()
-  if top_s then set_peripherals(top_s) end
+  set_peripherals(bot_s)
 
   for i = 1,2 do turtle.back() end  -- Back to center
   for i=1,3 do turtle.down() end    -- Back to start point

@@ -55,8 +55,12 @@ foreach my $path(keys %scripts) {
     my $hash    = $scripts{$path};
 
     my $content = read_text($path);
-    my $bp = basename($path);
-    $content =~ s/^--\s?$bp/--$bp $hash $update/sm;
+    my $bn = basename($path);
+    $content =~ s/^
+        --\s?
+        $bp
+        [^\n]*
+    /--$bn $hash $update/xsm;
     write_text($path, $content);
 
     my $paste   = WWW::Pastebin::Paste->new({ hash => $hash });
