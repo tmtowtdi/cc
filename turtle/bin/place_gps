@@ -1,7 +1,7 @@
 
 -- Search on CHECK
 
---place_gps TuerqNSi
+--place_gps TuerqNSi 1478125391 TuerqNSi 1478124649 TuerqNSi 1478124440 TuerqNSi 1478122223 TuerqNSi 1478121414 TuerqNSi 1478120858 TuerqNSi
 
 os.loadAPI("lib/inv")
 
@@ -74,8 +74,8 @@ function place_gps()
   turtle.place()
   if bot_w then set_peripherals(bot_w) end
 
-  turtle.bk(2)    -- Back to center
-  turtle.up(3)    -- Up to top row
+  for i=1,2 do turtle.back() end    -- Back to center
+  for i=1,3 do turtle.up() end      -- Up to top row
 
   -- Top row 1
   turtle.turnRight()
@@ -95,7 +95,8 @@ function place_gps()
   turtle.place()
   if top_s then set_peripherals(top_s) end
 
-  for i = 1,2 do turtle.back() end -- Back to center
+  for i = 1,2 do turtle.back() end  -- Back to center
+  for i=1,3 do turtle.down() end    -- Back to start point
   return true
 end
 
@@ -145,8 +146,8 @@ end
 
 
 -- Main
-local s = vector.new( gps.locate(2) )
-if s.x then
+local x,y,z = gps.locate(2) 
+if x and y and z then
   print("We're in range of a GPS system.")
   has_gps = true
 else
@@ -166,6 +167,8 @@ place_gps()
 print("Returning home again.")
 for i=1,height do turtle.down() end   -- fly back down to start
 
+
+--[[
 print("---------------------------------------")
 if has_gps then
   print("Your new GPS system is in place.  Fly")
@@ -194,6 +197,7 @@ else
   print("be on.")
 end
 print("---------------------------------------")
+--]]
 
 
  -- vim: syntax=lua ts=2 sw=2

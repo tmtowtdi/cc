@@ -1,5 +1,5 @@
 
---move rpdxDz77
+--move rpdxDz77 1478125391 rpdxDz77 1478124649 rpdxDz77 1478124440 rpdxDz77 1478122223 rpdxDz77 1478121414 rpdxDz77 1478120858 rpdxDz77
 
 os.loadAPI("lib/settings")
 
@@ -15,13 +15,8 @@ local cardinal = {
 
 function init()
   if not test_gps() then return false end
-  loc = vector.new( gps.locate(2) )
-  if (not loc.x or not loc.y or not loc.z) then error("GPS System is off!") end
-  if not d() then
-    error("GPS is not on!")
-    return false
-  end
-  sleep(0.5)
+  if not find_direction() then return false end
+  sleep(0.25)
   return true
 end
 
@@ -77,6 +72,7 @@ end
 
 function d()
   if not facing then
+    -- This _should_ never hit.
     if not test_gps() then return false end
     facing = find_direction()
   end
@@ -118,8 +114,9 @@ function find_direction()
 end
 
 function test_gps()
-  local t = vector.new( gps.locate(2) )
-  if t.x then return true else return false end
+  -- DO NOT use a vector for this.
+  local x, y, z = gps.locate(2)
+  if x and y and z then return true else return false end
 end
 
 function go_home(height, name)
@@ -322,7 +319,7 @@ end
 
 if not init() then
   error("We're out of GPS range!")
-  return
+  return false
 end
 
  -- vim: syntax=lua ts=2 sw=2

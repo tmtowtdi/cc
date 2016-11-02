@@ -1,22 +1,5 @@
 
---set_home
-
---[[
-  Place the turtle and run this to 
-  create etc/home, which will contain 
-  the coords of his "home" spot.
-
-  move.go_home() will take him back to 
-  that spot.
-
-  Set home point, save its coords as 
-  "home_x", "home_y", "home_z":
-    > bin/find_home
-
-  Set home point, save its coords as 
-  "other_x", "other_y", "other_z":
-    > bin/find_home other
---]]
+--set_home N30TvHE7 1478125391 N30TvHE7 1478124649 N30TvHE7 1478124440 N30TvHE7 1478122223 N30TvHE7 1478121414 N30TvHE7 1478120858
 
 os.loadAPI("lib/move")
 os.loadAPI("lib/settings")

@@ -10,7 +10,7 @@ no warnings qw(experimental::signatures);
 
 use lib 'lib';
 use File::Basename;
-use File::Slurper qw(read_text);
+use File::Slurper qw(read_text write_text);
 use FindBin;
 use JSON;
 use WWW::Pastebin::Account;
@@ -50,11 +50,18 @@ my $account = WWW::Pastebin::Account->new({
 });
 $account->login();
 
+my $update = time();
 foreach my $path(keys %scripts) {
     my $hash    = $scripts{$path};
+
     my $content = read_text($path);
+    my $bp = basename($path);
+    $content =~ s/^--\s?$bp/--$bp $hash $update/sm;
+    write_text($path, $content);
+
     my $paste   = WWW::Pastebin::Paste->new({ hash => $hash });
     $paste->edit($account, $content);
-    say "Updated " . basename($path) . ".";
+    say "Updated $bp.";
 }
+say "\nUpdate time for all is $update.";
 

@@ -8,7 +8,7 @@ APIs
 
 All APIs can be imported into any script with::
 
-    os.loadAPI("lib/APINAME")
+    if not os.loadAPI("lib/APINAME") then return end
     
 
 .. toctree::

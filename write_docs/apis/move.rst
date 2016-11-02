@@ -16,9 +16,17 @@ coordinates each time a movement method is used.
 This means that you must use *only* movement methods from the ``move`` api, or 
 it will end up thinking it's in one place but really be somewhere else.
 
-When the API is first loaded, it will attempt to determine what direction  
-turtle is currently facing.  The only way for that to happen is for the turtle 
-to move.  If the turtle is surrounded on all sides, this will fail.
+Prerequisites
+~~~~~~~~~~~~~
+
+This API requires that the turtle be in-range of an active GPS system, so when 
+it's first loaded, it will test for that GPS system.  Next, the API needs to 
+start out knowing which direction the turtle is facing.  To do this, the 
+turtle needs at least one horizontal slot next to it open, because it needs to 
+move to figure out its direction.
+
+If no GPS system is available, or the turtle cannot move, loading this API 
+will cause a fatal error.
 
 - :ref:`move_synopsis`
 - :ref:`move_methods`

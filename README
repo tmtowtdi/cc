@@ -20,17 +20,20 @@ TBD {{{{
             consolidate()
     }}}}
 
-    I'm starting to decide that there are GPS satellite machines, and then 
-    there's everything else.  Computers and turtles will get the same code -- 
-    keeping it separate is too much of a pain.
+    - Make sure ALL APIs return true on success, false on failure.
 
-    So scripts that are turtle-only should start out with some sort of 
-    sanity-check to ensure that the machine in question is actually a turtle, 
-    and not a computer.  I'm not sure how to do that.
+    - I'm starting to decide that there are GPS satellite machines, and then 
+      there's everything else.  Computers and turtles will get the same code 
+      -- keeping it separate is too much of a pain.
 
+      So scripts that are turtle-only should start out with some sort of 
+      sanity-check to ensure that the machine in question is actually a 
+      turtle, and not a computer.  I'm not sure how to do that.
 
+    - Add a die_usage() to all bin/ scripts.  See bin/go_home for eg.
 
-    Add a die_usage() to all bin/ scripts.  See bin/go_home for eg.
+    - Add 'bin/vers', which just prints out the current version (the epoch 
+      created by pb.pl)
 
 
 
@@ -152,7 +155,17 @@ pb.pl and Pastebin API {#{{{
         
         pb.pl updates all of my pastes on pastebin.com.  Just run the script 
         any time you make an edit here.
-    
+
+        It looks for a comment at the top of the script like this:
+                    --scriptnameANY OTHER TEXT CAN FOLLOW
+                    -- scriptnameANY OTHER TEXT CAN FOLLOW
+            If it finds such a comment, it changes that line to:
+                    --scriptname pastebin_hash_value epoch
+            This is to make it easier for you to tell, in-game, that you've 
+            actually downloaded the latest version (check the epoch value) 
+            after you've run bin/get_all.
+
+        
         If you create a new script or lib to add, first create it manually on 
         pastebin.com, then edit pb.pl following the existing examples.  From 
         then on, all calls to pb.pl will update your new script.
