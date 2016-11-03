@@ -1,7 +1,7 @@
 
 --move rpdxDz77 1478155922
 
-os.loadAPI("lib/settings")
+if not os.loadAPI("lib/settings") then return end
 
 local loc      = vector.new()
 local facing   = nil

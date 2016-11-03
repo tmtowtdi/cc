@@ -1,8 +1,8 @@
 
 --harvest G1u3NJE1 1478155922
 
-os.loadAPI("lib/inv")
-os.loadAPI("lib/move")
+if not os.loadAPI("lib/inv") then return end
+if not os.loadAPI("lib/move") then return end
 
 --[[
   For harvesting villager farms, which consist of two or more column-pairs of 
