@@ -9,16 +9,32 @@
     etc
 --]]
 
+if not os.loadAPI("lib/reds") then return end
 
-os.loadAPI("lib/reds")
+local args   = {...}
+function die_usage()
+    print("---------------------------------------")
+    print("bin/reds [ARGS]")
+    print("")
+    print("Run any function in lib/reds as a")
+    print("command.")
+    print("")
+    print("ARGS - Whatever arguments are required")
+    print("  by the function/command being run.")
+    print("---------------------------------------")
+end
+if args[1] == "-h" then
+    die_usage()
+    return
+end
+
 
 -- Great googly-moogly this whole thing is hideous.
-local origargs = {...}
-local cmd      = origargs[1]
+local cmd      = args[1]
 local passargs = {}
 
 -- Wrap all args in quotes, then join them into a single string
-for i = 2,#origargs do table.insert(passargs, '"'..origargs[i]..'"') end
+for i = 2,#args do table.insert(passargs, '"'..args[i]..'"') end
 local argstr = table.concat(passargs, ',')
 
 -- Build the command and eval it.

@@ -1,11 +1,24 @@
 
--- Search on CHECK
-
 --place_gps TuerqNSi 1478155922
 
-os.loadAPI("lib/inv")
+if not os.loadAPI("lib/inv") then return end
 
-local args    = {...}
+local args   = {...}
+function die_usage()
+    print("---------------------------------------")
+    print("bin/place_gps [height]")
+    print("")
+    print("Set up a GPS system.")
+    print("")
+    print("height - how high to fly up first.")
+    print("  Defaults to 140.")
+    print("---------------------------------------")
+end
+if args[1] == "-h" then
+    die_usage()
+    return
+end
+
 local height  = args[1] or 140
 local has_gps = false
 
@@ -23,14 +36,6 @@ function strafe_l(num)
  turtle.turnRight()
 end
 
---[[
-  Assumes you've just placed a computer, which is in front of you.
-  Places a modem on the machine's left, and a disk drive on its right, 
-  then inserts a disk into the drive, and creates a startup file on 
-  the disk.
-  Turtle ends up back at its starting position
-  CHECK totally untested.
---]]
 function set_peripherals(coords_vec)
   strafe_l(2)
   turtle.forward()

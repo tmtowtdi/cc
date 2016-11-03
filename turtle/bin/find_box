@@ -1,27 +1,28 @@
 
 --find_box x1kHs0v3 1478155922
 
---[[
-  Put the turtle down right next to a 
-  chest, then run this.  It will find 
-  the cooords of the box and write them 
-  to "etc/box.txt".
-
-  Find an adjacent box, save its coords 
-  as "box_x", "box_y", "box_z":
-    > bin/find_box
-
-  Find an adjacent box, save its coords 
-  as "other_x", "other_y", "other_z":
-    > bin/find_box other
-
---]]
-
 os.loadAPI("lib/move")
 os.loadAPI("lib/settings")
 
 local args = {...}
 local name = args[1] or 'box'
+
+function die_usage()
+    print("---------------------------------------")
+    print("bin/find_box [name]")
+    print("")
+    print("Find a chest next to the turtle and")
+    print("remember its location  ")
+    print("")
+    print("name - how we refer to this box.")
+    print("  Defaults to 'box'.")
+    print("---------------------------------------")
+end
+
+if name == "-h" then
+    die_usage()
+    return
+end
 
 if not move.test_gps() then error("GPS system is down!") end
 local c = vector.new( gps.locate(2) )
@@ -56,10 +57,5 @@ else
 end
 
 
- -- vim: syntax=lua
-
-
-223, 69, -161
-
-
+ -- vim: syntax=lua ts=2 sw=2
 

@@ -1,10 +1,26 @@
 
 --set_home N30TvHE7 1478155922
 
-os.loadAPI("lib/move")
-os.loadAPI("lib/settings")
+local args   = {...}
+function die_usage()
+    print("---------------------------------------")
+    print("bin/set_home [name]")
+    print("")
+    print("Record the turtle's current location")
+    print("as its 'home' spot.")
+    print("")
+    print("name - What to call this spot.")
+    print("  Defaults to 'home'.")
+    print("---------------------------------------")
+end
+if args[1] == "-h" then
+    die_usage()
+    return
+end
 
-local args = {...}
+if not os.loadAPI("lib/move") then return end
+if not os.loadAPI("lib/settings") then return end
+
 local name = args[1] or 'home'
 
 if not move.test_gps() then error("GPS system is down!") end
@@ -16,5 +32,4 @@ settings.set(name .. '_vec', c)
 
 print("Home point '"..name.."' has been set!")
 
- -- vim: syntax=lua
-
+ -- vim: syntax=lua ts=2 sw=2

@@ -34,10 +34,28 @@
     started again.
 --]]
 
-os.loadAPI("lib/move")
-os.loadAPI("lib/harvest")
+local args   = {...}
+function die_usage()
+    print("---------------------------------------")
+    print("bin/harvest_wheat [cols] [, rows]")
+    print("")
+    print("Harvest double-columns of wheat, as")
+    print("found in villager farms")
+    print("")
+    print("cols - Number of double-columns.")
+    print("  Defaults to 2.")
+    print("rows - Number of rows per column.")
+    print("  Defaults to 7.")
+    print("---------------------------------------")
+end
+if args[1] == "-h" then
+    die_usage()
+    return
+end
 
-local args = {...}
+if not os.loadAPI("lib/move") then return end
+if not os.loadAPI("lib/harvest") then return end
+
 local cols = args[1] or 2
 local rows = args[2] or 7
 
@@ -83,4 +101,4 @@ while true do
     end
 end
 
- -- vim: syntax=lua
+ -- vim: syntax=lua ts=2 sw=2

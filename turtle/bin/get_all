@@ -1,6 +1,20 @@
 
 --get_all DmEhcUVa 1478155922
 
+local args = {...}
+function die_usage()
+    print("---------------------------------------")
+    print("bin/get_all")
+    print("")
+    print("Updates all TMT Utilities code to the")
+    print("latest version.")
+    print("---------------------------------------")
+end
+if args[1] == "-h" then
+    die_usage()
+    return
+end
+
 -- Do not include the install script here.
 local files = {
     ["bin/dig_cube"]      = '2DRzRAR3',

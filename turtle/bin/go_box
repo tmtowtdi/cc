@@ -8,12 +8,30 @@
     > bin/go_box 100
 --]]
 
-os.loadAPI("lib/move")
-local args    = {...}
+local args   = {...}
+function die_usage()
+    print("---------------------------------------")
+    print("bin/go_box [height] [, name]")
+    print("")
+    print("Send the turtle to one block above a")
+    print("named box (set with bin/find_box).")
+    print("")
+    print("height - how high to fly up first.")
+    print("  Defaults to 100.")
+    print("name - which box to go to.  Defaults")
+    print("  to 'box'.")
+    print("---------------------------------------")
+end
+if args[1] == "-h" then
+    die_usage()
+    return
+end
+
+if not os.loadAPI("lib/move") then return end
 local highest = args[1] or 100
 local name    = args[2] or 'box'
 move.return_to_box(highest, name)
 move.dump_inv("dn")
 
- -- vim: syntax=lua
+ -- vim: syntax=lua ts=2 sw=2
 

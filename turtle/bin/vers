@@ -3,6 +3,22 @@
 
 local version = "12345"
 
+local args   = {...}
+function die_usage()
+    print("---------------------------------------")
+    print("bin/vers")
+    print("")
+    print("Get the version of TMT Utilities")
+    print("currently installed.")
+    print("---------------------------------------")
+end
+if args[1] == "-h" then
+    die_usage()
+    return
+end
+
 --print("---------------------------------------")
 print("TMT ComputerCraft Utilities")
 print("Version " .. version)
+
+ -- vim: syntax=lua ts=2 sw=2

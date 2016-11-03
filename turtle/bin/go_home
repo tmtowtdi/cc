@@ -1,10 +1,6 @@
 --go_home nCp8t5Q1 1478155922
 
---[[
-  Returns to your set home spot.
---]]
-
-os.loadAPI("lib/move")
+if not os.loadAPI("lib/move") then return end
 local args   = {...}
 local height = args[1] or 100
 local name   = args[2] or 'home'
@@ -35,5 +31,4 @@ else
     return
 end
 
- -- vim: syntax=lua
-
+ -- vim: syntax=lua ts=2 sw=2

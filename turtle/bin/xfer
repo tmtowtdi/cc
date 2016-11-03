@@ -1,9 +1,28 @@
 
 --xfer cLpwQi38 1478155922
 
-os.loadAPI("lib/move")
 
-local args       = {...}
+local args   = {...}
+function die_usage()
+    print("---------------------------------------")
+    print("bin/xfer [wait] [,high], [,src] [,trgt]")
+    print("")
+    print("Transfer items from src to trgt chest.")
+    print("")
+    print("wait - Between loops.  Def. 300.")
+    print("high - Fly up this far.  Def. 70.")
+    print("src - Name of src box.  Def. 'src'.")
+    print("trgt - Name of trgt box.")
+    print("  Def. 'target'.")
+    print("---------------------------------------")
+end
+if args[1] == "-h" then
+    die_usage()
+    return
+end
+
+if not os.loadAPI("lib/move") then return end
+
 local wait_time  = tonumber(args[1]) or 300
 local highest    = tonumber(args[2]) or 70
 local src_box    = args[3] or 'src'

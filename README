@@ -45,8 +45,6 @@ TBD {{{{
         sanity-check to ensure that the machine in question is actually a 
         turtle, and not a computer.  I'm not sure how to do that.
 
-    - Add a die_usage() to all bin/ scripts.  See bin/go_home for eg.
-
 }}}}
 
 Building Documentation {#{{{

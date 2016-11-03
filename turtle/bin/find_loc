@@ -1,7 +1,22 @@
 
 --find_loc SEYF57X4 1478155922
 
-os.loadAPI("lib/move")
+if not os.loadAPI("lib/move") then return end
+
+local args   = {...}
+function die_usage()
+    print("---------------------------------------")
+    print("bin/find_loc")
+    print("")
+    print("Show the turtle's current GPS location.")
+    print("The turtle must be in range of a GPS")
+    print("system for this to work.")
+    print("---------------------------------------")
+end
+if args[1] == "-h" then
+    die_usage()
+    return
+end
 
 if not move.test_gps() then error("GPS system is down!") end
 local c = vector.new( gps.locate(2) )
@@ -18,4 +33,4 @@ print("        N         ")
 print("        -         ")
 print("X: "..c.x..", Y: "..c.y..", Z: "..c.z)
 
- -- vim: syntax=lua
+ -- vim: syntax=lua ts=2 sw=2

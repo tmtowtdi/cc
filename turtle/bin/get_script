@@ -1,16 +1,33 @@
 
 --get_script pzEBgR8k 1478155922
 
+local args = {...}
 function die_usage()
-    print("get_script <local file path> <pastebin hash>")
+    print("---------------------------------------")
+    print("bin/get_script PATH, HASH")
+    print("")
+    print("Update a specific TMT Utilities code")
+    print("file to the latest version.")
+    print("Normally users will use bin/get_all")
+    print("instead of this.")
+    print("")
+    print("path - the script or API to update.")
+    print("  Required.")
+    print("hash - The pastebin.com hash of the")
+    print("  script to update.  Required.")
+    print("---------------------------------------")
+end
+if string.len(args[2]) ~= 8 then
+    die_usage()
     return
 end
 
-local args = {...}
-if string.len(args[2]) ~= 8 then die_usage() end
-
 local fp   = args[1]
 local hash = args[2]
+if not fp or not hash then
+    error("PATH and HASH arguments both required.")
+    return false
+end
 
 if fs.exists(fp) then fs.delete(fp) end
 shell.run( "pastebin", "get", hash, fp )
