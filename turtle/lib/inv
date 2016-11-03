@@ -122,4 +122,6 @@ function name_is_fq(item_name)
   if string.find(item_name,':') then return true else return false end
 end
 
+return true
+
  -- vim: syntax=lua ts=2 sw=2

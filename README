@@ -27,8 +27,6 @@ TBD {{{{
           files and starting correctly without human interaction.
         - Fix docs on this script
 
-    - Make sure ALL APIs return true on success, false on failure.
-
     - ABSOLUTELY DO NOT NOT NOT GIVE ALL FOUR GPS MACHINES THE SAME LABEL
         - That will duplicate their code - they become symlinks of each other.  
           They'll all end up with the same coords in their startups.

@@ -322,4 +322,6 @@ if not init() then
   return false
 end
 
+return true
+
  -- vim: syntax=lua ts=2 sw=2

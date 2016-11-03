@@ -106,5 +106,7 @@ function harvest_villager_farm(colpairs, rows)
     move.r()
 end
 
+return true
+
 
  -- vim: syntax=lua

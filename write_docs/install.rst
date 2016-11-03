@@ -33,12 +33,11 @@ On a GPS Satellite
 A GPS satellite machine is usually just a regular computer, but you can use any 
 computer or turtle, as long as it has a modem attached.
 
-Get four such machines.  Label each one (all four can share the same label if 
-desired), then pull the startup script 
+Get four such machines.  Label each one, then download the startup script.
 
 .. code-block:: text
 
-    > label set GPS
+    > label set gps1
     > pastebin get DkS2Evw3 startup
 
 Place the machines per the diagram image in the `first post in this thread, by 

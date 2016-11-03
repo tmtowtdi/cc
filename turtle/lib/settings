@@ -19,6 +19,7 @@ function load(path)
   local path = path or fp
   ensure_file(path)
   local fh = fs.open(path, 'r')
+  if not fh then return false end
   local raw = fh.readAll()
   fh.close()
   cooked = textutils.unserialize(raw)
@@ -64,6 +65,6 @@ function getNames()
   return names
 end
 
-load()
+return load()
 
  -- vim: syntax=lua tw=39 ts=2 sw=2

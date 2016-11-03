@@ -80,5 +80,6 @@ function repeat_rcv(args)
   end
 end
 
+return true
 
  -- vim: syntax=lua ts=2 sw=2
