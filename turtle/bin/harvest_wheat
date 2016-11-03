@@ -34,19 +34,27 @@
     started again.
 --]]
 
+local rv = shell.run("turn", "left")
+if rv then
+  shell.run("turn", "right")
+else
+  error("This device is not a turtle.")
+  return false
+end
+
 local args   = {...}
 function die_usage()
-    print("---------------------------------------")
-    print("bin/harvest_wheat [cols] [, rows]")
-    print("")
-    print("Harvest double-columns of wheat, as")
-    print("found in villager farms")
-    print("")
-    print("cols - Number of double-columns.")
-    print("  Defaults to 2.")
-    print("rows - Number of rows per column.")
-    print("  Defaults to 7.")
-    print("---------------------------------------")
+  print("---------------------------------------")
+  print("bin/harvest_wheat [cols] [, rows]")
+  print("")
+  print("Harvest double-columns of wheat, as")
+  print("found in villager farms")
+  print("")
+  print("cols - Number of double-columns.")
+  print("  Defaults to 2.")
+  print("rows - Number of rows per column.")
+  print("  Defaults to 7.")
+  print("---------------------------------------")
 end
 if args[1] == "-h" then
     die_usage()

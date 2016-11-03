@@ -1,18 +1,26 @@
 
 --place_gps TuerqNSi 1478155922
 
+local rv = shell.run("turn", "left")
+if rv then
+  shell.run("turn", "right")
+else
+  error("This device is not a turtle.")
+  return false
+end
+
 if not os.loadAPI("lib/inv") then return end
 
 local args   = {...}
 function die_usage()
-    print("---------------------------------------")
-    print("bin/place_gps [height]")
-    print("")
-    print("Set up a GPS system.")
-    print("")
-    print("height - how high to fly up first.")
-    print("  Defaults to 140.")
-    print("---------------------------------------")
+  print("---------------------------------------")
+  print("bin/place_gps [height]")
+  print("")
+  print("Set up a GPS system.")
+  print("")
+  print("height - how high to fly up first.")
+  print("  Defaults to 140.")
+  print("---------------------------------------")
 end
 if args[1] == "-h" then
     die_usage()
@@ -153,8 +161,6 @@ function write_startup_file(fname, vec)
 end
 
 
-
-
 -- Main
 local x,y,z = gps.locate(2) 
 if x and y and z then
@@ -177,49 +183,6 @@ place_gps()
 print("Returning home again.")
 for i=1,height do turtle.down() end   -- fly back down to start
 turtle.turnLeft()                     -- face original direction
-
-
---[[
-print("---------------------------------------")
-if has_gps then
-  print("Your new GPS system is in place.  Fly")
-  print("up to it, and, on all four computers,")
-  print("type this:")
-  print("   > copy disk/startup .")
-  print("   > startup")
-  print("...and your GPS system will be on.")
-  print("")
-  print("If you like, you can take down the disk")
-  print("drives (and disks) after copying the") 
-  print("startup files off of them.")
-else
-  print("Your new GPS system is in place.  Fly")
-  print("up to it and then, for each of the ")
-  print("four machines, figure out its X, Y, Z")
-  print("coordinates.  Then type this:")
-  print("   > pastebin get DkS2Evw3 startup")
-  print("")
-  print("Next, edit that startup script; enter")
-  print("the machine's coordinates and save")
-  print("the script.")
-  print("")
-  print("Last, run each machine's startup")
-  print("script, and your GPS system will")
-  print("be on.")
-end
-print("---------------------------------------")
-
-
-bott
-  E 338 7 377
-  W 332 7 377
-
-top
-  N 335 10 374
-  S 335 10 380
-
-
---]]
 
 
  -- vim: syntax=lua ts=2 sw=2

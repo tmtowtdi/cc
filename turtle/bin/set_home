@@ -1,17 +1,25 @@
 
 --set_home N30TvHE7 1478155922
 
+local rv = shell.run("turn", "left")
+if rv then
+  shell.run("turn", "right")
+else
+  error("This device is not a turtle.")
+  return false
+end
+
 local args   = {...}
 function die_usage()
-    print("---------------------------------------")
-    print("bin/set_home [name]")
-    print("")
-    print("Record the turtle's current location")
-    print("as its 'home' spot.")
-    print("")
-    print("name - What to call this spot.")
-    print("  Defaults to 'home'.")
-    print("---------------------------------------")
+  print("---------------------------------------")
+  print("bin/set_home [name]")
+  print("")
+  print("Record the turtle's current location")
+  print("as its 'home' spot.")
+  print("")
+  print("name - What to call this spot.")
+  print("  Defaults to 'home'.")
+  print("---------------------------------------")
 end
 if args[1] == "-h" then
     die_usage()

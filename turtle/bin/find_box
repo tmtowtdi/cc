@@ -1,22 +1,30 @@
 
 --find_box x1kHs0v3 1478155922
 
-os.loadAPI("lib/move")
-os.loadAPI("lib/settings")
+local rv = shell.run("turn", "left")
+if rv then
+  shell.run("turn", "right")
+else
+  error("This device is not a turtle.")
+  return false
+end
+
+if not os.loadAPI("lib/move") then return end
+if not os.loadAPI("lib/settings") then return end
 
 local args = {...}
 local name = args[1] or 'box'
 
 function die_usage()
-    print("---------------------------------------")
-    print("bin/find_box [name]")
-    print("")
-    print("Find a chest next to the turtle and")
-    print("remember its location  ")
-    print("")
-    print("name - how we refer to this box.")
-    print("  Defaults to 'box'.")
-    print("---------------------------------------")
+  print("---------------------------------------")
+  print("bin/find_box [name]")
+  print("")
+  print("Find a chest next to the turtle and")
+  print("remember its location  ")
+  print("")
+  print("name - how we refer to this box.")
+  print("  Defaults to 'box'.")
+  print("---------------------------------------")
 end
 
 if name == "-h" then
@@ -58,4 +66,3 @@ end
 
 
  -- vim: syntax=lua ts=2 sw=2
-

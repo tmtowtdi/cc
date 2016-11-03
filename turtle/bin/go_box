@@ -8,19 +8,27 @@
     > bin/go_box 100
 --]]
 
+local rv = shell.run("turn", "left")
+if rv then
+  shell.run("turn", "right")
+else
+  error("This device is not a turtle.")
+  return false
+end
+
 local args   = {...}
 function die_usage()
-    print("---------------------------------------")
-    print("bin/go_box [height] [, name]")
-    print("")
-    print("Send the turtle to one block above a")
-    print("named box (set with bin/find_box).")
-    print("")
-    print("height - how high to fly up first.")
-    print("  Defaults to 100.")
-    print("name - which box to go to.  Defaults")
-    print("  to 'box'.")
-    print("---------------------------------------")
+  print("---------------------------------------")
+  print("bin/go_box [height] [, name]")
+  print("")
+  print("Send the turtle to one block above a")
+  print("named box (set with bin/find_box).")
+  print("")
+  print("height - how high to fly up first.")
+  print("  Defaults to 100.")
+  print("name - which box to go to.  Defaults")
+  print("  to 'box'.")
+  print("---------------------------------------")
 end
 if args[1] == "-h" then
     die_usage()
@@ -34,4 +42,3 @@ move.return_to_box(highest, name)
 move.dump_inv("dn")
 
  -- vim: syntax=lua ts=2 sw=2
-

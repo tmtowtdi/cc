@@ -1,20 +1,27 @@
 
 --xfer cLpwQi38 1478155922
 
+local rv = shell.run("turn", "left")
+if rv then
+  shell.run("turn", "right")
+else
+  error("This device is not a turtle.")
+  return false
+end
 
 local args   = {...}
 function die_usage()
-    print("---------------------------------------")
-    print("bin/xfer [wait] [,high], [,src] [,trgt]")
-    print("")
-    print("Transfer items from src to trgt chest.")
-    print("")
-    print("wait - Between loops.  Def. 300.")
-    print("high - Fly up this far.  Def. 70.")
-    print("src - Name of src box.  Def. 'src'.")
-    print("trgt - Name of trgt box.")
-    print("  Def. 'target'.")
-    print("---------------------------------------")
+  print("---------------------------------------")
+  print("bin/xfer [wait] [,high], [,src] [,trgt]")
+  print("")
+  print("Transfer items from src to trgt chest.")
+  print("")
+  print("wait - Between loops.  Def. 300.")
+  print("high - Fly up this far.  Def. 70.")
+  print("src - Name of src box.  Def. 'src'.")
+  print("trgt - Name of trgt box.")
+  print("  Def. 'target'.")
+  print("---------------------------------------")
 end
 if args[1] == "-h" then
     die_usage()

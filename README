@@ -25,17 +25,6 @@ TBD {{{{
         - it's also doing it correctly now when there is a GPS in range, and, 
           holy crap, the computers are reading disk/startup as their startup 
           files and starting correctly without human interaction.
-        - Another option on this script is to:
-            - You've already got one GPS set up, and you want to set up 
-              another one far away.  Figure out where you want your new one, 
-              then go so you're in range of the old one.  Run the script as:
-                    bin/place_gps 120 e 4000
-              ...the 120 is still the height.  The 2nd and 3rd args are "go 
-              east 4000 blocks, then build the thing".  The turtle would be 
-              out of range of GPS when it got to its location, but since it 
-              started out in range, it could just count to keep track of its 
-              location when it gets to the destination, so it'd still know the 
-              coords and be able to create startup files.
 
     - I'm starting to decide that there are GPS satellite machines, and then 
       there's everything else.  Computers and turtles will get the same code 
@@ -44,6 +33,14 @@ TBD {{{{
         So scripts that are turtle-only should start out with some sort of 
         sanity-check to ensure that the machine in question is actually a 
         turtle, and not a computer.  I'm not sure how to do that.
+
+                local rv = shell.run("turn", "left")
+                if rv then
+                    shell.run("turn", "right")
+                else
+                    error("This is a computer, you need a turtle.")
+                    return false
+                end
 
 }}}}
 

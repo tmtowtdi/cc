@@ -7,49 +7,37 @@
     even and odd.
 --]]
 
+local rv = shell.run("turn", "left")
+if rv then
+  shell.run("turn", "right")
+else
+  error("This device is not a turtle.")
+  return false
+end
 
---[[
-  You must run both
-    bin/find_box
-    bin/set_home
-  ...before running this.
+local args   = {...}
+function die_usage()
+  print("---------------------------------------")
+  print("bin/dig_cube [col] [,row] [,dep] [,hi]")
+  print("")
+  print("Excavate a cube of ground.")
+  print("")
+  print("col - Cols to dig.  Def 8.")
+  print("row - Rows to dig.  Def 8.")
+  print("dep - Depth to dig.  Def 100.")
+  print("hi - Height to rise to before")
+  print("  returning.  Def 70.")
+  print("---------------------------------------")
+end
+if args[1] == "-h" then
+    die_usage()
+    return
+end
 
-  Assumes its starting point is the SW 
-  corner of a cubic rectangle to dig 
-  out.
+if not os.loadAPI("lib/inv") then return end
+if not os.loadAPI("lib/move") then return end
+if not os.loadAPI("lib/settings") then return end
 
-  Defaults to an 8x8 square to a depth 
-  of 100 plots under the starting 
-  point.
-    
-  When its inventory fills up, it'll 
-  fly up to a preset height (defaults 
-  to 70), then go back to its box to 
-  dump its inv, then return to complete 
-  the job.
-
-  When its job is complete, it'll head 
-  back to its home, so be sure to also 
-  run bin/set_home first.
-
-  Dig 8x8x100 cube
-  > bin/dig_cube
-
-  Dig 4x3x2 cube
-  > bin/dig_cube 4 3 2
-
-  Dig 4x3x2 cube, fly to Y==150 before 
-  returning to box to dump inv to avoid 
-  that tall tree nearby:
-  > bin/dig_cube 4 3 2 150
---]]
-
-
-os.loadAPI("lib/inv")
-os.loadAPI("lib/move")
-os.loadAPI("lib/settings")
-
-local args    = {...}
 local cols    = tonumber(args[1]) or 8
 local rows    = tonumber(args[2]) or 8
 local depth   = tonumber(args[3]) or 100
@@ -62,13 +50,6 @@ if not move.has_home('home') or not move.has_box('box') then
 end
 
 
-
-
-
---[[
-  Goes to the box, dumps our inventory, 
-  then returns back where it started.
---]]
 function dump_inv_and_return()
   local r  = vector.new( gps.locate(2) )
   local rd = move.d()
@@ -94,21 +75,6 @@ function dump_inv_and_return()
   return true
 end
 
---[[
-    Moves forward one slot, digging if 
-    necessary.
-    Automatically goes back to the box 
-    to dump inventory when needed.
-
-    If we hit bedrock, dumps inventory 
-    in box and goes home.
-
-    If inventory box is full, goes 
-    home.
-    
-    Returns true or false on success or 
-    fail.
---]]
 function dig_move_forward()
   local s,d = turtle.inspect()
   if (s and d.name == 'minecraft:bedrock') then
@@ -148,10 +114,6 @@ function dig_move_down()
   end
   return true
 end
-
-
-
-
 
 
 local start = vector.new( gps.locate(2) )
@@ -211,5 +173,4 @@ move.dump_inv("dn")
 move.go_home(highest)
 print("Ready for next mission, boss!")
 
-
- -- vim: syntax=lua
+ -- vim: syntax=lua ts=2 sw=2
