@@ -6,6 +6,18 @@
 Place GPS System
 ================
 
+- :ref:`scripts_place_gps_synopsis`
+- :ref:`scripts_place_gps_range`
+- :ref:`scripts_place_gps_inv`
+- :ref:`scripts_place_gps_run`
+- :ref:`scripts_place_gps_finish`
+- :ref:`scripts_place_gps_restart`
+
+.. _scripts_place_gps_synopsis:
+
+Synopsis
+--------
+
 Sends a turtle directly up in the air to set up a GPS system that all 
 rednet-equipped turtles in range can use to get their locations.
 
@@ -16,6 +28,22 @@ way.
 But subsequent GPS systems will be much easier to set up, provided they're in 
 range of the original system.  Setting up new systems in range of the old one 
 allow you to increase your GPS system coverage.
+
+.. _scripts_place_gps_range:
+
+Rednet (Modem) Range
+--------------------
+
+By default, modems in ComputerCraft have a fairly limited range.  You can 
+compensate for this by putting up lots of GPS systems, or by trying to set up 
+some sort of repeater network.
+
+But if you want longer modem range, and are in control of the server you're 
+playing on, you can increase the range by editing ``ComputerCraft.cfg``.  
+There are four settings in there related to modem range; search the file for 
+``modem_``.
+
+.. _scripts_place_gps_inv:
 
 Required Inventory
 ------------------
@@ -34,6 +62,8 @@ another functioning GPS system), you'll also need:
 
 - Four disk drives
 - Four floppy disks
+
+.. _scripts_place_gps_run:
 
 Running
 -------
@@ -56,6 +86,8 @@ you can specify a different number of blocks to move up:
 After the turtle places the GPS computers, it will return to its starting 
 position.
 
+.. _scripts_place_gps_finish:
+
 Final Steps
 -----------
 
@@ -70,18 +102,10 @@ In Range
 
 If you're in range of another GPS system, the human interaction is pretty 
 easy.  Each computer is next to a disk drive that's loaded with the correct 
-startup script, containing the correct coordinates.  You just have to get up 
-to each computer, copy that startup script off the disk, and run it.
-
-**I'm still in the process of testing this, but so far it looks like this 
-human interaction is not needed.  I think you need to fly up to turn the 
-computers on, but they're reading disk/startup as their startup scripts so no 
-copying needs to happen.  I think.**
-
-.. code-block:: text
-
-   > copy disk/startup .
-   > startup
+startup script, containing the correct coordinates.  All you have to do is 
+turn on the four computers; do this by simply clicking on each one.  Their 
+startup scripts, containing each machine's coordinates, will start 
+automatically.
 
 Out Of Range
 ~~~~~~~~~~~~
@@ -97,6 +121,8 @@ Get up to the newly-created computers, and for each one:
 - Download the startup script template: ``> pastebin get DkS2Evw3 startup``
 - Edit the startup script; enter the X, Y, Z coordinates into the script.
 - Run the script: ``> startup``
+
+.. _scripts_place_gps_restart:
 
 Server Restarts
 ---------------

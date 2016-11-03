@@ -33,7 +33,7 @@
     <link rel="top" title="ComputerCraft Utilities 0.1 documentation" href="../../index.html"/>
         <link rel="up" title="Scripts" href="../index.html"/>
         <link rel="next" title="APIs" href="../../apis/index.html"/>
-        <link rel="prev" title="Set Home" href="set_home.html"/> 
+        <link rel="prev" title="Vers" href="vers.html"/> 
 
   
   <script src="../../static/js/modernizr.min.js"></script>
@@ -97,7 +97,13 @@
 <li class="toctree-l3"><a class="reference internal" href="place_gps.html">Place GPS System</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reds.html">Reds (Script)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="set_home.html">Set Home</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Xfer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vers.html">Vers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Xfer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running">Running</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -151,7 +157,56 @@
             
   <div class="section" id="xfer">
 <span id="scripts-xfer"></span><h1>Xfer<a class="headerlink" href="#xfer" title="Permalink to this headline">¶</a></h1>
-<p>Docs for <code class="docutils literal"><span class="pre">bin/xfer</span></code> go here</p>
+<p>Transfer items between chests.</p>
+<ul class="simple">
+<li><a class="reference internal" href="#scripts-xfer-synopsis"><span class="std std-ref">Synopsis</span></a></li>
+<li><a class="reference internal" href="#scripts-xfer-setup"><span class="std std-ref">Setup</span></a></li>
+<li><a class="reference internal" href="#scripts-xfer-run"><span class="std std-ref">Running</span></a></li>
+</ul>
+<div class="section" id="synopsis">
+<span id="scripts-xfer-synopsis"></span><h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
+<p>You&#8217;ve got a chest that&#8217;s being filled up by $something.  Maybe a turtle is
+digging a pit and periodically dropping off its inventory, maybe your kid
+brother insists on sticking everything he collects into one chest.  Whatever
+&#8211; you want to move the contents of one chest into another one.</p>
+</div>
+<div class="section" id="setup">
+<span id="scripts-xfer-setup"></span><h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>Your turtle needs to know where its two chests are.  The one it&#8217;s removing
+items from is the <code class="docutils literal"><span class="pre">src</span></code> box, and the one it&#8217;s dropping items into is the
+<code class="docutils literal"><span class="pre">target</span></code> box.  By default, the script knows them by those names, but you can
+use different names if you like.</p>
+<p>Find your <code class="docutils literal"><span class="pre">src</span></code> box, place the turtle next to it, and run
+<a class="reference internal" href="find_box.html#scripts-find-box"><span class="std std-ref">Find Box</span></a>.  Be sure to give the box a reasonable name (simply
+<code class="docutils literal"><span class="pre">src</span></code> is recommended).</p>
+<p>Next, do the same with your <code class="docutils literal"><span class="pre">target</span></code> box.</p>
+<p>Make sure that both of your boxes have a clear approach path straight up.  A
+box that&#8217;s covered with hoppers won&#8217;t work; the box needs to be open to the
+sky.</p>
+<p>Last, set a home for your turtle with <a class="reference internal" href="set_home.html#scripts-set-home"><span class="std std-ref">Set Home</span></a>.  At this point,
+this home <em>must</em> be named <code class="docutils literal"><span class="pre">home</span></code>.  Even though the <code class="docutils literal"><span class="pre">set_home</span></code> script
+allows you to set up multiple named spots, this script is expecting only to
+send the turtle to one named <code class="docutils literal"><span class="pre">home</span></code>.</p>
+</div>
+<div class="section" id="running">
+<span id="scripts-xfer-run"></span><h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>This is pretty simple.  Start the transfer:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>-- Accept all the defaults
+&gt; bin/xfer
+
+-- Or pass your own settings
+&gt; bin/xfer 600 100 out in
+</pre></div>
+</div>
+<p>In the first version, the turtle will fly to a height of 70, then to the box
+named <code class="docutils literal"><span class="pre">src</span></code>, collect everything it can, fly to the box named <code class="docutils literal"><span class="pre">target</span></code>,
+empty all it can, then fly back to its home and wait for <code class="docutils literal"><span class="pre">300</span></code> seconds (five
+minutes).</p>
+<p>In the second version, the turtle will fly to a height of 100, then to the box
+named <code class="docutils literal"><span class="pre">out</span></code>, collect everything it can, fly to the box named <code class="docutils literal"><span class="pre">in</span></code>, empty
+all it can, then fly back to its home and wait for <code class="docutils literal"><span class="pre">600</span></code> seconds (ten
+minutes).</p>
+</div>
 </div>
 
 
@@ -164,7 +219,7 @@
         <a href="../../apis/index.html" class="btn btn-neutral float-right" title="APIs" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="set_home.html" class="btn btn-neutral" title="Set Home" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="vers.html" class="btn btn-neutral" title="Vers" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

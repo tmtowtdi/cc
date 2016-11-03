@@ -97,6 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="place_gps.html">Place GPS System</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reds.html">Reds (Script)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="set_home.html">Set Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vers.html">Vers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xfer.html">Xfer</a></li>
 </ul>
 </li>
@@ -151,7 +152,22 @@
             
   <div class="section" id="go-box">
 <span id="scripts-go-box"></span><h1>Go Box<a class="headerlink" href="#go-box" title="Permalink to this headline">¶</a></h1>
-<p>docs for go box here</p>
+<p>Sends the turtle to one block above the named box.  You assign names to boxes
+using <a class="reference internal" href="find_box.html#scripts-find-box"><span class="std std-ref">Find Box</span></a>.</p>
+<p>It&#8217;s important to understand the flight path.  The turtle will first fly up in
+the air, then fly until it&#8217;s exactly above the box, then fly straight down.
+So be sure the area directly above the turtle, as well as the area directly
+above the box, is clear.</p>
+<p>By default, the turtle will rise up to Y == 100, then return to the box named
+<code class="docutils literal"><span class="pre">box</span></code>.</p>
+<p>Y == 100 will often be high enough that the trip will take unnecessary extra
+time.  On the other hand, if you&#8217;re in the mountains, Y == 100 may not be high
+enough.  Likewise, you can have many named boxes.</p>
+<p>So you can override the defaults.  In this case, the turtle will rise up to Y
+== 150 and return to <code class="docutils literal"><span class="pre">orebox1</span></code>:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/go_box 150 orebox1
+</pre></div>
+</div>
 </div>
 
 

@@ -4,6 +4,9 @@
 Scripts
 =======
 
+All scripts live in the ``bin/`` directory, and all will produce a brief help 
+message if invoked with the ``-h`` option.
+
 Turtle Scripts
 ~~~~~~~~~~~~~~
 .. toctree::
@@ -20,5 +23,6 @@ Turtle Scripts
    turtle/place_gps
    turtle/reds
    turtle/set_home
+   turtle/vers
    turtle/xfer
 

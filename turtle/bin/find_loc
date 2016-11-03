@@ -1,5 +1,5 @@
 
---find_loc SEYF57X4 1478204554
+--find_loc SEYF57X4 1478208591
 
 if not os.loadAPI("lib/move") then return end
 

@@ -1,5 +1,5 @@
 
---find_box x1kHs0v3 1478204554
+--find_box x1kHs0v3 1478208591
 
 local rv = shell.run("turn", "left")
 if rv then

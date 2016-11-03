@@ -97,6 +97,7 @@
 <li class="toctree-l3"><a class="reference internal" href="place_gps.html">Place GPS System</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Reds (Script)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="set_home.html">Set Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vers.html">Vers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xfer.html">Xfer</a></li>
 </ul>
 </li>
@@ -151,7 +152,22 @@
             
   <div class="section" id="reds-script">
 <span id="scripts-reds"></span><h1>Reds (Script)<a class="headerlink" href="#reds-script" title="Permalink to this headline">¶</a></h1>
-<p>Docs for <code class="docutils literal"><span class="pre">bin/reds</span></code> go here</p>
+<p>The <a class="reference internal" href="../../apis/reds.html#apis-reds"><span class="std std-ref">Reds (API)</span></a> contains functions for dealing with turtles as redstone
+tools.</p>
+<p>Often when using <a class="reference internal" href="../../apis/reds.html#apis-reds"><span class="std std-ref">Reds (API)</span></a>, all your script needs to do is call a
+single function.  Writing a script just to make one function call is a little
+silly, so this script allows you to call <a class="reference internal" href="../../apis/reds.html#apis-reds"><span class="std std-ref">Reds (API)</span></a> functions as if they
+were commands.</p>
+<p>For example, the <a class="reference internal" href="../../apis/reds.html#apis-reds-method-timer"><span class="std std-ref">timer(args)</span></a> function repeatedly toggles a
+redstone signal on and off.  To use a turtle as a simple clock, you can call
+that function as command:</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/reds timer front 5 1
+</pre></div>
+</div>
+<p>...that will call that <a class="reference internal" href="../../apis/reds.html#apis-reds-method-timer"><span class="std std-ref">timer(args)</span></a> function, passing
+<code class="docutils literal"><span class="pre">front</span></code>, <code class="docutils literal"><span class="pre">5</span></code>, and <code class="docutils literal"><span class="pre">1</span></code> as the arguments.  So your turtle will produce a
+redstone signal out its front for 5 seconds, then turn the signal off for 1
+second, then repeat.</p>
 </div>
 
 

@@ -6,5 +6,20 @@
 Find Location
 =============
 
-Docs for ``bin/find_loc`` goes here
+Find and report the turtle's current coordinates, provided it's in range of an 
+active GPS system.
 
+.. code-block:: text
+
+    > bin/find_loc
+          Y axis
+             +
+             S
+             |
+             |
+     - W-----+-----E +   X axis
+             |
+             |
+             N
+             -
+     X: 123, Y: 456, Z: -789)

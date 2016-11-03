@@ -1,5 +1,5 @@
 
---set_home N30TvHE7 1478204554
+--set_home N30TvHE7 1478208591
 
 local rv = shell.run("turn", "left")
 if rv then

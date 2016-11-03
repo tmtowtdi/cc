@@ -3,7 +3,6 @@ TBD {{{{
 
     Ack for "CHECK"
 
-
     bin/dig_cube {#{{{
         - I added a GPS re-consult after each column is completed.
         - I also changed it to use go_home, dump_inv, return_to_box from the 
@@ -20,11 +19,6 @@ TBD {{{{
             consolidate()
     }}}}
 
-    - bin/place_gps is properly setting up the GPS system, with modems, when 
-      there's not already a gps system in range.
-        - it's also doing it correctly now when there is a GPS in range, and, 
-          holy crap, the computers are reading disk/startup as their startup 
-          files and starting correctly without human interaction.
 
 }}}}
 
