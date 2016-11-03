@@ -1,0 +1,8 @@
+
+--vers BQy6B7b6
+
+local version = "12345"
+
+--print("---------------------------------------")
+print("TMT ComputerCraft Utilities")
+print("Version " .. version)

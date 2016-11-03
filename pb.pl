@@ -31,6 +31,7 @@ my %scripts = (
     "$FindBin::Bin/turtle/bin/place_gps"     => 'TuerqNSi',
     "$FindBin::Bin/turtle/bin/reds"          => 'L5egEbry',
     "$FindBin::Bin/turtle/bin/set_home"      => 'N30TvHE7',
+    "$FindBin::Bin/turtle/bin/vers"          => 'BQy6B7b6',
     "$FindBin::Bin/turtle/bin/xfer"          => 'cLpwQi38',
 
     "$FindBin::Bin/turtle/lib/harvest"  => 'G1u3NJE1',
@@ -56,14 +57,27 @@ foreach my $path(keys %scripts) {
 
     my $content = read_text($path);
     my $bn = basename($path);
+
+    ### All code files should have a header comment.
     $content =~ s/^
                     --\s?  $bn  .*
-                $/--$bn $hash $update/xm;    # no 's'!
+                $/--$bn $hash $update/xm;           # no 's'.
+
+    ### Update the version variable in bin/vers
+    $content =~ s/^
+                    local \s+
+                    version \s+ = \s+
+                    "(\d+)"
+                    \s*
+                $/local version = "$update"/xm;    # no 's'!
+
     write_text($path, $content);
 
     my $paste   = WWW::Pastebin::Paste->new({ hash => $hash });
     $paste->edit($account, $content);
     say "Updated $bn.";
 }
+
+
 say "\nUpdate time for all is $update.";
 

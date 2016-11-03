@@ -25,15 +25,17 @@ TBD {{{{
         - it's also doing it correctly now when there is a GPS in range, and, 
           holy crap, the computers are reading disk/startup as their startup 
           files and starting correctly without human interaction.
-        - Fix docs on this script
-
-    - ABSOLUTELY DO NOT NOT NOT GIVE ALL FOUR GPS MACHINES THE SAME LABEL
-        - That will duplicate their code - they become symlinks of each other.  
-          They'll all end up with the same coords in their startups.
-        - You could label them all "GPS", then do the "pastebin get" on one of 
-          them to pull the startup template.  That would put that same 
-          template on all four machines.  But then you'd have to re-label each 
-          one and it's probably not worth the trouble.
+        - Another option on this script is to:
+            - You've already got one GPS set up, and you want to set up 
+              another one far away.  Figure out where you want your new one, 
+              then go so you're in range of the old one.  Run the script as:
+                    bin/place_gps 120 e 4000
+              ...the 120 is still the height.  The 2nd and 3rd args are "go 
+              east 4000 blocks, then build the thing".  The turtle would be 
+              out of range of GPS when it got to its location, but since it 
+              started out in range, it could just count to keep track of its 
+              location when it gets to the destination, so it'd still know the 
+              coords and be able to create startup files.
 
     - I'm starting to decide that there are GPS satellite machines, and then 
       there's everything else.  Computers and turtles will get the same code 
@@ -44,12 +46,6 @@ TBD {{{{
         turtle, and not a computer.  I'm not sure how to do that.
 
     - Add a die_usage() to all bin/ scripts.  See bin/go_home for eg.
-
-    - Add 'bin/vers', which just prints out the current version (the epoch 
-      created by pb.pl)
-
-335 7 375
-
 
 }}}}
 

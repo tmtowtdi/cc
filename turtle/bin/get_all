@@ -15,6 +15,7 @@ local files = {
     ["bin/reds"]          = 'L5egEbry',
     ["bin/set_home"]      = 'N30TvHE7',
     ["bin/market"]        = 'w1RtfqFd',
+    ["bin/vers"]          = 'BQy6B7b6',
     ["bin/xfer"]          = 'cLpwQi38',
     ["lib/harvest"]       = 'G1u3NJE1',
     ["lib/inv"]           = 'bxF3p2yy',
