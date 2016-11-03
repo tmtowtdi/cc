@@ -139,9 +139,13 @@
   <div class="section" id="apis">
 <span id="apis-index"></span><h1>APIs<a class="headerlink" href="#apis" title="Permalink to this headline">¶</a></h1>
 <p>All APIs can be imported into any script with:</p>
-<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">os</span><span class="p">.</span><span class="n">loadAPI</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">lib/APINAME&quot;</span><span class="p">)</span>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">loadAPI</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">lib/APINAME&quot;</span><span class="p">)</span> <span class="k">then</span> <span class="k">return</span> <span class="k">end</span>
 </pre></div>
 </div>
+<p>Most APIs are just a collection of functions that don&#8217;t do anything until you
+call one, but a few APIs (notably, <code class="docutils literal"><span class="pre">move</span></code>) perform some initialization as
+soon as you load them.  If that initialization fails for whatever reason, your
+script should fail as well.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="harvest.html">Harvest</a></li>

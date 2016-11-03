@@ -6,8 +6,8 @@
 Place GPS System
 ================
 
-Sends a turtle directly up and sets up a GPS system that all rednet-equipped 
-turtles in range can then use to get their locations.
+Sends a turtle directly up in the air to set up a GPS system that all 
+rednet-equipped turtles in range can use to get their locations.
 
 Setting up a GPS system is much more of a pain if you're not already in range 
 of another GPS system.  Your very first GPS system will need to be set up this 
@@ -46,8 +46,8 @@ you want your GPS system to be placed, then start the build:
 
   > bin/place_gps
 
-By default, that will fly up 140 spots and begin building your system, but you 
-can specify a different number of spots to move up:
+By default, that will fly up 140 blocks and begin building your system, but 
+you can specify a different number of blocks to move up:
 
 .. code-block:: text
 
@@ -71,7 +71,12 @@ In Range
 If you're in range of another GPS system, the human interaction is pretty 
 easy.  Each computer is next to a disk drive that's loaded with the correct 
 startup script, containing the correct coordinates.  You just have to get up 
-to each computer, copy that startup script off the disk, and run it:
+to each computer, copy that startup script off the disk, and run it.
+
+**I'm still in the process of testing this, but so far it looks like this 
+human interaction is not needed.  I think you need to fly up to turn the 
+computers on, but they're reading disk/startup as their startup scripts so no 
+copying needs to happen.  I think.**
 
 .. code-block:: text
 
@@ -82,8 +87,9 @@ Out Of Range
 ~~~~~~~~~~~~
 
 If you're *not* in range of another GPS system, the turtle that built this 
-current system had no way of creating the correct startup files, so you're 
-going to need to create them yourself.
+current system had no way of detecting the coordinates of the satellites it 
+was placing, so it couldn't create the correct startup files, so you're going 
+to need to create them yourself.
 
 Get up to the newly-created computers, and for each one:
 

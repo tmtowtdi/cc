@@ -47,6 +47,7 @@ will cause a fatal error.
     - :ref:`move_method_face`
     - :ref:`move_method_go_home`
     - :ref:`move_method_has_home`
+    - :ref:`move_method_isnan`
     - :ref:`move_method_return_to_box`
     - :ref:`move_method_has_box`
     - :ref:`move_method_dump_inv`
@@ -251,6 +252,26 @@ custom home location with another name, you may pass that name.
 
 Check if the turtle has a home location named ``name``.  Returns true if so, 
 false if not.
+
+----
+
+.. _move_method_isnan:
+
+``isnan(num)``
++++++++++++++++++++++++++++++++
+
+Tests if ``num`` is ``nan`` (Not A Number).
+
+``num``
+  number to test.  Required.
+
+::
+
+    local num = 0/0
+    if isnan(num) then
+      error("Crapola, that's not a number.")
+      return false
+    end
 
 ----
 

@@ -89,6 +89,7 @@
 <li class="toctree-l2"><a class="reference internal" href="harvest.html">Harvest</a></li>
 <li class="toctree-l2"><a class="reference internal" href="inv.html">Inv</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Move</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#synopsis">Synopsis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#fd-spaces-force"><code class="docutils literal"><span class="pre">fd(spaces,</span> <span class="pre">force)</span></code></a></li>
@@ -108,6 +109,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#face-dir"><code class="docutils literal"><span class="pre">face(dir)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#go-home-height-name"><code class="docutils literal"><span class="pre">go_home(height,</span> <span class="pre">name)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#has-home-name"><code class="docutils literal"><span class="pre">has_home(name)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#isnan-num"><code class="docutils literal"><span class="pre">isnan(num)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#return-to-box-height-name"><code class="docutils literal"><span class="pre">return_to_box(height,</span> <span class="pre">name)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#has-box-name"><code class="docutils literal"><span class="pre">has_box(name)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#dump-inv-dir"><code class="docutils literal"><span class="pre">dump_inv(dir)</span></code></a></li>
@@ -178,9 +180,15 @@ location, it keeps track of its location by modifying its internal GPS
 coordinates each time a movement method is used.</p>
 <p>This means that you must use <em>only</em> movement methods from the <code class="docutils literal"><span class="pre">move</span></code> api, or
 it will end up thinking it&#8217;s in one place but really be somewhere else.</p>
-<p>When the API is first loaded, it will attempt to determine what direction
-turtle is currently facing.  The only way for that to happen is for the turtle
-to move.  If the turtle is surrounded on all sides, this will fail.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>This API requires that the turtle be in-range of an active GPS system, so when
+it&#8217;s first loaded, it will test for that GPS system.  Next, the API needs to
+start out knowing which direction the turtle is facing.  To do this, the
+turtle needs at least one horizontal slot next to it open, because it needs to
+move to figure out its direction.</p>
+<p>If no GPS system is available, or the turtle cannot move, loading this API
+will cause a fatal error.</p>
 <ul>
 <li><p class="first"><a class="reference internal" href="#move-synopsis"><span class="std std-ref">Synopsis</span></a></p>
 </li>
@@ -204,6 +212,7 @@ to move.  If the turtle is surrounded on all sides, this will fail.</p>
 <li><a class="reference internal" href="#move-method-face"><span class="std std-ref">face(dir)</span></a></li>
 <li><a class="reference internal" href="#move-method-go-home"><span class="std std-ref">go_home(height, name)</span></a></li>
 <li><a class="reference internal" href="#move-method-has-home"><span class="std std-ref">has_home(name)</span></a></li>
+<li><a class="reference internal" href="#move-method-isnan"><span class="std std-ref">isnan(num)</span></a></li>
 <li><a class="reference internal" href="#move-method-return-to-box"><span class="std std-ref">return_to_box(height, name)</span></a></li>
 <li><a class="reference internal" href="#move-method-has-box"><span class="std std-ref">has_box(name)</span></a></li>
 <li><a class="reference internal" href="#move-method-dump-inv"><span class="std std-ref">dump_inv(dir)</span></a></li>
@@ -214,6 +223,7 @@ to move.  If the turtle is surrounded on all sides, this will fail.</p>
 </dl>
 </li>
 </ul>
+</div>
 <div class="section" id="synopsis">
 <span id="move-synopsis"></span><h2>Synopsis<a class="headerlink" href="#synopsis" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-lua"><div class="highlight"><pre><span></span><span class="n">os</span><span class="p">.</span><span class="n">loadAPI</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">lib/move&quot;</span><span class="p">)</span>
@@ -361,6 +371,22 @@ custom home location with another name, you may pass that name.</p>
 </dl>
 <p>Check if the turtle has a home location named <code class="docutils literal"><span class="pre">name</span></code>.  Returns true if so,
 false if not.</p>
+<hr class="docutils" />
+</div>
+<div class="section" id="isnan-num">
+<span id="move-method-isnan"></span><h3><code class="docutils literal"><span class="pre">isnan(num)</span></code><a class="headerlink" href="#isnan-num" title="Permalink to this headline">¶</a></h3>
+<p>Tests if <code class="docutils literal"><span class="pre">num</span></code> is <code class="docutils literal"><span class="pre">nan</span></code> (Not A Number).</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">num</span></code></dt>
+<dd>number to test.  Required.</dd>
+</dl>
+<div class="highlight-lua"><div class="highlight"><pre><span></span><span class="kd">local</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="o">/</span><span class="mi">0</span>
+<span class="k">if</span> <span class="n">isnan</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">then</span>
+  <span class="nb">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Crapola, that&#39;s not a number.&quot;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="kc">false</span>
+<span class="k">end</span>
+</pre></div>
+</div>
 <hr class="docutils" />
 </div>
 <div class="section" id="return-to-box-height-name">
