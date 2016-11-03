@@ -1,9 +1,11 @@
 #!/usr/bin/env lua
 
-local foo, bar, baz
+function isnan(x) return x ~= x end
 
-bar = 3
+local n = 0/0
+print(n)
 
-print(bar)
+print( isnan(5) )
+print( isnan(n) )
 
  -- vim: syntax=lua ts=2 sw=2

@@ -1,5 +1,5 @@
 
---place_gps TuerqNSi 1478155922
+--place_gps TuerqNSi 1478204554
 
 local rv = shell.run("turn", "left")
 if rv then

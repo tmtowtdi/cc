@@ -1,4 +1,4 @@
---go_home nCp8t5Q1 1478155922
+--go_home nCp8t5Q1 1478204554
 
 local rv = shell.run("turn", "left")
 if rv then

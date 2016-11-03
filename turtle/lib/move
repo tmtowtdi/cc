@@ -1,5 +1,5 @@
 
---move rpdxDz77 1478155922
+--move rpdxDz77 1478204554
 
 if not os.loadAPI("lib/settings") then return end
 
@@ -113,10 +113,13 @@ function find_direction()
   return facing
 end
 
+function isnan(x) return x ~= x end
 function test_gps()
   -- DO NOT use a vector for this.
   local x, y, z = gps.locate(2)
-  if x and y and z then return true else return false end
+  if not x or not y or not z then return false end
+  if isnan(x) or isnan(y) or isnan(z) then return false end
+  return true
 end
 
 function go_home(height, name)

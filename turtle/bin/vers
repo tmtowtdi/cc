@@ -1,8 +1,7 @@
 
---vers BQy6B7b6
+--vers BQy6B7b6 1478204554
 
-local version = "12345"
-
+local version = "1478204554"
 local args   = {...}
 function die_usage()
     print("---------------------------------------")
