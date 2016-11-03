@@ -1,7 +1,7 @@
 
 -- Search on CHECK
 
---place_gps TuerqNSi 1478129818
+--place_gps TuerqNSi 1478155922
 
 os.loadAPI("lib/inv")
 
@@ -45,10 +45,7 @@ function set_peripherals(coords_vec)
     turtle.select( inv.find_ccper_slot("drive") )
     turtle.place()
     turtle.select( inv.find("ComputerCraft:disk") )
-    -- CHECK does this put the disk in the drive?  Should but untested.
-    turtle.place()  
-    -- CHECK I'm assuming we're adjacent to the drive we just placed so we 
-    -- should be able to access it.
+    turtle.drop()  
     write_startup_file("disk/startup", coords_vec)
     strafe_l()
   end
@@ -140,10 +137,14 @@ function check_inv()
 end
 
 function write_startup_file(fname, vec)
-    local h = fs.open(fname, 'w')
-    h.writeLine( "shell.run( \"gps\", \"host\", vec.x, vec.y, vec.z )" )
-    h.close()
-    return true;
+  local h = fs.open(fname, 'w')
+  if not h then
+    error("Got an error opening file "..fname)
+    return false
+  end
+  h.writeLine( "shell.run( \"gps\", \"host\", "..vec.x..", "..vec.y..", "..vec.z.." )" )
+  h.close()
+  return true;
 end
 
 

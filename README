@@ -22,6 +22,10 @@ TBD {{{{
 
     - bin/place_gps is properly setting up the GPS system, with modems, when 
       there's not already a gps system in range.
+        - it's also doing it correctly now when there is a GPS in range, and, 
+          holy crap, the computers are reading disk/startup as their startup 
+          files and starting correctly without human interaction.
+        - Fix docs on this script
 
     - Make sure ALL APIs return true on success, false on failure.
 
