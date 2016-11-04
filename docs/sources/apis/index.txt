@@ -3,8 +3,8 @@
 
 .. _apis_index:
 
-APIs
-====
+APIs Reference
+==============
 
 All APIs can be imported into any script with::
 

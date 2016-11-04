@@ -5,7 +5,7 @@ Installing
 - :ref:`installing_labels`
 - :ref:`installing_gps`
 - :ref:`installing_other`
-    - :ref:`installing_updating_other`
+    - :ref:`installing_updating`
 
 .. _installing_labels:
 
@@ -27,35 +27,20 @@ you can pick it up and put it down at will.
 
 .. _installing_gps:
 
-On a GPS Satellite
-~~~~~~~~~~~~~~~~~~
+Installing On a GPS Satellite
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A GPS satellite machine is usually just a regular computer, but you can use any 
-computer or turtle, as long as it has a modem attached.
+If you like, you can install the full utilities package on a computer meant to 
+be used as a GPS satellite.  There's generally no reason to do so, but if you 
+want to, see :ref:`installing_other` .
 
-Get four such machines.  Label each one, then download the startup script.
-
-.. code-block:: text
-
-    > label set gps1 (then gps2, gps3, gps4)
-    > pastebin get DkS2Evw3 startup
-
-Place the machines per the diagram image in the `first post in this thread, by 
-BigSHinyToys.  
-<http://www.computercraft.info/forums2/index.php?/topic/3088-how-to-guide-gps-global-position-system/>`_ 
-
-Now, and yes, this is a pain in the ass, approach each individual machine, 
-figure out its exact X, Y, Z coordinates, and edit its startup script to include 
-those coordinates.  Then start the machine
-
-.. code-block:: text
-
-  > startup
+Your best bet when setting up a GPS system is just to use the 
+:ref:`scripts_place_gps` script.
 
 .. _installing_other:
 
-On Any Other Machine
-~~~~~~~~~~~~~~~~~~~~
+Installing On Any Other Machine
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 On any brand-new machine, type
 
@@ -66,29 +51,17 @@ On any brand-new machine, type
 
 ...replace **<LABELNAME>** with any name you want to give the machine.
 
-.. _installing_updating_other:
+.. _installing_updating:
 
 Updating
 --------
 
-The installer script installed an updater script.  You can run it any time to 
-update to the latest version of the code
+One of the scripts installed by the installer script was an updater script.  
+You can run it any time to update to the latest version of the code:
 
 .. code-block:: text
 
   > bin/get_all
 
-If a new script or API gets added and you want that, you'll need to run that 
-updater script twice in a row
-
-.. code-block:: text
-
-  > bin/get_all
-  ...output scrolls past...
-  > bin/get_all
-
-...The first run gets the newer ``get_all`` script, which will know how to 
-download the new script/API you're interested in.  The second run will run this 
-new version of ``get_all``, pulling the new script/API.
-
+See the complete :ref:`scripts_get_all` docs.
 

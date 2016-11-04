@@ -1,8 +1,8 @@
 
 .. _scripts_index:
 
-Scripts
-=======
+Scripts Reference
+=================
 
 All scripts live in the ``bin/`` directory, and all will produce a brief help 
 message if invoked with the ``-h`` option.

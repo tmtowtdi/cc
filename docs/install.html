@@ -31,7 +31,7 @@
 
   
     <link rel="top" title="ComputerCraft Utilities 0.1 documentation" href="index.html"/>
-        <link rel="next" title="Scripts" href="scripts/index.html"/>
+        <link rel="next" title="Scripts Reference" href="scripts/index.html"/>
         <link rel="prev" title="Welcome to ComputerCraft Utilities’s documentation!" href="index.html"/> 
 
   
@@ -84,15 +84,15 @@
                 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Installing</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#labels-are-not-optional">Labels Are Not Optional!</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#on-a-gps-satellite">On a GPS Satellite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#on-any-other-machine">On Any Other Machine</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-on-a-gps-satellite">Installing On a GPS Satellite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-on-any-other-machine">Installing On Any Other Machine</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#updating">Updating</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="scripts/index.html">Scripts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="apis/index.html">APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts/index.html">Scripts Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apis/index.html">APIs Reference</a></li>
 </ul>
 
             
@@ -142,12 +142,12 @@
 <ul>
 <li><p class="first"><a class="reference internal" href="#installing-labels"><span class="std std-ref">Labels Are Not Optional!</span></a></p>
 </li>
-<li><p class="first"><a class="reference internal" href="#installing-gps"><span class="std std-ref">On a GPS Satellite</span></a></p>
+<li><p class="first"><a class="reference internal" href="#installing-gps"><span class="std std-ref">Installing On a GPS Satellite</span></a></p>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#installing-other"><span class="std std-ref">On Any Other Machine</span></a></dt>
+<dt><a class="reference internal" href="#installing-other"><span class="std std-ref">Installing On Any Other Machine</span></a></dt>
 <dd><ul class="first last simple">
-<li><a class="reference internal" href="#installing-updating-other"><span class="std std-ref">Updating</span></a></li>
+<li><a class="reference internal" href="#installing-updating"><span class="std std-ref">Updating</span></a></li>
 </ul>
 </dd>
 </dl>
@@ -165,26 +165,16 @@ custom files you&#8217;d created, will be gone.</p>
 you can pick it up and put it down at will.</p>
 <p><em>Label your shit.</em></p>
 </div>
-<div class="section" id="on-a-gps-satellite">
-<span id="installing-gps"></span><h2>On a GPS Satellite<a class="headerlink" href="#on-a-gps-satellite" title="Permalink to this headline">¶</a></h2>
-<p>A GPS satellite machine is usually just a regular computer, but you can use any
-computer or turtle, as long as it has a modem attached.</p>
-<p>Get four such machines.  Label each one, then download the startup script.</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; label set gps1 (then gps2, gps3, gps4)
-&gt; pastebin get DkS2Evw3 startup
-</pre></div>
+<div class="section" id="installing-on-a-gps-satellite">
+<span id="installing-gps"></span><h2>Installing On a GPS Satellite<a class="headerlink" href="#installing-on-a-gps-satellite" title="Permalink to this headline">¶</a></h2>
+<p>If you like, you can install the full utilities package on a computer meant to
+be used as a GPS satellite.  There&#8217;s generally no reason to do so, but if you
+want to, see <a class="reference internal" href="#installing-other"><span class="std std-ref">Installing On Any Other Machine</span></a> .</p>
+<p>Your best bet when setting up a GPS system is just to use the
+<a class="reference internal" href="scripts/turtle/place_gps.html#scripts-place-gps"><span class="std std-ref">Place GPS System</span></a> script.</p>
 </div>
-<p>Place the machines per the diagram image in the <a class="reference external" href="http://www.computercraft.info/forums2/index.php?/topic/3088-how-to-guide-gps-global-position-system/">first post in this thread, by
-BigSHinyToys.</a></p>
-<p>Now, and yes, this is a pain in the ass, approach each individual machine,
-figure out its exact X, Y, Z coordinates, and edit its startup script to include
-those coordinates.  Then start the machine</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; startup
-</pre></div>
-</div>
-</div>
-<div class="section" id="on-any-other-machine">
-<span id="installing-other"></span><h2>On Any Other Machine<a class="headerlink" href="#on-any-other-machine" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installing-on-any-other-machine">
+<span id="installing-other"></span><h2>Installing On Any Other Machine<a class="headerlink" href="#installing-on-any-other-machine" title="Permalink to this headline">¶</a></h2>
 <p>On any brand-new machine, type</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>&gt; label set &lt;LABELNAME&gt;
 &gt; pastebin run JQsniAQj
@@ -192,22 +182,13 @@ those coordinates.  Then start the machine</p>
 </div>
 <p>...replace <strong>&lt;LABELNAME&gt;</strong> with any name you want to give the machine.</p>
 <div class="section" id="updating">
-<span id="installing-updating-other"></span><h3>Updating<a class="headerlink" href="#updating" title="Permalink to this headline">¶</a></h3>
-<p>The installer script installed an updater script.  You can run it any time to
-update to the latest version of the code</p>
+<span id="installing-updating"></span><h3>Updating<a class="headerlink" href="#updating" title="Permalink to this headline">¶</a></h3>
+<p>One of the scripts installed by the installer script was an updater script.
+You can run it any time to update to the latest version of the code:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/get_all
 </pre></div>
 </div>
-<p>If a new script or API gets added and you want that, you&#8217;ll need to run that
-updater script twice in a row</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/get_all
-...output scrolls past...
-&gt; bin/get_all
-</pre></div>
-</div>
-<p>...The first run gets the newer <code class="docutils literal"><span class="pre">get_all</span></code> script, which will know how to
-download the new script/API you&#8217;re interested in.  The second run will run this
-new version of <code class="docutils literal"><span class="pre">get_all</span></code>, pulling the new script/API.</p>
+<p>See the complete <a class="reference internal" href="scripts/turtle/get_all.html#scripts-get-all"><span class="std std-ref">Get All</span></a> docs.</p>
 </div>
 </div>
 </div>
@@ -219,7 +200,7 @@ new version of <code class="docutils literal"><span class="pre">get_all</span></
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="scripts/index.html" class="btn btn-neutral float-right" title="Scripts" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="scripts/index.html" class="btn btn-neutral float-right" title="Scripts Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral" title="Welcome to ComputerCraft Utilities’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>

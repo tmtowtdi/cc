@@ -224,7 +224,7 @@ consolidate using the simple name ``copper_ore``, this method will attempt to
 combine those two different items, and will fail, returning an error.  
 
 Besides, passing in the FQ name will be faster than just using the simple 
-name.  So FQ names are strongly recommended.
+name.  So *FQ names are strongly recommended*.
 
 ``slots`` is an array of integer slot numbers where ``name`` is located.  If 
 you don't pass in ``slots``, ``consolidate()`` will figure out where in the 
@@ -234,7 +234,9 @@ The only reason I can come up with why you'd ever pass in ``slots`` would be
 that you were planning on calling ``consolidate()`` multiple times in a row, 
 and you were attempting to avoid having ``consolidate()`` re-check your whole 
 inventory for you each time.  :ref:`inv_method_consolidate_all` is doing 
-exactly this, which speeds things up a bit.
+exactly this, which speeds things up a bit.  But really, if you wanted this in 
+userland code, you'd just call :ref:`inv_method_consolidate_all` and be done 
+with it.
 
 You'll probably never pass in ``slots``.  
 
