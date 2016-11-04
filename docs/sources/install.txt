@@ -1,11 +1,11 @@
 
-Installing
-==========
+Installing and Updating
+=======================
 
 - :ref:`installing_labels`
 - :ref:`installing_gps`
 - :ref:`installing_other`
-    - :ref:`installing_updating`
+- :ref:`installing_updating`
 
 .. _installing_labels:
 
