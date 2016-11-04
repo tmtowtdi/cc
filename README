@@ -19,6 +19,19 @@ TBD {{{{
             consolidate()
     }}}}
 
+
+    in "turtle.moveForward()", turtle is a variable (holding the turtle API), 
+    and it's true.  It's always loaded on turtles, never on computers.  So:
+            if turtle then (this is a turtle) else (this is not a turtle) end
+
+        Unless you're on a computer that has something like this:
+                local turtle = "donatello"
+        already in the script you're working on, this will work as an 
+        isa_turtle test.
+
+if not turtle then error("This is not a turtle!") end
+
+
 }}}}
 
 Building Documentation {#{{{

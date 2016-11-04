@@ -1,14 +1,6 @@
 
 --xfer cLpwQi38 1478246104
 
-local rv = shell.run("turn", "left")
-if rv then
-  shell.run("turn", "right")
-else
-  error("This device is not a turtle.")
-  return false
-end
-
 local args   = {...}
 function die_usage()
   print("---------------------------------------")
@@ -23,11 +15,9 @@ function die_usage()
   print("  Def. 'target'.")
   print("---------------------------------------")
 end
-if args[1] == "-h" then
-    die_usage()
-    return
-end
+if args[1] == "-h" then die_usage() return end
 
+if not turtle then error("This is not a turtle!") end
 if not os.loadAPI("lib/move") then return end
 
 local wait_time  = tonumber(args[1]) or 300

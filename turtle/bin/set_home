@@ -13,11 +13,9 @@ function die_usage()
   print("  Defaults to 'home'.")
   print("---------------------------------------")
 end
-if args[1] == "-h" then
-    die_usage()
-    return
-end
+if args[1] == "-h" then die_usage() return end
 
+if not turtle then error("This is not a turtle!") end
 if not os.loadAPI("lib/move") then return end
 if not os.loadAPI("lib/settings") then return end
 

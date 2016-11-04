@@ -34,14 +34,6 @@
     started again.
 --]]
 
-local rv = shell.run("turn", "left")
-if rv then
-  shell.run("turn", "right")
-else
-  error("This device is not a turtle.")
-  return false
-end
-
 local args   = {...}
 function die_usage()
   print("---------------------------------------")
@@ -56,11 +48,9 @@ function die_usage()
   print("  Defaults to 7.")
   print("---------------------------------------")
 end
-if args[1] == "-h" then
-    die_usage()
-    return
-end
+if args[1] == "-h" then die_usage() return end
 
+if not turtle then error("This is not a turtle!") end
 if not os.loadAPI("lib/move") then return end
 if not os.loadAPI("lib/harvest") then return end
 

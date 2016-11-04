@@ -1,20 +1,8 @@
 
 --find_box x1kHs0v3 1478246104
 
-local rv = shell.run("turn", "left")
-if rv then
-  shell.run("turn", "right")
-else
-  error("This device is not a turtle.")
-  return false
-end
-
-if not os.loadAPI("lib/move") then return end
-if not os.loadAPI("lib/settings") then return end
 
 local args = {...}
-local name = args[1] or 'box'
-
 function die_usage()
   print("---------------------------------------")
   print("bin/find_box [name]")
@@ -26,11 +14,13 @@ function die_usage()
   print("  Defaults to 'box'.")
   print("---------------------------------------")
 end
+if args[1] == "-h" then die_usage() return end
 
-if name == "-h" then
-    die_usage()
-    return
-end
+if not turtle then error("This is not a turtle!") end
+if not os.loadAPI("lib/move") then return end
+if not os.loadAPI("lib/settings") then return end
+
+local name = args[1] or 'box'
 
 if not move.test_gps() then error("GPS system is down!") end
 local c = vector.new( gps.locate(2) )
