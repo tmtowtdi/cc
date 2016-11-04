@@ -1,5 +1,5 @@
 
---xfer cLpwQi38 1478246104
+--xfer cLpwQi38 1478280438
 
 local args   = {...}
 function die_usage()
@@ -24,33 +24,6 @@ local wait_time  = tonumber(args[1]) or 300
 local highest    = tonumber(args[2]) or 70
 local src_box    = args[3] or 'src'
 local target_box = args[4] or 'target'
-
---[[
-  Set a home point for the turtle
-  > bin/set_home
-
-  Find your source box (the one you're 
-  pulling inventory from), then:
-  > bin/find_box src
-
-  Find your target box (the one you're 
-  dumping inventory to), then:
-  > bin/find_box target
-
-  Now run this:
-  > bin/xfer
-
-  ...and this will go to src, pull 
-  items from it, then go to target, 
-  dump items into it, then return to 
-  its home point and wait five minutes.  
-  Lather rinse repeat.
-
-  > bin xfer 100 70 box1 box2
-  ...take from "box1", dump to "box2", 
-  fly up to a Y of 70 between moves, 
-  wait 100 seconds before repeating.
---]]
 
 function do_suck()
   print("Going to "..src_box)

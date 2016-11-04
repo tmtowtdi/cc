@@ -1,21 +1,14 @@
 
---inv bxF3p2yy 1478246104
+--inv bxF3p2yy 1478284027
 
 function find(item_name)
-  local simp_name = simplify_name(item_name)
   for i = 1,16 do 
     data = turtle.getItemDetail(i)
     if data then
-      if simplify_name(data.name) == simp_name then
-        if simp_name ~= item_name then    -- user passed FQ name
-          if data.name == item_name then
-            return i      -- FQ item name matches arg
-          else
-            return false  -- Simple names match, but FQ names do not.
-          end
-        else
-          return i        -- Arg is simple, matches.  Close enough.
-        end
+      if name_is_fq(item_name) then
+        if data.name == item_name then return i end
+      else
+        if simplify_name(data.name) == item_name then return i end
       end
     end
   end
@@ -23,19 +16,14 @@ function find(item_name)
 end
 
 function find_all(item_name)
-  simp_name = simplify_name(item_name)
-  local slots = {}
+  local slots  = {}
   for i = 1,16 do 
     data = turtle.getItemDetail(i)
     if data then
-      if simplify_name(data.name) == simp_name then
-        if simp_name ~= item_name then    -- user passed FQ name
-          if data.name == item_name then
-            table.insert(slots, i)        -- FQ name matches arg
-          end
-        else
-          table.insert(slots, i)          -- Arg is simple, matches, close enough.
-        end
+      if name_is_fq(item_name) then
+        if data.name == item_name then table.insert(slots, i) end
+      else
+        if simplify_name(data.name) == item_name then table.insert(slots, i) end
       end
     end
   end
@@ -87,34 +75,53 @@ function ccper_type(d)
   return false
 end
 
-function consolidate(item_name)
-  local slots = find_all(item_name)
+function consolidate(item_name, slots)
+  local slots = slots or find_all(item_name)
   for i = #slots, 1, -1 do
     turtle.select(slots[i])
-    for j = 1, (i-1) do
-      if not turtle.transferTo(slots[j]) then break end       -- could not xfer to previous slot (it may be full)
-      if not turtle.getItemCount(slots[j]) then break end     -- No items left in selected slot; it's empty.
+    for j = 1,(i-1) do
+      turtle.transferTo(slots[j])
+      if not turtle.getItemCount(slots[i]) then break end
     end
   end
 end
 
 function consolidate_all()
-    for i = 1,16 do
-        local d = turtle.getItemDetail(i)
-        consolidate(d.name)
+  local done  = {}
+  local items = {} 
+  --[[
+    items = {
+      name           = slots where it appears
+      ---------------------------------------
+      minecraft:dirt = {1, 3, 15},
+      minecraft:coal = {2, 7, 13, 14}
+    }
+
+    find_all() has to iterate all 16 inv slots each time it's called.  If 
+    we're holding 16 different item types, that's 256 iterations.
+    Instead of forcing consolidate() to call find_all() for each different 
+    item type in our inv, iterate all slots ourselves, gathering all of the 
+    slots data in one go.
+  --]]
+  for i = 1,16 do
+    local d = turtle.getItemDetail(i)
+    if d.name then 
+      if not items[d.name] then items[d.name] = {} end  --lua !autovivify
+      table.insert( items[d.name], i )
     end
+  end
+  for name, slots in pairs(items) do consolidate(name, slots) end
 end
 
 function all_slots_used()
-    for i = 1,16 do
-        if not turtle.getItemDetail(i) then return false end
-    end
-    return true
+  for i = 1,16 do
+    if not turtle.getItemDetail(i) then return false end
+  end
+  return true
 end
 
 function simplify_name(item_name)
-  local new = string.gsub(item_name, "%w+:", "")
-  return new
+  return string.gsub(item_name, "%w+:", "")
 end
 
 function name_is_fq(item_name)

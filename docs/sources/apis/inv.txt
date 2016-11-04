@@ -19,6 +19,7 @@ Inventory management API.
     - :ref:`inv_method_isa_ccmonitor`
     - :ref:`inv_method_isa_ccprinter`
     - :ref:`inv_method_consolidate`
+    - :ref:`inv_method_consolidate_all`
     - :ref:`inv_method_all_slots_used`
     - :ref:`inv_method_simplify_name`
     - :ref:`inv_method_name_is_fq`
@@ -44,6 +45,9 @@ Synopsis
 
     -- Consolidate dirt blocks
     inv.consolidate("dirt")
+
+    -- Consolidate entire inventory
+    inv.consolidate_all()
 
     -- Find out if we have any empty slots left
     if inv.all_slots_used() then
@@ -188,11 +192,13 @@ failure (the queried item is not a ComputerCraft peripheral.)
 
 .. _inv_method_consolidate:
 
-``consolidate(name)``
-+++++++++++++++++++++
+``consolidate(name, slots)``
+++++++++++++++++++++++++++++
 
 ``name``
   str, required
+``slots``
+  table, optional
 
 Consolidates non-full stacks of the same item to go from this:
 
@@ -215,10 +221,33 @@ Consolidates non-full stacks of the same item to go from this:
 ``name`` *can* be either FQ or simple.  However, if your inventory contains 
 both ``forestry:copper_ore`` and ``thermal:copper_ore``, and you attempt to 
 consolidate using the simple name ``copper_ore``, this method will attempt to 
-combine those two different items, and will fail, returning an error.  So FQ 
-names are strongly recommended.
+combine those two different items, and will fail, returning an error.  
+
+Besides, passing in the FQ name will be faster than just using the simple 
+name.  So FQ names are strongly recommended.
+
+``slots`` is an array of integer slot numbers where ``name`` is located.  If 
+you don't pass in ``slots``, ``consolidate()`` will figure out where in the 
+inventory ``name`` is located for you.
+
+The only reason I can come up with why you'd ever pass in ``slots`` would be 
+that you were planning on calling ``consolidate()`` multiple times in a row, 
+and you were attempting to avoid having ``consolidate()`` re-check your whole 
+inventory for you each time.  :ref:`inv_method_consolidate_all` is doing 
+exactly this, which speeds things up a bit.
+
+You'll probably never pass in ``slots``.  
 
 Returns true/false on success/failure.
+
+----
+
+.. _inv_method_consolidate_all:
+
+``consolidate_all()``
++++++++++++++++++++++
+
+Consolidates all items in the inventory.  See :ref:`inv_method_consolidate` .
 
 ----
 

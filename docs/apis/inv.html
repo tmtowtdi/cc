@@ -99,7 +99,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#isa-ccmonitor-d"><code class="docutils literal"><span class="pre">isa_ccmonitor(d)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#isa-ccprinter-d"><code class="docutils literal"><span class="pre">isa_ccprinter(d)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ccper-type-d"><code class="docutils literal"><span class="pre">ccper_type(d)</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#consolidate-name"><code class="docutils literal"><span class="pre">consolidate(name)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#consolidate-name-slots"><code class="docutils literal"><span class="pre">consolidate(name,</span> <span class="pre">slots)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#consolidate-all"><code class="docutils literal"><span class="pre">consolidate_all()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#all-slots-used"><code class="docutils literal"><span class="pre">all_slots_used()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#simplify-name-name"><code class="docutils literal"><span class="pre">simplify_name(name)</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#name-is-fq-name"><code class="docutils literal"><span class="pre">name_is_fq(name)</span></code></a></li>
@@ -176,7 +177,8 @@
 <li><a class="reference internal" href="#inv-method-isa-ccmodem"><span class="std std-ref">isa_ccmodem(d)</span></a></li>
 <li><a class="reference internal" href="#inv-method-isa-ccmonitor"><span class="std std-ref">isa_ccmonitor(d)</span></a></li>
 <li><a class="reference internal" href="#inv-method-isa-ccprinter"><span class="std std-ref">isa_ccprinter(d)</span></a></li>
-<li><a class="reference internal" href="#inv-method-consolidate"><span class="std std-ref">consolidate(name)</span></a></li>
+<li><a class="reference internal" href="#inv-method-consolidate"><span class="std std-ref">consolidate(name, slots)</span></a></li>
+<li><a class="reference internal" href="#inv-method-consolidate-all"><span class="std std-ref">consolidate_all()</span></a></li>
 <li><a class="reference internal" href="#inv-method-all-slots-used"><span class="std std-ref">all_slots_used()</span></a></li>
 <li><a class="reference internal" href="#inv-method-simplify-name"><span class="std std-ref">simplify_name(name)</span></a></li>
 <li><a class="reference internal" href="#inv-method-name-is-fq"><span class="std std-ref">name_is_fq(name)</span></a></li>
@@ -201,6 +203,9 @@
 
 <span class="c1">-- Consolidate dirt blocks</span>
 <span class="n">inv</span><span class="p">.</span><span class="n">consolidate</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">dirt&quot;</span><span class="p">)</span>
+
+<span class="c1">-- Consolidate entire inventory</span>
+<span class="n">inv</span><span class="p">.</span><span class="n">consolidate_all</span><span class="p">()</span>
 
 <span class="c1">-- Find out if we have any empty slots left</span>
 <span class="k">if</span> <span class="n">inv</span><span class="p">.</span><span class="n">all_slots_used</span><span class="p">()</span> <span class="k">then</span>
@@ -308,11 +313,13 @@ value (again).</p>
 failure (the queried item is not a ComputerCraft peripheral.)</p>
 <hr class="docutils" />
 </div>
-<div class="section" id="consolidate-name">
-<span id="inv-method-consolidate"></span><h3><code class="docutils literal"><span class="pre">consolidate(name)</span></code><a class="headerlink" href="#consolidate-name" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="consolidate-name-slots">
+<span id="inv-method-consolidate"></span><h3><code class="docutils literal"><span class="pre">consolidate(name,</span> <span class="pre">slots)</span></code><a class="headerlink" href="#consolidate-name-slots" title="Permalink to this headline">¶</a></h3>
 <dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">name</span></code></dt>
 <dd>str, required</dd>
+<dt><code class="docutils literal"><span class="pre">slots</span></code></dt>
+<dd>table, optional</dd>
 </dl>
 <p>Consolidates non-full stacks of the same item to go from this:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>---------------------------
@@ -331,9 +338,26 @@ failure (the queried item is not a ComputerCraft peripheral.)</p>
 <p><code class="docutils literal"><span class="pre">name</span></code> <em>can</em> be either FQ or simple.  However, if your inventory contains
 both <code class="docutils literal"><span class="pre">forestry:copper_ore</span></code> and <code class="docutils literal"><span class="pre">thermal:copper_ore</span></code>, and you attempt to
 consolidate using the simple name <code class="docutils literal"><span class="pre">copper_ore</span></code>, this method will attempt to
-combine those two different items, and will fail, returning an error.  So FQ
-names are strongly recommended.</p>
+combine those two different items, and will fail, returning an error.</p>
+<p>Besides, passing in the FQ name will be faster than just using the simple
+name.  So <em>FQ names are strongly recommended</em>.</p>
+<p><code class="docutils literal"><span class="pre">slots</span></code> is an array of integer slot numbers where <code class="docutils literal"><span class="pre">name</span></code> is located.  If
+you don&#8217;t pass in <code class="docutils literal"><span class="pre">slots</span></code>, <code class="docutils literal"><span class="pre">consolidate()</span></code> will figure out where in the
+inventory <code class="docutils literal"><span class="pre">name</span></code> is located for you.</p>
+<p>The only reason I can come up with why you&#8217;d ever pass in <code class="docutils literal"><span class="pre">slots</span></code> would be
+that you were planning on calling <code class="docutils literal"><span class="pre">consolidate()</span></code> multiple times in a row,
+and you were attempting to avoid having <code class="docutils literal"><span class="pre">consolidate()</span></code> re-check your whole
+inventory for you each time.  <a class="reference internal" href="#inv-method-consolidate-all"><span class="std std-ref">consolidate_all()</span></a> is doing
+exactly this, which speeds things up a bit.  But really, if you wanted this in
+userland code, you&#8217;d just call <a class="reference internal" href="#inv-method-consolidate-all"><span class="std std-ref">consolidate_all()</span></a> and be done
+with it.</p>
+<p>You&#8217;ll probably never pass in <code class="docutils literal"><span class="pre">slots</span></code>.</p>
 <p>Returns true/false on success/failure.</p>
+<hr class="docutils" />
+</div>
+<div class="section" id="consolidate-all">
+<span id="inv-method-consolidate-all"></span><h3><code class="docutils literal"><span class="pre">consolidate_all()</span></code><a class="headerlink" href="#consolidate-all" title="Permalink to this headline">¶</a></h3>
+<p>Consolidates all items in the inventory.  See <a class="reference internal" href="#inv-method-consolidate"><span class="std std-ref">consolidate(name, slots)</span></a> .</p>
 <hr class="docutils" />
 </div>
 <div class="section" id="all-slots-used">

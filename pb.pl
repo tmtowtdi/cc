@@ -18,27 +18,27 @@ use WWW::Pastebin::Paste;
 
 ### _DO_ include the install script here.
 my %scripts = (
-    "$FindBin::Bin/turtle/install"           => 'JQsniAQj',
+#    "$FindBin::Bin/turtle/install"           => 'JQsniAQj',
 
-    "$FindBin::Bin/turtle/bin/dig_cube"      => '2DRzRAR3',
-    "$FindBin::Bin/turtle/bin/find_box"      => 'x1kHs0v3',
-    "$FindBin::Bin/turtle/bin/find_loc"      => 'SEYF57X4',
-    "$FindBin::Bin/turtle/bin/get_all"       => 'DmEhcUVa',
-    "$FindBin::Bin/turtle/bin/get_script"    => 'pzEBgR8k',
-    "$FindBin::Bin/turtle/bin/go_box"        => 'HaNYCNZM',
-    "$FindBin::Bin/turtle/bin/go_home"       => 'nCp8t5Q1',
-    "$FindBin::Bin/turtle/bin/harvest_wheat" => '8rXFt1YW',
-    "$FindBin::Bin/turtle/bin/place_gps"     => 'TuerqNSi',
-    "$FindBin::Bin/turtle/bin/reds"          => 'L5egEbry',
-    "$FindBin::Bin/turtle/bin/set_home"      => 'N30TvHE7',
+#    "$FindBin::Bin/turtle/bin/dig_cube"      => '2DRzRAR3',
+#    "$FindBin::Bin/turtle/bin/find_box"      => 'x1kHs0v3',
+#    "$FindBin::Bin/turtle/bin/find_loc"      => 'SEYF57X4',
+#    "$FindBin::Bin/turtle/bin/get_all"       => 'DmEhcUVa',
+#    "$FindBin::Bin/turtle/bin/get_script"    => 'pzEBgR8k',
+#    "$FindBin::Bin/turtle/bin/go_box"        => 'HaNYCNZM',
+##    "$FindBin::Bin/turtle/bin/go_home"       => 'nCp8t5Q1',
+#    "$FindBin::Bin/turtle/bin/harvest_wheat" => '8rXFt1YW',
+#    "$FindBin::Bin/turtle/bin/place_gps"     => 'TuerqNSi',
+#    "$FindBin::Bin/turtle/bin/reds"          => 'L5egEbry',
+#    "$FindBin::Bin/turtle/bin/set_home"      => 'N30TvHE7',
     "$FindBin::Bin/turtle/bin/vers"          => 'BQy6B7b6',
-    "$FindBin::Bin/turtle/bin/xfer"          => 'cLpwQi38',
-
-    "$FindBin::Bin/turtle/lib/harvest"  => 'G1u3NJE1',
+#    "$FindBin::Bin/turtle/bin/xfer"          => 'cLpwQi38',
+#
+#    "$FindBin::Bin/turtle/lib/harvest"  => 'G1u3NJE1',
     "$FindBin::Bin/turtle/lib/inv"      => 'bxF3p2yy',
-    "$FindBin::Bin/turtle/lib/move"     => 'rpdxDz77',
-    "$FindBin::Bin/turtle/lib/reds"     => 'iPfT2SHV',
-    "$FindBin::Bin/turtle/lib/settings" => 'nqQjpWVX',
+#    "$FindBin::Bin/turtle/lib/move"     => 'rpdxDz77',
+#    "$FindBin::Bin/turtle/lib/reds"     => 'iPfT2SHV',
+#    "$FindBin::Bin/turtle/lib/settings" => 'nqQjpWVX',
 
 );
 

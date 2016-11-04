@@ -76,12 +76,14 @@ you want your GPS system to be placed, then start the build:
 
   > bin/place_gps
 
-By default, that will fly up 140 blocks and begin building your system, but 
-you can specify a different number of blocks to move up:
+By default, that will fly up 140 blocks (from its current location, not to Y 
+== 140), and begin building your system, but you can specify a different 
+number of blocks to move up.  So if you're just testing and don't want to wait 
+for the turtle to go up 140 blocks...
 
 .. code-block:: text
 
-  > bin/place_gps 120
+  > bin/place_gps 5
 
 After the turtle places the GPS computers, it will return to its starting 
 position.
@@ -91,24 +93,11 @@ position.
 Final Steps
 -----------
 
-After the turtle returns, your GPS system will be almost, but not quite, 
-ready; it still needs human interaction to turn on.
+After the turtle returns, what happens next depends on whether it was in-range 
+of another GPS system in the first place.
 
-Each GPS computer needs to have a startup script containing its own X, Y, and 
-Z coordinates hardcoded in the script.
-
-In Range
-~~~~~~~~
-
-If you're in range of another GPS system, the human interaction is pretty 
-easy.  Each computer is next to a disk drive that's loaded with the correct 
-startup script, containing the correct coordinates.  All you have to do is 
-turn on the four computers; do this by simply clicking on each one.  Their 
-startup scripts, containing each machine's coordinates, will start 
-automatically.
-
-Out Of Range
-~~~~~~~~~~~~
+If the turtle was in-range of an existing GPS system, then *you're finished*.  
+Your new GPS system is set up and turned on.
 
 If you're *not* in range of another GPS system, the turtle that built this 
 current system had no way of detecting the coordinates of the satellites it 
@@ -121,6 +110,10 @@ Get up to the newly-created computers, and for each one:
 - Download the startup script template: ``> pastebin get DkS2Evw3 startup``
 - Edit the startup script; enter the X, Y, Z coordinates into the script.
 - Run the script: ``> startup``
+
+Be really careful about getting the coordinates right.  If you give the GPS 
+computers the wrong coordinates, any computer or turtle using that system is 
+going to think it's in the wrong location.  Check and double-check.
 
 .. _scripts_place_gps_restart:
 

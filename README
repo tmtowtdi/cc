@@ -10,27 +10,10 @@ TBD {{{{
 
         Needs tested
     }#}}}
-    bin/xfer {#{{{
-        Working pretty well, but it definitely needs a check on the "target" 
-        box to see if it's full and go home and give up if so.
-    }#}}}
     lib/inv {{{{
         Needs tested, particularly:
             consolidate()
     }}}}
-
-
-    in "turtle.moveForward()", turtle is a variable (holding the turtle API), 
-    and it's true.  It's always loaded on turtles, never on computers.  So:
-            if turtle then (this is a turtle) else (this is not a turtle) end
-
-        Unless you're on a computer that has something like this:
-                local turtle = "donatello"
-        already in the script you're working on, this will work as an 
-        isa_turtle test.
-
-if not turtle then error("This is not a turtle!") end
-
 
 }}}}
 

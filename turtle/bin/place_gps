@@ -1,5 +1,5 @@
 
---place_gps TuerqNSi 1478246104
+--place_gps TuerqNSi 1478280438
 
 local args   = {...}
 function die_usage()

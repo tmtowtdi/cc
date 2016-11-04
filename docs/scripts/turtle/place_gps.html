@@ -214,9 +214,11 @@ you want your GPS system to be placed, then start the build:</p>
 <div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/place_gps
 </pre></div>
 </div>
-<p>By default, that will fly up 140 blocks and begin building your system, but
-you can specify a different number of blocks to move up:</p>
-<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/place_gps 120
+<p>By default, that will fly up 140 blocks (from its current location, not to Y
+== 140), and begin building your system, but you can specify a different
+number of blocks to move up.  So if you&#8217;re just testing and don&#8217;t want to wait
+for the turtle to go up 140 blocks...</p>
+<div class="highlight-text"><div class="highlight"><pre><span></span>&gt; bin/place_gps 5
 </pre></div>
 </div>
 <p>After the turtle places the GPS computers, it will return to its starting
@@ -224,21 +226,10 @@ position.</p>
 </div>
 <div class="section" id="final-steps">
 <span id="scripts-place-gps-finish"></span><h2>Final Steps<a class="headerlink" href="#final-steps" title="Permalink to this headline">¶</a></h2>
-<p>After the turtle returns, your GPS system will be almost, but not quite,
-ready; it still needs human interaction to turn on.</p>
-<p>Each GPS computer needs to have a startup script containing its own X, Y, and
-Z coordinates hardcoded in the script.</p>
-<div class="section" id="in-range">
-<h3>In Range<a class="headerlink" href="#in-range" title="Permalink to this headline">¶</a></h3>
-<p>If you&#8217;re in range of another GPS system, the human interaction is pretty
-easy.  Each computer is next to a disk drive that&#8217;s loaded with the correct
-startup script, containing the correct coordinates.  All you have to do is
-turn on the four computers; do this by simply clicking on each one.  Their
-startup scripts, containing each machine&#8217;s coordinates, will start
-automatically.</p>
-</div>
-<div class="section" id="out-of-range">
-<h3>Out Of Range<a class="headerlink" href="#out-of-range" title="Permalink to this headline">¶</a></h3>
+<p>After the turtle returns, what happens next depends on whether it was in-range
+of another GPS system in the first place.</p>
+<p>If the turtle was in-range of an existing GPS system, then <em>you&#8217;re finished</em>.
+Your new GPS system is set up and turned on.</p>
 <p>If you&#8217;re <em>not</em> in range of another GPS system, the turtle that built this
 current system had no way of detecting the coordinates of the satellites it
 was placing, so it couldn&#8217;t create the correct startup files, so you&#8217;re going
@@ -250,7 +241,9 @@ to need to create them yourself.</p>
 <li>Edit the startup script; enter the X, Y, Z coordinates into the script.</li>
 <li>Run the script: <code class="docutils literal"><span class="pre">&gt;</span> <span class="pre">startup</span></code></li>
 </ul>
-</div>
+<p>Be really careful about getting the coordinates right.  If you give the GPS
+computers the wrong coordinates, any computer or turtle using that system is
+going to think it&#8217;s in the wrong location.  Check and double-check.</p>
 </div>
 <div class="section" id="server-restarts">
 <span id="scripts-place-gps-restart"></span><h2>Server Restarts<a class="headerlink" href="#server-restarts" title="Permalink to this headline">¶</a></h2>
