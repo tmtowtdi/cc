@@ -1,5 +1,5 @@
 
---move rpdxDz77 1478208591
+--move rpdxDz77 1478246104
 
 if not os.loadAPI("lib/settings") then return end
 
@@ -15,6 +15,7 @@ local cardinal = {
 
 function init()
   if not test_gps() then return false end
+  loc = vector.new( gps.locate(2) )
   if not find_direction() then return false end
   sleep(0.25)
   return true
@@ -129,10 +130,8 @@ function go_home(height, name)
       error("You must run bin/set_home first.")
       return false
   end
-  local hx     = settings.get(name .. '_x')
-  local hy     = settings.get(name .. '_y')
-  local hz     = settings.get(name .. '_z')
-  goto(hx, hy, hz, height)
+  local v = settings.get(name .. '_vec')
+  goto(v.x, v.y, v.z, height)
   return true
 end
 
@@ -292,20 +291,20 @@ function strafe_r(cnt,force) r() fd(cnt, force) l() end
 function strafe_l(cnt,force) l() fd(cnt, force) r() end
 
 function gotoX(toX,force)
-    if toX == nil then error("No coordinate specified.",2) end
+    if toX == nil then error("No coordinate specified.") end
     local force = force or false
     if loc.x < toX then face_e() else face_w() end
     while loc.x ~= toX do fd(1,force) end
 end
 function gotoY(toY,force)
   toY = tonumber(toY)
-  if toY == nil then error("No coordinate specified.",2) end
+  if toY == nil then error("No coordinate specified.") end
   local force = force or false
   if loc.y < toY then move = up elseif loc.y > toY then move = dn end
   while loc.y ~= toY do move(1,force) end
 end
 function gotoZ(toZ,force)
-    if toZ == nil then error("No coordinate specified.",2) end
+    if toZ == nil then error("No coordinate specified.") end
     local force = force or false
     if loc.z < toZ then face_s() else face_n() end
     while loc.z ~= toZ do fd(1, force) end
@@ -317,7 +316,6 @@ function goto(toX, toY, toZ, height, force)
     gotoY(toY, force)
 end
 
--- 230 72 -176
 
 
 if not init() then

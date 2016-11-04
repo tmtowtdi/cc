@@ -1,15 +1,7 @@
 
---set_home N30TvHE7 1478208591
+--set_home N30TvHE7 1478246104
 
-local rv = shell.run("turn", "left")
-if rv then
-  shell.run("turn", "right")
-else
-  error("This device is not a turtle.")
-  return false
-end
-
-local args   = {...}
+local args = {...}
 function die_usage()
   print("---------------------------------------")
   print("bin/set_home [name]")

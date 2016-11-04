@@ -37,7 +37,7 @@ Get four such machines.  Label each one, then download the startup script.
 
 .. code-block:: text
 
-    > label set gps1
+    > label set gps1 (then gps2, gps3, gps4)
     > pastebin get DkS2Evw3 startup
 
 Place the machines per the diagram image in the `first post in this thread, by 
@@ -62,16 +62,9 @@ On any brand-new machine, type
 .. code-block:: text
 
     > label set <LABELNAME>
-    > pastebin get JQsniAQj install
-    > install
+    > pastebin run JQsniAQj
 
 ...replace **<LABELNAME>** with any name you want to give the machine.
-
-After the install script completes, you can delete it
-
-.. code-block:: text
-
-    > rm install
 
 .. _installing_updating_other:
 

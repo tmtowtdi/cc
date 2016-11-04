@@ -1,12 +1,4 @@
---go_home nCp8t5Q1 1478208591
-
-local rv = shell.run("turn", "left")
-if rv then
-  shell.run("turn", "right")
-else
-  error("This device is not a turtle.")
-  return false
-end
+--go_home nCp8t5Q1 1478246104
 
 if not os.loadAPI("lib/move") then return end
 local args   = {...}
@@ -20,7 +12,7 @@ function die_usage()
   print("Send the turtle to its home spot (set")
   print("with bin/set_home).  ")
   print("")
-  print("height - how high to fly up first.")
+  print("height - Y coord to fly to first.")
   print("  Defaults to 100.")
   print("name - which home to go to.  Defaults")
   print("  to 'home'.")
