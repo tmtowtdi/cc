@@ -15,6 +15,11 @@ TBD {{{{
             consolidate()
     }}}}
 
+    The Installing/Updating docs are probably too wordy.  Start simple, which 
+    is what most people are going to want, then get into the noob handholding 
+    after that.  Probably skip the crap about labeling and GPS sats 
+    altogether.
+
 }}}}
 
 Building Documentation {#{{{
