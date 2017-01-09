@@ -1,0 +1,45 @@
+
+--redstone_timer NADU9iGj 1478288770
+
+local args   = {...}
+function die_usage()
+  print("---------------------------------------")
+  print("bin/redstone_timer in out on off")
+  print("")
+  print("Produce a redstone signal on a timer")
+  print("if we're receiving a redstone signal")
+  print("on a specific side.")
+  print("")
+  print("in  - side to check for input")
+  print("out - side to produce timer signal")
+  print("on  - seconds to leave leave signal on")
+  print("off - seconds to leave signal off")
+  print("---------------------------------------")
+end
+if args[1] == "-h" then die_usage() return end
+
+local input  = (args[1]) or 'back'
+local output = (args[2]) or 'front'
+local onfor  = tonumber(args[3]) or 1
+local offfor = tonumber(args[4]) or 2
+
+function timer(inp, out, onfor, offfor)
+  local mybool = true
+  while true do
+    if not redstone.getInput(input) then return end
+    redstone.setOutput(out, mybool)
+    if mybool then sleep(onfor) else sleep(offfor) end
+    mybool = not mybool
+  end
+end
+
+
+while true do
+  if redstone.getInput(input) then
+    timer(input, output, onfor, offfor)
+  end
+  sleep( .1 )
+end
+
+ -- vim: syntax=lua ts=2 sw=2
+

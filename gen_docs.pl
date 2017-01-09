@@ -24,11 +24,10 @@ my $files_fixed = 0;
 find( \&wanted, '.' );
 say "I just fixed $files_fixed files.";
 
-say "Commented out generating CNAME until my domain transfer goes through.";
-#open my $fh, '>', "CNAME" or die $!;
-#print $fh "cc.tmtowtdi.online";
-#close $fh;
-#say "CNAME file is in place.";
+open my $fh, '>', "CNAME" or die $!;
+print $fh "cc.tmtowtdi.online";
+close $fh;
+say "CNAME file is in place.";
 
 
 sub wanted {

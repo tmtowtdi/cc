@@ -7,7 +7,6 @@
     even and odd.
 --]]
 
-
 local args   = {...}
 function die_usage()
   print("---------------------------------------")
